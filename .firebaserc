@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "online-meetups-e955d"
+  },
+  "targets": {
+      "online-meetups-e955d": {
+        "hosting": {
+          "dev": [
+            "online-meetups-e955d"
+          ],
+          "demo": [
+            "onlinemeetups"
+          ]
+        }
+      }
+    }
+}

@@ -3,51 +3,92 @@
         <div class="primary-logo">
             <img src="assets/images/dummy.png">
         </div>
-        <div class="pre-process-wrapper" *ngIf="meetingCollection as meeting">
-            <div class="pre-process-box" [formGroup]="joinForm">
-                <div class="main-block-header">
-                    <div class="hero-text text-left">
-                        <h3>Join a Meeting:</h3>
-                        <div class="pre-process-label">
-                            <h3>{{meeting.name}}</h3>
-                            <p>{{MeetingDate}}</p>
-                            <div class="p-image">
-                                <p>Weekly Sunday School</p>
-                            </div>
+        <div class="pre-process-wrapper" *ngIf="forJoiningMeetup">
+            <div class="pre-process-box guest-meeting-entry" [formGroup]="joinForm" style="margin-bottom: -1rem; padding-top: 1rem;">
+                <div class="main-block-header guest-main-block-header">
+                    <div class="hero-text text-center">
+                        <h3 style="text-decoration: underline;">Please Sign-up to Join the Meetup</h3>
+                        <div class="pre-process-label text-center">
+
                         </div>
                     </div>
                 </div>
                 <div class="basic-input-block email-login-block">
                     <div class="formGroup">
-                        <input type="text" class="om-input clr-input om-username" placeholder="Name" name="name"
+                        <input type="text" class="om-input clr-input om-username" placeholder="Name" name="displayName"
                                formControlName="displayName" required>
                     </div>
                     <div class="formGroup">
                         <div class="om-useremail-wrapper">
 
                             <input type="email" class="om-input clr-input om-useremail" placeholder="Email" name="email"
-                                   formControlName="email" required>
+                                   formControlName="email">
                         </div>
                     </div>
-                    <div class="dv-input"></div>
-                    <div class="formGroup">
+                    <!--<div class="dv-input"></div>-->
+                   <!-- <div class="formGroup">
                         <input type="text" class="om-input clr-input om-referral"
                                placeholder="Who invited you to this meetup" name="invitedBy"
                                formControlName="invitedBy">
-                    </div>
-
-                    <!-- Calling ForgotPassword from AuthService Api -->
-                    <div class="formGroup">
+                    </div>-->
+                    <div class="formGroup" style="margin-top: -1.8rem;padding-left: 19%;">
                         <div class="auth-button-group">
                             <div class="btn-primary">
                                 <input type="submit" class="btn btn-email" value="Request to Join"
-                                       (click)="SubmitForm()">
+                                       (click)="submitForm()">
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="redirectToLogin">
+
+                <div class="redirectToLogin" style="margin-top: 0.8rem;">
+                    <span>Go back to ? <a class="redirect" href="" (click)="RedirectToSignIn($event)">Log In</a></span>
+                </div>
+            </div>
+        </div>
+        <div class="pre-process-wrapper" *ngIf="meetingDocData as meeting">
+            <div class="pre-process-box guest-meeting-entry" [formGroup]="joinForm" style="margin-bottom: -1rem;">
+                <div class="main-block-header guest-main-block-header">
+                    <div class="hero-text text-center">
+                        <h3 style="text-decoration: underline;">Join the below meeting</h3>
+                        <div class="pre-process-label text-center">
+                            <p style="font-size: 1.2rem;font-weight: bold;color: #7ed321; margin-top:-0.2rem;margin-bottom: 0.15rem;">{{meeting.name}}</p>
+                            <p>{{meetingDate | date:'medium'}}</p>
+                            <p style="font-weight: bold;">{{meetingDocData.meetupName}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="basic-input-block email-login-block">
+                    <div class="formGroup">
+                        <input type="text" class="om-input clr-input om-username" placeholder="Name" name="displayName"
+                               formControlName="displayName" required>
+                    </div>
+                    <div class="formGroup">
+                        <div class="om-useremail-wrapper">
+
+                            <input type="email" class="om-input clr-input om-useremail" placeholder="Email" name="email"
+                                   formControlName="email">
+                        </div>
+                    </div>
+                    <!--<div class="dv-input"></div>-->
+                   <!-- <div class="formGroup">
+                        <input type="text" class="om-input clr-input om-referral"
+                               placeholder="Who invited you to this meetup" name="invitedBy"
+                               formControlName="invitedBy">
+                    </div>-->
+                    <div class="formGroup" style="margin-top: -1.8rem;padding-left: 19%;">
+                        <div class="auth-button-group">
+                            <div class="btn-primary">
+                                <input type="submit" class="btn btn-email" value="Request to Join"
+                                       (click)="submitForm()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="redirectToLogin" style="margin-top: 0.8rem;">
                     <span>Go back to ? <a class="redirect" href="" (click)="RedirectToSignIn($event)">Log In</a></span>
                 </div>
             </div>

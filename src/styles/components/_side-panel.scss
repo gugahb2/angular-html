@@ -5,15 +5,16 @@ $side-panel-border: #8c9299;
 .om-side-panel {
     position: fixed;
     right: 0;
-    top: 65px;
-    width: 689px;
-    height: calc(100vh - 65px);
+    top: 4.05rem;
+    width: 43.06rem;
+    height: calc(100vh - 4.05rem);
     display: none;
     background: $bg;
-    border: solid 7px $side-panel-border;
-    padding-left: 31px;
-    padding-top: 27px;
-    padding-right: 42px;
+    border: groove thin;
+    border-radius: 0.2rem;
+    padding-left: 2rem;
+    padding-top: 1.65rem;
+    padding-right: 2.65rem;
     overflow: hidden;
 
     .img-button-wrapper {
@@ -85,6 +86,10 @@ $side-panel-border: #8c9299;
 
 .show-element {
     display: inline-block;
+}
+
+.hide-element {
+    display: none;
 }
 
 .show-chat-element {

@@ -1,241 +1,84 @@
 <div class="dashboard-container om-block-container dashboard-home">
-    <div class="home-container" *ngIf="meetup && this.authService.firebaseUser$ | async as user">
+    <div class="home-container" *ngIf="selectedMeetupDocData && this.authService.loggedInUserFromAuthService$ | async as user">
         <div class="dc-heading">
-            <div class="dc-heading-icon">
-                <img src="/assets/images/icons/icon-h.png">
+            <div class="dc-heading-icon meetup-logo-24 card-header">
+                {{selectedMeetupDocData.name.toUpperCase() | slice:0:1}}
             </div>
 
             <div class="meetups-dropdown-wrap">
-                <clr-dropdown>
-                    <div class="user-current-option-header" clrDropdownTrigger>
-                        <div class="current-option-header"><span class="option-header-icon"></span>
-                            <h1>{{meetup.name}}</h1>
-                            <span class="arrow-icon"></span>
-                        </div>
-                    </div>
-                    <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
-                        <div aria-label="Dropdown header Action 1" clrDropdownItem *ngFor="let m of meetupList"
-                             (click)="ChangeMeetup(m)">
-                            {{m.name}}
-                        </div>
-                    </clr-dropdown-menu>
-                </clr-dropdown>
+                <span style="margin-left: 0.5rem;{{getSelectedMeetupNameFontSize()}};padding-top: 0.2rem;font-weight: bold;">{{selectedMeetupDocData.name}}</span>
             </div>
-            <div class="header-button" *ngIf="this.meetup.role.includes('MEETUP_OWNER')">
+            <div class="header-button">
                 <div class="image-button">
-                    <a routerLink="/dashboard/meetups/settings" class="om-link success img-link">Add meetup</a>
+                    <a routerLink="/publicmeetups" class="om-link-find-meetups success img-link"><clr-icon class="search-icon" shape="search" style=" position: relative;top: -0.2rem;left: -0.4rem;"></clr-icon>Find a Meetup</a>
+                </div>
+            </div>
+            <div class="header-button" *ngIf="((this.selectedMeetupDocData?.id) && (['MEETUP_OWNER', 'MEETUP_ADMIN'].includes(this.meetupRole))) || !loggedInUserDocData.isAnonymous">
+                <div class="image-button">
+                    <a routerLink="/dashboard/add-new-meetup" class="om-link success img-link"><div class="green-circle"></div>Add meetup</a>
                 </div>
             </div>
         </div>
         <div class="inner-container">
             <div class="clr-row">
-                <div class="upcoming-meetings small-block">
-                    <h3>Upcoming Meetings</h3>
+                <div class="upcoming-meetings small-block-home">
+                    <h3>Upcoming & Ongoing Meetings</h3>
 
                     <div class="d-block-scoll">
                         <div class="ps recent-chat-ps" [perfectScrollbar]="config">
                             <div class="chats-scroll">
 
-                                <div class="meetings-d-block" *ngFor="let meeting of meetings">
-                                    <h3>{{meeting.name}}</h3>
-                                    <p>{{Date(meeting.startsAt)}}</p>
-                                    <div class="p-image">
-                                        <p>Weekly Sunday School</p>
-                                    </div>
-                                    <div class="d-button-set">
-                                        <a href="" class="om-link om-link-small"
-                                           (click)="InviteMeeting($event,meeting)">Invite</a>
-                                        <!--                                        <a href="" class="om-link om-link-small success"-->
-                                        <!--                                           (click)="JoinMeeting($event,meeting)">Join</a>-->
-                                    </div>
-                                </div>
+                                <div class="meetings-d-block" *ngFor="let meeting of upcomingMeetings | async" style="clear: left;">
 
+                                   <div style="float: left;margin-bottom: 1rem;" >
+                                    <h3>{{meeting.meetingName}}</h3>
+                                       <p *ngIf="meeting.isStarted">{{meeting.startsAt.toDate()| date:'MMMM dd'}}, {{meeting.startsAt.toDate() | date:'h:mm'}} - {{meeting.endsAt.toDate() | date:'shortTime'}}</p>
+                                       <p *ngIf="!meeting.isStarted" style="font-size: 0.95rem;">Created {{meeting.createdAgo}} ago!<br>&nbsp;&#x21aa;Yet to Start!</p>
+                                    <div class="p-image">
+                                        <p><img src="assets/images/icons/groups-small.png" style="margin-right:0.3rem;"/>{{selectedMeetupDocData.name}}</p> <!--This is group name, currently defaulted to meetup name as there are only default groups now. Will change to group name later-->
+                                    </div>
+                                   </div>
+                                    <div style="float: right;margin-right: 1rem;">
+                                        <a href="" class="om-link om-link-small" *ngIf="!loggedInUserDocData.isAnonymous && !meeting.hasEnded" (click)="meetingInviteLinkClicked($event,meeting)">Invite</a>
+                                        <a class="om-link om-link-small success" style="margin-left: 1rem;"
+                                           (click)="openNewWindowNGoToMeeting($event, meeting, 'start', meeting.isMeetingCreator)"  *ngIf="meeting.isMeetingCreator && !meeting.isStarted && !meeting.hasEnded">
+                                            Start Meeting
+                                        </a>
+                                        <span class="om-link om-link-small success" style="margin-left: 1rem;" *ngIf="!meeting.isMeetingCreator && !meeting.isStarted && !meeting.hasEnded">
+                                            Meeting yet to begin!
+                                        </span>
+                                        <a class="om-link om-link-small success" style="margin-left: 1rem;"
+                                           (click)="openNewWindowNGoToMeeting($event, meeting, 'join', meeting.isMeetingCreator)" *ngIf="meeting.isStarted && !meeting.hasEnded">
+                                            Join Meeting...
+                                        </a>
+
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="recent-chats-block-wrapper small-block home-page">
+                <div class="recent-chats-block-wrapper small-block-home home-page">
                     <h3>Recent Chats</h3>
                     <div class="ps recent-chat-ps" [perfectScrollbar]="config">
                         <div class="chats-scroll">
                             <div class="recent-chats-block">
-                                <div class="chat-block-head">
-                                    <div class="chat-block-photo"></div>
-                                    <p class="chat-block-name">Harold Hunges</p>
-                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </p>
-                                    <span class="chat-block-state"></span>
-                                </div>
-                                <div class="chat-block-head">
+                                <div class="chat-block-head" (click)="openRecentChatInChatSection(recentChatItem)"
+                                     *ngFor="let recentChatItem of recentChatsList">
                                     <div class="chat-block-photo">
-                                        <img src="/assets/images/img.jpg">
+                                        <img src="{{recentChatItem.userImages[0]}}"
+                                             *ngIf="recentChatItem.userImages && (recentChatItem.userImages.length > 0)">
+                                        <div class="chatter-image-alt"
+                                             *ngIf="!recentChatItem.userImages ||(recentChatItem.userImages && recentChatItem.userImages.length === 1 && !recentChatItem.userImages[0]) && recentChatItem.chatterNames">{{recentChatItem.chatterNames.toUpperCase() | slice:0:1}}</div>
                                     </div>
-                                    <p class="chat-block-name">Sarah Thomas</p>
-                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </p>
-                                    <span class="chat-block-state"></span>
-                                </div>
-                                <div class="chat-block-head">
-                                    <div class="chat-block-photo">
-                                        <img src="/assets/images/img.jpg">
-                                    </div>
-                                    <p class="chat-block-name">Sarah Thomas</p>
-                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </p>
-                                    <span class="chat-block-state"></span>
-                                </div>
-                                <div class="chat-block-head">
-                                    <div class="chat-block-photo">
-                                        <img src="/assets/images/img.jpg">
-                                    </div>
-                                    <p class="chat-block-name">Sarah Thomas</p>
-                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </p>
-                                    <span class="chat-block-state"></span>
-                                </div>
-                                <div class="chat-block-head">
-                                    <div class="chat-block-photo">
-                                        <img src="/assets/images/img.jpg">
-                                    </div>
-                                    <p class="chat-block-name">Sarah Thomas</p>
-                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </p>
-                                    <span class="chat-block-state"></span>
-                                </div>
-                                <div class="chat-block-head">
-                                    <div class="chat-block-photo">
-                                        <img src="/assets/images/img.jpg">
-                                    </div>
-                                    <p class="chat-block-name">Sarah Thomas</p>
-                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </p>
-                                    <span class="chat-block-state"></span>
-                                </div>
-                                <div class="chat-block-head">
-                                    <div class="chat-block-photo">
-                                        <img src="/assets/images/img.jpg">
-                                    </div>
-                                    <p class="chat-block-name">Sarah Thomas</p>
-                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </p>
-                                    <span class="chat-block-state"></span>
-                                </div>
-                                <div class="chat-block-head">
-                                    <div class="chat-block-photo">
-                                        <img src="/assets/images/img.jpg">
-                                    </div>
-                                    <p class="chat-block-name">Sarah Thomas</p>
-                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </p>
-                                    <span class="chat-block-state"></span>
-                                </div>
-                                <div class="chat-block-head">
-                                    <div class="chat-block-photo">
-                                        <img src="/assets/images/img.jpg">
-                                    </div>
-                                    <p class="chat-block-name">Sarah Thomas</p>
-                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </p>
-                                    <span class="chat-block-state"></span>
-                                </div>
-                                <div class="chat-block-head">
-                                    <div class="chat-block-photo">
-                                        <img src="/assets/images/img.jpg">
-                                    </div>
-                                    <p class="chat-block-name">Sarah Thomas</p>
-                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </p>
-                                    <span class="chat-block-state"></span>
-                                </div>
-                                <div class="chat-block-head">
-                                    <div class="chat-block-photo">
-                                        <img src="/assets/images/img.jpg">
-                                    </div>
-                                    <p class="chat-block-name">Sarah Thomas</p>
-                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </p>
-                                    <span class="chat-block-state"></span>
-                                </div>
-                                <div class="chat-block-head">
-                                    <div class="chat-block-photo">
-                                        <img src="/assets/images/img.jpg">
-                                    </div>
-                                    <p class="chat-block-name">Sarah Thomas</p>
-                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </p>
-                                    <span class="chat-block-state"></span>
-                                </div>
-                                <div class="chat-block-head">
-                                    <div class="chat-block-photo">
-                                        <img src="/assets/images/img.jpg">
-                                    </div>
-                                    <p class="chat-block-name">Sarah Thomas</p>
-                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </p>
-                                    <span class="chat-block-state"></span>
-                                </div>
-                                <div class="chat-block-head">
-                                    <div class="chat-block-photo">
-                                        <img src="/assets/images/img.jpg">
-                                    </div>
-                                    <p class="chat-block-name">Sarah Thomas</p>
-                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </p>
-                                    <span class="chat-block-state"></span>
-                                </div>
-                                <div class="chat-block-head">
-                                    <div class="chat-block-photo">
-                                        <img src="/assets/images/img.jpg">
-                                    </div>
-                                    <p class="chat-block-name">Sarah Thomas</p>
-                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </p>
-                                    <span class="chat-block-state"></span>
+                                    <p class="chat-block-name">{{recentChatItem.chatterNames ? recentChatItem.chatterNames : 'user'}}</p>
+                                    <p [line-truncation]="3" [innerHTML]="recentChatItem.recentMessages"></p>
+                                    <span [ngClass]="{'chat-block-state chat-block-state-away': (getMemberOnlineStatus(recentChatItem) === 'away'),
+                                        'chat-block-state chat-block-state-online': (getMemberOnlineStatus(recentChatItem) === 'online'),
+                                        'chat-block-state chat-block-state-offline': (getMemberOnlineStatus(recentChatItem) === 'offline')
+                                        }"
+                                          *ngIf="trustedMembers"></span>
                                 </div>
                             </div>
                         </div>
@@ -244,7 +87,7 @@
             </div>
         </div>
     </div>
-<!--    <div *ngIf="!HasAccessToMeetup && userCollection as user" class="home-container">-->
+    <!--    <div *ngIf="!HasAccessToMeetup && userCollection as user" class="home-container">-->
     <!--        <div class="dc-heading">-->
     <!--            <p>You're not a member, please <a (click)="NavigateToJoin($event)" class="om-link success img-link">join</a>-->
     <!--                the meetup.</p>-->

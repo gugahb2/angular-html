@@ -1,3 +1,35 @@
+html {
+	font-size: 16px;
+
+	@media screen and (min-width: 300px) {
+		font-size: 10px;
+	}
+
+	@media screen and (min-width: 400px) {
+		font-size: 12px;
+	}
+
+	@media screen and (min-width: 550px) {
+		font-size: 13px;
+	}
+
+	@media screen and (min-width: 700px) {
+		font-size: 14px;
+	}
+
+	@media screen and (min-width: 800px) {
+		font-size: 15px;
+	}
+
+	@media screen and (min-width: 900px) {
+		font-size: 16px;
+	}
+
+	@media screen and (min-width: 1200px) {
+		font-size: 17px;
+	}
+}
+
 .om-form-control.clr-form-control {
 	margin-right: 0;
 }
@@ -57,7 +89,7 @@
 		padding-left: 0;
 		padding-right: 0;
 		line-height: normal;
-		margin-bottom: 20px;
+		margin-bottom: 0.8rem;
 	}
 
 	.label-block-content {
@@ -226,8 +258,9 @@
 		justify-content: space-between;
 		align-items: center;
 		margin-left: 0;
-		padding-left: 60px;
+		padding-left: 1.2rem;
 		padding-bottom: 36px;
+		margin-top: 0.1rem;
 
 		&.dc-hero-heading {
 			padding-left: 0;
@@ -240,7 +273,7 @@
 
 		@include bd-custom-max(991px) {
 			padding-left: 25px;
-			flex-wrap: wrap;
+			/*flex-wrap: wrap;*/
 
 			h1 {
 				width: 100%;
@@ -363,8 +396,7 @@
 	position: absolute;
 	left: 0;
 	top: 0;
-	width: 39px;
-	height: 40px;
+	margin-right: 1rem;
 
 	@include bd-custom-max(991px) {
 		position: relative;
@@ -396,7 +428,7 @@
 }
 
 .inner-container {
-	max-width: 933px;
+	max-width: 92%;
 	width: 100%;
 	padding-left: 15px;
 	padding-right: 15px;
@@ -419,12 +451,16 @@
 
 .upcoming-meetings {
 	width: 100%;
-	max-width: 500px;
-	margin-right: 15px;
+	max-width: 52%;
+	margin-right: 1rem;
 	border-top: 1px solid $border;
 
 	.p-image {
-		margin-top: 21px;
+		margin-top: 0.8rem;
+	}
+
+	.p-image::before{
+		background: url("~/assets/images/icons/navbar/groups.png") no-repeat;
 	}
 
 	@include bd-custom-max(1250px) {
@@ -442,6 +478,11 @@
 		padding-right: 10px;
 		padding-bottom: 46px;
 	}
+}
+
+.chat-block-head-group {
+	padding-top: 0.2rem !important;
+
 }
 
 .recent-chats-block-wrapper {
@@ -476,6 +517,7 @@
 		padding-left: 62px;
 		padding-right: 10px;
 
+
 		&:hover {
 			background: #f2f2f2;
 		}
@@ -485,10 +527,7 @@
 			left: 10px;
 		}
 
-		.chat-block-state {
-			top: 10px;
-			right: 10px;
-		}
+
 	}
 
 	&.home-page {
@@ -516,11 +555,11 @@
 	}
 
 	.chat-block-head {
-		margin-bottom: 26px;
+		margin-bottom: 1.61rem;
 
-		padding-bottom: 10px;
+		padding-bottom: 1.35rem;
 		margin-bottom: 0;
-		padding-top: 10px;
+		padding-top: 0.1rem;
 
 		&:hover {
 			background: #f2f2f2;
@@ -532,11 +571,6 @@
 
 		.chat-group-photo {
 			top: 10px;
-		}
-
-		.chat-block-state {
-			top: 10px;
-			right: 10px;
 		}
 	}
 }
@@ -632,7 +666,40 @@
 		width: 13px;
 		height: 13px;
 		border-radius: 100px;
-		background-color: #579bff;
+		background-color: lawngreen;
+	}
+
+	.chat-block-state-online {
+		display: inline-block;
+		position: absolute;
+		right: 0;
+		top: 8px;
+		width: 13px;
+		height: 13px;
+		border-radius: 100px;
+		background-color: lawngreen;
+	}
+
+	.chat-block-state-away {
+		display: inline-block;
+		position: absolute;
+		right: 0;
+		top: 8px;
+		width: 13px;
+		height: 13px;
+		border-radius: 100px;
+		background-color: orange;
+	}
+
+	.chat-block-state-offline {
+		display: inline-block;
+		position: absolute;
+		right: 0;
+		top: 8px;
+		width: 13px;
+		height: 13px;
+		border-radius: 100px;
+		background-color: lightgrey;
 	}
 }
 
@@ -680,10 +747,10 @@
 }
 
 .p-image {
-	padding-left: 29px;
+	padding-left: 0.4rem;
 
 	p {
-		font-size: 16px;
+		font-size: 1rem;
 	}
 }
 
@@ -691,7 +758,7 @@
 	>h3 {
 		margin-top: 15px;
 		margin-bottom: 7px;
-		margin-bottom: 40px;
+		margin-bottom: 2rem;
 	}
 }
 
@@ -741,8 +808,8 @@
 
 .meetings-d-block {
 	position: relative;
-	padding-right: 190px;
-	margin-bottom: 45px;
+	padding-right: 1rem;
+	margin-bottom: 2.6rem;
 	transition: all 0.5s ease;
 
 	&:last-child {
@@ -831,6 +898,10 @@
 	&.clr-col-md-2 {
 		max-width: 170px;
 	}
+}
+
+.dashboard-subcomponent-title{
+
 }
 
 .meetup-page {
@@ -922,7 +993,8 @@
 }
 
 .om-username {
-	margin-bottom: 39px;
+	margin-bottom: 2.45rem;
+	margin-left: 0;
 }
 
 .pre-process-box {
@@ -1089,10 +1161,12 @@
 }
 
 .search-input {
-	width: 390px;
-	height: 41px;
-	border-radius: 20.5px;
+	width: 24.375rem;
+	height: 2.563rem;
+	border-radius: 1.3rem;
 	border: solid 1px #979797;
+	padding-left: 1.4rem;
+	font-weight: normal;
 }
 
 .chat-sidepanel-search-header {
@@ -1153,7 +1227,7 @@
 }
 
 .cell-name-wrapper {
-	max-width: 178px;
+	max-width: 11.1rem;
 }
 
 .side-panel-content-wrapper {
@@ -1164,6 +1238,16 @@
 
 .datagrid-table .datagrid-cell.cell-state-warpper {
 	text-align: right;
+	padding-right: 1rem;
+	margin-right: 6rem;
+}
+
+.clr-checkbox-wrapper input[type=checkbox] {
+	opacity: 1 !important;
+}
+
+.clr-checkbox-wrapper > label{
+	display: none!important;
 }
 
 .cell-state {
@@ -1619,8 +1703,9 @@
 }
 
 .meetups-dropdown-wrap {
-	width: 460px;
-	position: relative;
+	width: 32rem;
+	margin-left: 1.8rem;
+	margin-top: 0.6rem;
 
 	.dropdown,
 	.dropdown .dropdown-toggle:not(.btn) {
@@ -1642,11 +1727,12 @@
 			display: none;
 		}
 
-		padding-left: 0;
+		padding-left: 0.2rem;
 		background: transparent;
 		border: none;
 		justify-content: flex-start;
 		z-index: 1;
+		margin-top: 0.2rem;
 
 		&:after {
 			content: "";
@@ -1743,19 +1829,34 @@
 
 .toast-container {
 	width: 100% !important;
-	top: 65px !important;
+	//top: 65px !important;
 	right: 0 !important;
+	top: 1px !important;
 	border-radius: 0 !important;
+	opacity: 1;
 
 	.ngx-toastr {
 		width: 100% !important;
-		padding: 26.5px 15px 26.5px 50px !important;
+		padding: 0.8rem 0.92rem 2.2rem 3.16rem !important;
 		box-shadow: none !important;
 	}
 
 	.toast-success {
 		background-color: #7ed321;
+		height: 2rem;
+		position: relative;
+		//top: 4rem;
 		text-align: center;
+		font-size: 1.2rem;
+		background-image: none;
+	}
+
+	.toast-info {
+		height: 2rem;
+		position: relative;
+		//top: 4rem;
+		text-align: center !important;
+		font-size: 1.2rem !important;
 		background-image: none;
 	}
 }
@@ -1808,4 +1909,54 @@
 		font-size: 10px;
 		color: #ffffff;
 	}
+}
+
+.meetup-logo {
+	width: 3.2rem;
+	height: 3.2rem;
+	background-color: #8c9299 !important;
+	border-radius: 0.6rem;
+	margin-top: 0.2rem;
+	margin-right: 1rem;
+	margin-left: 0.2rem;
+	font-size: 2.0rem;
+	color: white;
+}
+
+.meetup-logo-42 {
+	width: 4.2rem;
+	height: 4.2rem;
+	background-color: #8c9299 !important;
+	border-radius: 0.7rem;
+	margin-top: 0.2rem;
+	margin-right: 1rem;
+	margin-left: 0.2rem;
+	font-size: 3.2rem;
+	color: white;
+}
+
+.meetup-logo-24 {
+	width: 2.4rem;
+	height: 2.4rem;
+	background-color: #8c9299 !important;
+	border-radius: 0.7rem;
+	margin-top: 0.2rem;
+	margin-right: 0.5rem;
+	margin-left: 0.2rem;
+	font-size: 1.7rem;
+	color: white;
+	font-weight: 600;
+	padding: 0.3rem 2rem 1.3rem 0.8rem;
+}
+
+.meetup-logo-36 {
+	width: 3.6rem;
+	height: 3.6rem;
+	background-color: #8c9299 !important;
+	border-radius: 0.6rem;
+	margin-top: 0.2rem;
+	margin-right: 1rem;
+	margin-left: 0.2rem;
+	font-size: 3.2rem;
+	color: white;
 }

@@ -17,13 +17,27 @@ export class AuthGuard implements CanActivate {
     }
 
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-        return this.authService.firebaseUser$.pipe(
+        return this.authService.loggedInUserFromAuthService$.pipe(
             take(1),
             map(user => !!user),
             tap(loggedIn => {
               if (!loggedIn) {
                 console.log('Auth Guard Not logged in');
-                this.router.navigate(['/sign-in'], { queryParams: { returnUrl: state.url }});
+                  let queryParamsObject = {};
+                  if(next?.queryParams?.frompm){
+                      queryParamsObject['frompm'] = next.queryParams.frompm;
+                  }
+                  if(next?.queryParams?.mid){
+                      queryParamsObject['mid'] = next.queryParams.mid;
+                  }
+                  queryParamsObject['returnUrl'] = state.url;
+                this.router.navigate(['/sign-in'], { queryParams: queryParamsObject});
+              } else {
+                  this.authService.loggedInUserFromAuthService$.subscribe((firebaseUser => {
+                      if (firebaseUser){
+                          //console.log('firebaseUser in auth guard:' + JSON.stringify(firebaseUser))
+                      }
+                  }))
               }
           })
         );

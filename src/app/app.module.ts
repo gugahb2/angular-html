@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 
@@ -12,26 +14,20 @@ import { environment } from "../environments/environment";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { SignInComponent } from "./components/sign-in/sign-in.component";
 import { SignUpComponent } from "./components/sign-up/sign-up.component";
-import { ForgotPasswordComponent } from "./components/forgot-password/forgot-password.component";
-import { VerifyEmailComponent } from "./components/verify-email/verify-email.component";
 
 import { AuthService } from "./shared/services/auth.service";
 import { ProfileComponent } from "./components/profile/profile.component";
 import { ClarityModule } from "@clr/angular";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FinishEmailSignInComponent } from "./components/finish-email-sign-in/finish-email-sign-in.component";
 import { EmailSignInComponent } from "./components/email-sign-in/email-sign-in.component";
 import { ApiService } from "./shared/services/api.service";
 
 import { AngularFireFunctionsModule, REGION } from "@angular/fire/functions";
 import { NewMeetingsNowComponent } from "./components/dashboard/meetings/new-meetings-now/new-meetings-now.component";
-import { NewMeetingsGroupComponent } from "./components/dashboard/meetings/new-meetings-group/new-meetings-group.component";
-import { NewMeetingsScheduledComponent } from "./components/dashboard/meetings/new-meetings-scheduled/new-meetings-scheduled.component";
-import { MeetupSettingsComponent } from "./components/dashboard/home/meetup-settings/meetup-settings.component";
+import { AddNewMeetup } from "./components/dashboard/home/add-new-meetup/add-new-meetup.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HomeComponent } from "./components/dashboard/home/home.component";
-import { AddMeetupsComponent } from "./components/dashboard/home/add-meetups/add-meetups.component";
-import { MeetingNotifyComponent } from "./components/dashboard/meetings/meeting-notify/meeting-notify.component";
+import { LoadMeetupsOnAppLoad } from "./components/dashboard/home/load-meetups-on-app-load/load-meetups-on-app-load.component";
 import { ChatComponent } from "./components/dashboard/chat/chat.component";
 import { MeetingsComponent } from "./components/dashboard/meetings/meetings.component";
 import { MeetingInviteComponent } from "./components/dashboard/meetings/meeting-invite/meeting-invite.component";
@@ -53,12 +49,18 @@ import { PageNotFoundComponent } from "./components/page-not-found/page-not-foun
 import { GuestFormComponent } from "./components/guest-form/guest-form.component";
 import { JoinMeetingComponent } from "./components/join-meeting/join-meeting.component";
 import { HomePageComponent } from "./components/home-page/home-page.component";
-import { JoinMeetupComponent } from "./components/dashboard/home/join-meetup/join-meetup.component";
 import { ToastrModule } from "ngx-toastr";
 import { JoinPublicMeetupsComponent } from './components/dashboard/home/join-public-meetups/join-public-meetups.component';
-import { PublicMeetupsComponent } from './public-meetups/public-meetups.component';
+import { PublicMeetupsComponent } from './components/public-meetups/public-meetups.component';
 import { MarketingPageComponent } from './components/marketing-page/marketing-page.component';
 import { DashboardResolver } from './shared/guard/dashboard-resolver.service';
+import { PendingMemberReviewComponent } from './components/pending-member-review/pending-member-review.component';
+import { NgInitDirective } from './shared/directives/ng-init.directive';
+import {PresenceService} from "./shared/services/presence.service";
+import {EllipsisModule} from "ngx-ellipsis";
+import { ReadMoreComponent } from './components/read-more/read-more.component';
+import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { OmSettingsComponent } from './components/dashboard/om-settings/om-settings.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	suppressScrollX: true,
@@ -70,19 +72,14 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		DashboardComponent,
 		SignInComponent,
 		SignUpComponent,
-		ForgotPasswordComponent,
-		VerifyEmailComponent,
 		ProfileComponent,
 		FinishEmailSignInComponent,
 		EmailSignInComponent,
 		NewMeetingsNowComponent,
-		NewMeetingsGroupComponent,
-		NewMeetingsScheduledComponent,
-		MeetupSettingsComponent,
+		AddNewMeetup,
 		HomeComponent,
-		AddMeetupsComponent,
-		MeetupSettingsComponent,
-		MeetingNotifyComponent,
+		LoadMeetupsOnAppLoad,
+		AddNewMeetup,
 		ChatComponent,
 		MeetingsComponent,
 		NavigationComponent,
@@ -99,13 +96,19 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		GuestFormComponent,
 		JoinMeetingComponent,
 		HomePageComponent,
-		JoinMeetupComponent,
 		JoinPublicMeetupsComponent,
 		PublicMeetupsComponent,
 		MarketingPageComponent,
+		PendingMemberReviewComponent,
+		NgInitDirective,
+		ReadMoreComponent,
+		PrivacyPolicyComponent,
+		OmSettingsComponent,
 	],
 	imports: [
+		CommonModule,
 		BrowserModule,
+		BrowserAnimationsModule,
 		AppRoutingModule,
 		AngularFireModule.initializeApp(environment.firebase),
 		AngularFireAuthModule,
@@ -117,8 +120,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		ReactiveFormsModule,
 		PerfectScrollbarModule,
 		LineTruncationLibModule,
-		BrowserAnimationsModule,
 		ToastrModule.forRoot(),
+		EllipsisModule
 	],
 	providers: [
 		AuthService,
@@ -128,8 +131,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 			provide: PERFECT_SCROLLBAR_CONFIG,
 			useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
 		},
-		DashboardResolver
+		DashboardResolver,
+		PresenceService
 	],
 	bootstrap: [AppComponent],
+	exports: [NgInitDirective]
 })
 export class AppModule {}

@@ -2,12 +2,12 @@
     <div class="home-container" [ngClass]="status?'split-panel':''">
         <div class="dc-heading text-left dc-hero-heading">
             <h1>Groups</h1>
-            <div class="header-button-group">
+            <div class="header-button-group" *ngIf="((this.selectedMeetupDocData?.id) && (['MEETUP_OWNER', 'MEETUP_ADMIN'].includes(this.meetupRole)))">
                 <div class="find-div-wrapper">
-                    <a href="" class="search-link" (click)="FindPanel($event)">Find a group</a>
+                    <a href="" class="search-link" (click)="openFindGroupsPanel($event)"><clr-icon class="search-icon" shape="search" style=" position: relative;top: -0.2rem;left: -0.4rem;"></clr-icon>Find a group</a>
                 </div>
                 <div class="image-button">
-                    <a routerLink="/dashboard/groups/new" class="om-link success">New</a>
+                    <a routerLink="/dashboard/groups/new" class="om-link success"><div class="green-circle"></div>New Group</a>
                 </div>
             </div>
         </div>
@@ -20,36 +20,15 @@
                         <clr-dg-column></clr-dg-column>
                         <clr-dg-column></clr-dg-column>
 
-                        <clr-dg-row>
-                            <clr-dg-cell class="group-name">Adult Sunday School</clr-dg-cell>
+                        <clr-dg-row *ngFor="let group of groupsList">
+                            <clr-dg-cell class="group-name">{{group.name}}</clr-dg-cell>
                             <clr-dg-cell class="group-meeting-link">
-                                <div class="link-block"><a class="om-link">Create Meeting</a></div>
+                                <div class="link-block"><a class="om-link" routerLink="/dashboard/meetings/new">Create Meeting</a></div>
                             </clr-dg-cell>
                             <clr-dg-cell class="group-meeting-link">
-                                <div class="link-block"><a class="om-link">Create Chat</a></div>
-                            </clr-dg-cell>
-                        </clr-dg-row>
-                        <clr-dg-row>
-                            <clr-dg-cell class="group-name">Adult Sunday School</clr-dg-cell>
-                            <clr-dg-cell class="group-meeting-link">
-                                <div class="link-block"><a class="om-link">Create Meeting</a>
-                                </div>
-                            </clr-dg-cell>
-                            <clr-dg-cell class="group-meeting-link">
-                                <div class="link-block"><a class="om-link">Create Chat</a></div>
+                                <div class="link-block"><a class="om-link" routerLink="/dashboard/chat" (click)="openGroupChatInChatSection(group)">Group Chat</a></div>
                             </clr-dg-cell>
                         </clr-dg-row>
-                        <clr-dg-row>
-                            <clr-dg-cell class="group-name">Adult Sunday School</clr-dg-cell>
-                            <clr-dg-cell class="group-meeting-link">
-                                <div class="link-block"><a class="om-link">Create Meeting</a>
-                                </div>
-                            </clr-dg-cell>
-                            <clr-dg-cell class="group-meeting-link">
-                                <div class="link-block"><a class="om-link">Create Chat</a></div>
-                            </clr-dg-cell>
-                        </clr-dg-row>
-
                     </clr-datagrid>
                 </div>
             </div>
@@ -59,14 +38,30 @@
                 <div class="side-panel-heading text-left">
                     <h3>Find a Group</h3>
                     <div class="side-panel-head-button">
-                        <a href="">Done</a>
+                        <a href="" (click)="closeFindGroupsPanel($event)">Done</a>
                     </div>
                 </div>
                 <div class="side-panel-content-wrapper">
                     <div class="side-panel-search">
                         <div class="search-warpper">
-                            <span class="ico"></span>
-                            <input type="text" class="clr-input search-input">
+                            <clr-icon class="search-icon" shape="search" style=" position: relative;top: 1.7rem;left: 0.4rem;"></clr-icon>
+                            <input type="text" class="clr-input search-input"
+                                   placeholder="Enter minimum 3 letters & press Enter..."
+                                   [formControl]="searchTextControl" (keyup.enter)="enterPressed()">
+                        </div>
+                        <div class="side-panel-scroll new-chat-users">
+                            <div class="ps side-panel-ps" [perfectScrollbar]="config">
+
+                                <div class="sidepanel-data-grid">
+                                        <clr-datagrid>
+                                            <clr-dg-row class="cell-row" *ngFor="let group of searchedGroupsList; let i=index;">
+
+                                                <clr-dg-cell style="max-width: 15rem;">{{this.group.name}}</clr-dg-cell>
+
+                                            </clr-dg-row>
+                                        </clr-datagrid>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,348 @@
+.search-warpper-new-chat {
+  margin-right: 6rem !important;
+}
+
+.side-panel-header-b-chats {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 1.06rem;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.hide-element {
+  display: none;
+}
+
+.chatting-message-box {
+  position: relative;
+  padding-right: 3rem;
+  margin-bottom: 2rem;
+  opacity: 1;
+  /*animation: chatbox-animation 0.5s ease forwards;*/
+
+  div.content {
+    width: 32rem;
+    font-size: 1.2rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    border-radius: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+  }
+}
+
+.chatting-message-box div.content {
+  width: 19rem;
+  max-width: 21rem;
+  word-wrap: break-word;
+}
+
+/*These are the ideal media settings*/
+.chatting-message-box {
+  position: relative;
+  padding-right: 3rem;
+  margin-bottom: 0.8rem;
+  margin-top: 0.8rem;
+  opacity: 1;
+}
+
+.message-receive .chatting-message-box {
+  padding-left: 3rem;
+}
+
+.chatting-profile {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2f2f2;
+  overflow: hidden;
+
+  img {
+    max-width: 100%;
+  }
+
+}
+
+.side-panel-ps {
+  position: relative;
+  max-height: calc(100vh - 262px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /*justify-content: end;*/
+}
+
+.chatter-image-alt {
+  width: 2.1rem;
+  height: 2.1rem;
+  line-height: 1.6rem;
+  border-radius: 50%;
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: #000000;
+  text-align: center;
+  padding-top: 0.2rem;
+  background: grey;
+}
+
+.recent-chats-block-wrapper .chat-block-head-chats-section{
+  padding-top:0.1rem !important;
+}
+
+.chat-block-head .chat-block-photo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 2rem;
+  width: 2rem;
+  border: solid 1px #979797;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.ps > .ps__rail-x,
+.ps > .ps__rail-y {
+  opacity: 0.6;
+}
+
+.chat-right-section {
+  max-width: calc(100% - 367px);
+  width: 100%;
+  position: relative;
+}
+
+.chat-user-details {
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 14px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #909090;
+}
+
+
+
+
+/*
+@media screen and (min-width: 1200px) {
+  .chat-right-section {
+    max-width: calc(100% - 23rem);
+    width: 100%;
+    position: relative;
+  }
+}*/
+
+
+/*@media screen and (min-width: 900px) and (max-width: 1199px) {
+  .chat-right-section {
+    max-width: 60%;
+    width: 100%;
+    position: relative;
+  }
+}*/
+@media screen and (min-width: 800px) and (max-width: 899px) {
+  .chat-right-section {
+    max-width: 70%;
+    width: 100%;
+    position: relative;
+  }
+}
+
+@media screen and (min-width: 700px)  and (max-width: 799px) {
+  .chat-right-section {
+    max-width: 70%;
+    width: 100%;
+    position: relative;
+  }
+}
+
+@media screen and (min-width: 550px)  and (max-width: 699px) {
+  .side-panel-ps {
+    position: relative;
+    max-height: 32rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /*justify-content: end;*/
+  }
+
+  .chat-right-section {
+    max-width: 90%;
+    /* width: 99%; */
+    position: relative;
+    margin-left: 2rem;
+    margin-right: 2rem;
+
+  }
+  .chat-user-details {
+    display: inline-flex;
+  }
+
+  .chatting-input-wrapper, .chatting-input-tool {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-right: 0.8rem;
+  }
+
+
+  .chatting-block {
+    min-height: 24rem;
+    max-height: 36rem;
+    padding: 0.5rem 0.5rem;
+  }
+
+  .chat-container .chat-user-details, .chat-container .chatting-messages {
+    padding-right: 1rem;
+    padding-left: 0.5rem;
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgrey;
+  }
+
+  .chatting-input-wrapper .om-input.clr-textarea {
+    width: 38rem;
+  }
+
+  .chatting-message-box div.content {
+    width: 14rem;
+    max-width: 20rem;
+    word-wrap: break-word;
+  }
+
+  /*These are the ideal media settings*/
+  .chatting-message-box {
+    position: relative;
+    padding-right: 3rem;
+    margin-bottom: 0.9rem;
+    margin-top: 0.9rem;
+    opacity: 1;
+  }
+
+  .message-receive .chatting-message-box {
+    padding-left: 3rem;
+  }
+}
+
+@media screen and (min-width: 400px)  and (max-width: 549px){
+  .side-panel-ps {
+    position: relative;
+    max-height: 25rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /*justify-content: end;*/
+  }
+
+  .chat-left-section{
+    max-width: 70%;
+  }
+  .chat-right-section {
+    max-width: 80%;
+    width: 100%;
+    position: relative;
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+  .chatting-input-wrapper, .chatting-input-tool {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .chat-user-details {
+    display: inline-flex;
+  }
+
+  .chatting-input-wrapper, .chatting-input-tool {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-right: 0.4rem;
+  }
+
+
+
+  .chatting-block{
+    min-height: 12rem;
+    max-height:32rem;
+    padding: 0.4rem 0.4rem;
+  }
+
+  .chatting-message-box div.content {
+    width: 20rem;
+  }
+
+  .chatting-message-box {
+    position: relative;
+    padding-right: 3rem;
+    margin-bottom: 0.8rem;
+    margin-top: 0.8rem;
+    opacity: 1;
+  }
+}
+
+@media screen and (min-width: 300px) and (max-width: 399px) {
+  .side-panel-ps {
+    position: relative;
+    max-height: 25rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /*justify-content: end;*/
+  }
+  .chat-right-section {
+    max-width: 80%;
+    width: 100%;
+    position: relative;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+  .chatting-input-wrapper, .chatting-input-tool {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-right: 0.2rem;
+  }
+
+  .chat-user-details {
+    display: inline-flex;
+  }
+
+  .chatting-block{
+    min-height: 10rem;
+    max-height:23rem;
+    padding: 0.3rem 0.3rem;
+  }
+
+  .chatting-message-box div.content {
+    width: 16rem;
+  }
+
+  .chatting-message-box {
+    position: relative;
+    padding-right: 3rem;
+    margin-bottom: 0.6rem;
+    margin-top: 0.6rem;
+    opacity: 1;
+  }
+
+}
+
+

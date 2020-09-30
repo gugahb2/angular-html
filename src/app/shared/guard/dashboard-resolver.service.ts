@@ -14,7 +14,7 @@ export class DashboardResolver implements Resolve<any> {
   constructor(private authService: AuthService) { console.log('In the resolver'); }
 
   resolve(): Observable<any> {
-    return this.authService.firebaseUser$.pipe(
+    return this.authService.loggedInUserFromAuthService$.pipe(
       switchMap(user => {
         if (user) {
           console.log("User");

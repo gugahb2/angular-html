@@ -5,7 +5,7 @@
         </div>
         <div class="main-block-header">
             <div class="hero-text">
-                <h3>Welcome back, {{DisplayName}}</h3>
+                <h3>Welcome back, {{topDisplayName}}</h3>
             </div>
         </div>
         <div class="authBlock">
@@ -28,8 +28,8 @@
             </div>
         </div>
         <div class="redirectToLogin">
-            <span>Not {{DisplayName}} ? <a class="redirect" href="" routerLink="/sign-in"
-                    (click)="RedirectToLogin($event)">Login here.</a></span>
+            <span>{{displayName}} <a class="redirect" style="color:#579bff;" href="" routerLink="/sign-in"
+                    (click)="RedirectToLogin($event)">Login here</a></span>
         </div>
     </div>
     <div class="center-element" *ngIf="!hasUser">
@@ -46,7 +46,7 @@
         <div class="authBlock">
             <div class="auth-button-group">
                 <div class="btn-primary">
-                    <button class="btn btn-email" routerLink="/sign-in">Create Your Account</button>
+                    <button class="btn btn-home-page btn-email" routerLink="/sign-in">Sign-In / Create Your Account</button> <button class="btn btn-home-page btn-email" routerLink="/publicmeetups">Browse Public Meetups</button>
                 </div>
             </div>
         </div>

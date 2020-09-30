@@ -1,0 +1,43 @@
+.chatter-image-alt {
+  width: 2.06rem;
+  height: 2.06rem;
+  line-height: 1.6rem;
+  border-radius: 50%;
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: #000000;
+  text-align: center;
+  padding-top: 0.2rem;
+  background: grey;
+}
+
+.recent-chats-block-wrapper .chat-block-head{
+  padding-top:0.1rem;
+}
+
+.chat-block-head .chat-block-photo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 2rem;
+  width: 2rem;
+  border: solid 1px #979797;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.ps > .ps__rail-x,
+.ps > .ps__rail-y {
+  opacity: 0.6;
+}
+
+.small-block-home {
+  >h3 {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem!important;
+  }
+}

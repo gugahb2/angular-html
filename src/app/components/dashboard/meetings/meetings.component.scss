@@ -1,0 +1,124 @@
+/*
+.meeting-table {
+  .datagrid-column-separator {
+    display: none;
+  }
+
+  .table-body-row {
+    margin-bottom: 1.5rem;
+
+    &:last-of-type {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .datagrid-table .datagrid-placeholder-container {
+    display: none;
+  }
+
+  .datagrid {
+    border: none;
+  }
+
+  .datagrid-table {
+
+    .datagrid-header {
+      background: #f6f6f6;
+      border: solid 1px #eaeaea;
+      z-index: 1;
+
+      .datagrid-row:hover {
+        background: #f6f6f6;
+      }
+    }
+
+    .datagrid-column {
+      background: none;
+      padding: 15px 10px;
+
+      .datagrid-column-title {
+        color: #56606d;
+        font-size: 18px;
+        line-height: normal;
+        letter-spacing: normal;
+        font-family: "Helvetica Neue LT W05_45 Light";
+      }
+
+      &.m-name {
+        .datagrid-column-title {
+          font-family: "Helvetica Neue LT W05_75 Bold";
+          font-size: 20px;
+        }
+      }
+
+      &.m-name {
+        width: 267px !important;
+        max-width: 267px;
+        padding-left: 11px;
+      }
+
+      &.time {
+        width: 191px !important;
+        max-width: 191px;
+        padding-left: 11px;
+      }
+
+      &.grp {
+        width: 235px !important;
+        max-width: 235px;
+        padding-left: 11px;
+      }
+
+      &.att {
+        width: 39px !important;
+        max-width: 39px;
+      }
+
+    }
+  }
+
+  .datagrid-row {
+    border: none;
+    background: none;
+  }
+
+
+  .datagrid .datagrid-cell {
+    background: none;
+    font-family: "Helvetica Neue LT W05_45 Light";
+    color: #56606d;
+    font-size: 18px;
+    line-height: normal;
+    letter-spacing: normal;
+
+    &.m-name {
+      font-family: "Helvetica Neue LT W05_75 Bold";
+    }
+
+    &.m-name {
+      width: 267px !important;
+      max-width: 267px;
+      padding-left: 11px;
+    }
+
+    &.time {
+      width: 191px !important;
+      max-width: 191px;
+      padding-left: 11px;
+    }
+
+    &.grp {
+      width: 235px !important;
+      max-width: 235px;
+      padding-left: 11px;
+    }
+
+    &.att {
+      width: 39px !important;
+      max-width: 39px;
+    }
+
+  }
+
+}
+*/

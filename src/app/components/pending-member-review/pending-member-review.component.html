@@ -1,0 +1,40 @@
+<div class="dashboard-container om-block-container dashboard-home">
+    <div class="home-container">
+        <div class="dc-heading">
+            <div class="dashboard-subcomponent-title">
+                <h1>Pending Member Review</h1>
+            </div>
+        </div>
+        <div class="inner-container full-width" *ngIf="['MEETUP_OWNER', 'MEETUP_ADMIN'].includes(this.meetupRole)">
+            <div class="clr-row">
+                <!--Loop this div for groups - meeting-table-->
+                <div class="meeting-table">
+                    <clr-datagrid>
+                        <clr-dg-column class="m-name" style="padding-left: 1.6rem;">Name</clr-dg-column>
+                        <clr-dg-column class="time">Last Active</clr-dg-column>
+                        <clr-dg-column class="review-cell-questions-header">Questions</clr-dg-column>
+                        <clr-dg-column class="review-cell-header">Action</clr-dg-column>
+
+                        <clr-dg-row class="table-body-row" style="margin-bottom: 0; margin-top: 0;border-bottom: 1px solid lightgray;" *ngFor="let member of membersToReview">
+                            <clr-dg-cell class="m-name review-cell">{{member.displayName}}</clr-dg-cell>
+                            <clr-dg-cell class="time review-cell-last-login">{{member.lastOnlineStatusChangeAt?.toDate() | date:'mediumDate'}}</clr-dg-cell>
+                            <clr-dg-cell class="review-cell-questions" [innerHTML]="member.joiningQnA"></clr-dg-cell>
+                            <clr-dg-cell class="review-cell">
+                                <div class="d-button-set">
+                                    <label [routerLink]="[]" style="margin-right: 1.2rem;color: gray !important;" class="d-button-member-review">Send Message</label>
+                                    <a [routerLink]="[]" (click)="markAsNonTrusted(member)" style="margin-right: 1.2rem;" class="d-button-member-review">Decline</a>
+                                    <a [routerLink]="[]" (click)="markAsTrusted(member)" style="margin-right: 0.2rem;" class="d-button-member-review">Mark Trusted</a>
+                                </div>
+                            </clr-dg-cell>
+                        </clr-dg-row>
+                    </clr-datagrid>
+                </div>
+            </div>
+        </div>
+        <div class="inner-container full-width" *ngIf="!['MEETUP_OWNER', 'MEETUP_ADMIN'].includes(this.meetupRole)">
+            <div class="clr-row text-center">
+                <span style="font-size: 1.2rem;font-style: italic;">You are not authorized to view this page...</span>
+            </div>
+        </div>
+    </div>
+</div>

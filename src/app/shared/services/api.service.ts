@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 })
 export class ApiService {
     user: any;
-    userCollection: any;
+    loggedInUserDocData: any;
 
     constructor(
         private http: HttpClient,
@@ -25,17 +25,17 @@ export class ApiService {
     }
 
     /**
-     * Fetch user collection from firebase database
+     * Fetch user document from firebase database
      */
-    FetchUserCollection() {
+    fetchUserDocument() {
         return new Promise(resolve => {
             if (this.user && this.user.uid) {
                 this.auth.idToken.subscribe(data => {
                     const user = this.afs.collection('Users').doc(this.user.uid).get();
                     user.subscribe((snapshot) => {
-                        this.userCollection = snapshot.data();
+                        this.loggedInUserDocData = snapshot.data();
                         resolve(snapshot.data());
-                        localStorage.setItem('userCollection', JSON.stringify(this.userCollection));
+                        localStorage.setItem('userCollection', JSON.stringify(this.loggedInUserDocData));
                     });
                 });
             }
@@ -46,8 +46,8 @@ export class ApiService {
         this.auth.idToken.subscribe(data => {
             const user = this.afs.collection('Users').doc(this.user.uid);
             user.snapshotChanges().subscribe((snapshot) => {
-                this.userCollection = snapshot.payload.data();
-                localStorage.setItem('userCollection', JSON.stringify(this.userCollection));
+                this.loggedInUserDocData = snapshot.payload.data();
+                localStorage.setItem('userCollection', JSON.stringify(this.loggedInUserDocData));
             });
         });
     }
@@ -60,44 +60,8 @@ export class ApiService {
      * Return the user collection
      */
     get UserCollection(): object {
-        return this.userCollection || JSON.parse(localStorage.getItem('userCollection'));
+        return this.loggedInUserDocData || JSON.parse(localStorage.getItem('userCollection'));
     }
 
-    /**
-     * Create meetup on submitting meetup form
-     */
-    CreateMeetup(data) {
-        data = {
-            ...data,
-            owner: {
-                uid: this.user.uid,
-                name: this.user.displayName,
-                email: this.user.email
-            },
-            createdAt: Date.now()
-        };
 
-        this.auth.idToken.subscribe(sub => {
-            const meetupCollection = this.afs.collection('OnlineMeetups');
-            meetupCollection.add(data).then(response => {
-                setTimeout(() => {
-                    this.router.navigate([`/dashboard/meetup/${response.id}`]);
-                }, 100);
-            });
-        });
-    }
-
-    /**
-     * Create meeting on submitting meeting form
-     */
-    CreateMeeting(data) {
-        this.auth.idToken.subscribe(sub => {
-            const meetingCollection = this.afs.collection('Meetings');
-            meetingCollection.add(data).then(response => {
-                setTimeout(() => {
-                    this.router.navigate([`/dashboard/meeting/${response.id}/notify`]);
-                }, 100);
-            });
-        });
-    }
 }

@@ -1,39 +1,18 @@
-<div class="dashboard-container om-block-container" *ngIf="user">
-    <div class="home-container" *ngIf="showSecurityQuestions">
-        <form clrForm *ngIf="HasQuestions && meetupCollection" [formGroup]="questionForm"
-              (submit)="SubmitQuestions($event)">
-            <div class="form-block" *ngFor="let q of JoiningQuestions;let i = index">
-                <clr-input-container class="om-form-control textbox-wrapper">
-                    <label class="hide-sm" for="question-{{i}}">{{q.question}}</label>
-                    <input clrInput type="text" class="om-input clr-col-md-4" name="question-{{i}}"
-                           placeholder="Enter your answer" required id="question-{{i}}"
-                           formControlName="question-{{i}}"/>
-                </clr-input-container>
-            </div>
-            <div class="button-block button-wrapper-a">
-                <input type="submit" class="btn success om-btn bold-link" value="Submit">
-            </div>
-        </form>
-    </div>
-    <div class="home-container" *ngIf="!showSecurityQuestions">
+<div class="dashboard-container om-block-container">
+    <div class="home-container" *ngIf="this.loggedInUserDocData">
         <div class="dc-heading">
-            <div class="dc-heading-icon">
-                <img src="/assets/images/icons/icon-h.png">
-            </div>
             <h1>Meetings</h1>
-            <div class="header-button" *ngIf="!isUserGuest">
+            <div class="header-button" *ngIf="!isUserGuest && this.selectedMeetupDocData">
                 <div class="image-button">
-                    <a routerLink="/dashboard/meetings/new" class="om-link success">New</a>
+                    <a routerLink="/dashboard/meetings/new" class="om-link success"><div class="green-circle"></div>New</a>
                 </div>
             </div>
         </div>
-        <div class="dc-sub-heading" *ngIf="!isUserGuest">
+        <div class="dc-sub-heading" disabled="true" hidden="true" *ngIf="!isUserGuest">
             <div class="small-select single-select">
                 <clr-select-container class="om-select-wrapper">
                     <select clrSelect name="options">
-                        <option value="one">Sunday School</option>
-                        <option value="two">Sunday School</option>
-                        <option value="three">Sunday School</option>
+                        <option value="selectedMeetupDocData.id" *ngIf="selectedMeetupDocData">{{this.selectedMeetupDocData.name}}</option>
                     </select>
                 </clr-select-container>
             </div>
@@ -41,34 +20,40 @@
                 <a class="om-link bold-link">Filter</a>
             </div>
         </div>
-        <div class="full-width text-center om-small-link-wrapper" *ngIf="!isUserGuest">
-            <a href="" class="om-link success om-small-link" (click)="ShowPastMeetings($event)">{{showPastMeetings?'Hide':'View'}} past meeting</a>
+        <div class="full-width text-center om-small-link-wrapper" *ngIf="this.selectedMeetupDocData">
+            <a href="" class="om-link success om-small-link" (click)="ShowPastMeetings($event)">{{showPastMeetings?'Hide':'View'}} Past Meetings</a>
         </div>
         <div class="inner-container full-width">
             <div class="clr-row">
-                <!--Loop this div for groups - meeting-table-->
-                <div class="meeting-table">
-                    <clr-datagrid >
-                        <clr-dg-column class="m-name"><!--{{group.groupName}}--> Meeting name</clr-dg-column>
+                <div class="meeting-table" *ngFor="let group of userMeetings">
+                    <clr-datagrid *ngIf="!group.isPastMeeting || showPastMeetings">
+                    <clr-dg-column class="m-name">{{group.groupName}} <!--Meeting name--></clr-dg-column>
                         <clr-dg-column class="time">Time</clr-dg-column>
                         <clr-dg-column class="grp">Group</clr-dg-column>
-                        <clr-dg-column class="att">d</clr-dg-column>
+                        <clr-dg-column class="att">Action</clr-dg-column>
 
-                        <clr-dg-row class="table-body-row" *ngFor="let m of meeting">
-                            <clr-dg-cell class="m-name">{{m.name}}</clr-dg-cell>
-                            <clr-dg-cell class="time">{{m.date | date}}</clr-dg-cell>
-                            <clr-dg-cell class="grp">Weekly Sunday School</clr-dg-cell>
-                            <clr-dg-cell class="att">i</clr-dg-cell>
+                        <clr-dg-row class="table-body-row" *ngFor="let meeting of group.items">
+                            <clr-dg-cell class="m-name">{{meeting.meetingName}}</clr-dg-cell>
+                            <clr-dg-cell class="time" *ngIf="meeting.isStarted">{{meeting.startsAt.toDate() | date:'shortTime'}} - {{meeting.endsAt.toDate() | date:'shortTime'}}</clr-dg-cell>
+                            <clr-dg-cell class="time" *ngIf="!meeting.isStarted" style="font-size: 0.95rem;">Created {{meeting.createdAgo}} ago!<span  *ngIf="!meeting.hasExpired"><br>&nbsp;&#x21aa;Yet to Start!</span></clr-dg-cell>
+                            <clr-dg-cell class="grp">{{this.selectedMeetupDocData.name}}</clr-dg-cell>
                             <clr-dg-cell>
                                 <div class="d-button-set">
-                                    <a href="" class="om-link om-link-small"
-                                       *ngIf="!isUserGuest && !meeting.isPastMeeting"
-                                       (click)="InviteMeeting($event,meeting)">Invite</a>
-                                    <a href="{{m.joinURL}}" class="om-link om-link-small success"
-                                       (click)="goToLink($event, meeting)"><!-- *ngIf="meeting.showButton" -->
-                                        Join
+                                    <a href="" class="om-link om-link-small" *ngIf="!isUserGuest && !meeting.hasEnded  && !meeting.hasExpired" (click)="meetingInviteLinkClicked($event,meeting)">Invite</a>
+                                    <a href="{{meeting.zoomMeetingStartUrl}}" class="om-link om-link-small success"
+                                       (click)="openNewWindowNGoToMeeting($event, meeting, 'start', meeting.isMeetingCreator)" *ngIf="meeting.isMeetingCreator && !meeting.isStarted && !meeting.hasEnded && !meeting.hasExpired">
+                                        Start Meeting
                                     </a>
-                                    <span *ngIf="meeting.isPastMeeting">Meeting finished</span>
+                                    <a href="{{meeting.zoomMeetingJoinUrl}}" class="om-link om-link-small success"
+                                       (click)="openNewWindowNGoToMeeting($event, meeting, 'join', meeting.isMeetingCreator)" *ngIf="meeting.isStarted && !meeting.hasEnded">
+                                        Join Meeting in Progress...
+                                    </a>
+
+                                    <span *ngIf="!meeting.isMeetingCreator && !meeting.isStarted && !meeting.hasEnded && !meeting.hasExpired">
+                                        Meeting yet to begin...
+                                    </span>
+                                    <span *ngIf="meeting.isPastMeeting && meeting.hasEnded">Meeting finished!</span>
+                                    <span *ngIf="meeting.hasExpired">Meeting expired!</span>
                                 </div>
                             </clr-dg-cell>
                         </clr-dg-row>

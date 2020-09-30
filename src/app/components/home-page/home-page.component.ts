@@ -18,22 +18,34 @@ export class HomePageComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        if (this.DisplayName) { this.hasUser = true; }
+        if (this.topDisplayName) { this.hasUser = true; }
     }
 
     socialMediaLogin(loginType) {
         switch (loginType) {
-            case 'google': {this.authService.googleSignin(); break; }
-            case 'apple': {this.authService.appleSignin(); break; }
-            case 'facebook': {this.authService.facebookSignin(); break; }
+            case 'google': {this.authService.googleSignin({}); break; }
+            case 'apple': {this.authService.appleSignin({}); break; }
+            case 'facebook': {this.authService.facebookSignin({}); break; }
             }
         if (this.authService.isAuthenticated) {
                 this.router.navigate(['/dashboard']);
         }
     }
 
-    get DisplayName(): string {
-        return localStorage.getItem('displayName');
+    get displayName(): string {
+        if(localStorage.getItem('loginType') && localStorage.getItem('loginType') === 'email'){
+            return '';
+        } else {
+            return('Not ' + localStorage.getItem('displayName') + ' ?');
+        }
+    }
+
+    get topDisplayName(): string {
+        if(localStorage.getItem('loginType') && localStorage.getItem('loginType') === 'email'){
+            return '';
+        } else {
+            return(localStorage.getItem('displayName'));
+        }
     }
 
     get LoginType(): string {

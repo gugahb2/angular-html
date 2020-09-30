@@ -24,7 +24,7 @@
         opacity: 1;
 
         .om-link {
-            margin-right: 49px;
+            margin-right: 2.2rem;
 
             &:hover {
                 background: #7ed321;
@@ -33,7 +33,7 @@
             }
 
             &:last-child {
-                margin-right: 0;
+                margin-right: 0.2rem;
             }
         }
     }
@@ -81,8 +81,8 @@
     }
 
     .time {
-        width: 191px;
-        padding-left: 11px;
+        width: 16rem;
+        padding-left: 0.7rem;
     }
 
     .grp {
@@ -127,10 +127,12 @@
     }
 
     .table-body-row {
-        margin-bottom: 42px;
+        margin-bottom: 0.2rem;
+        border-bottom: 1px solid #e7e7e7 !important;
 
         &:last-of-type {
-            margin-bottom: 32px;
+            margin-bottom: 0.1rem;
+            border-bottom: none !important;
         }
     }
 
@@ -156,11 +158,11 @@
 
         .datagrid-column {
             background: none;
-            padding: 15px 10px;
+            padding: 0.9rem 0.6rem;
 
             .datagrid-column-title {
                 color: #56606d;
-                font-size: 18px;
+                font-size: 1.18rem;
                 line-height: normal;
                 letter-spacing: normal;
                 font-family: "Helvetica Neue LT W05_45 Light";
@@ -180,9 +182,9 @@
             }
 
             &.time {
-                width: 191px !important;
-                max-width: 191px;
-                padding-left: 11px;
+                width: 15rem !important;
+                max-width: 15rem;
+                padding-left: 0.7rem;
             }
 
             &.grp {
@@ -224,9 +226,9 @@
         }
 
         &.time {
-            width: 191px !important;
-            max-width: 191px;
-            padding-left: 11px;
+            width: 15rem !important;
+            max-width: 15rem;
+            padding-left: 0.7rem;
         }
 
         &.grp {

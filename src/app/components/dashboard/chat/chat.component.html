@@ -1,15 +1,17 @@
 <div class="dashboard-container om-block-container chat-container">
-    <div class="home-container" [ngClass]="status?'split-panel':''">
+    <div class="home-container" [ngClass]="true?'split-panel':''">
         <div class="dc-heading text-left dc-hero-heading dc-chat-heading">
             <h1>Chat</h1>
             <div class="chat-search-header">
                 <div class="chat-search-header-content">
-                    <input type="text" placeholder="Search" class="om-input">
+                    <input type="text" placeholder="Coming Soon..." [attr.disabled]="true" class="om-input">
                 </div>
             </div>
             <div class="header-button-group">
                 <div class="image-button">
-                    <a class="om-link success" (click)="ChatPanel($event)">New</a>
+                    <a class="om-link success" (click)="chatPanel($event)">
+                        <div class="green-circle"></div>
+                        New</a>
                 </div>
             </div>
         </div>
@@ -22,44 +24,17 @@
                         <div class="ps recent-chat-ps" [perfectScrollbar]="config">
                             <div class="chats-scroll">
                                 <div class="recent-chats-block">
-                                    <div class="chat-block-head">
-                                        <div class="chat-group-photo">
+                                    <div class="chat-block-head chat-block-head-chats-section" (click)="openGroupChatInMainSection(groupChatItem)"
+                                         *ngFor="let groupChatItem of groupsList">
+                                        <ng-container *ngIf="groupChatItem.id">
+                                        <div class="chat-block-photo">
                                             <img src="/assets/images/icons/groups-small.png">
                                         </div>
-                                        <p class="chat-block-name">Adult Sunday School</p>
-                                        <span class="chat-block-state"></span>
+                                        <p class="chat-block-name" ellipsis
+                                           [ellipsis-content]>{{groupChatItem.name}}</p>
+                                        <p [line-truncation]="3" [innerHTML]="groupChatItem.recentMessages"></p>
+                                        </ng-container>
                                     </div>
-                                    <div class="chat-block-head">
-                                        <div class="chat-group-photo">
-                                            <img src="/assets/images/icons/groups-small.png">
-                                        </div>
-                                        <p class="chat-block-name">Adult Sunday School</p>
-                                        <span class="chat-block-state"></span>
-                                    </div>
-                                    <div class="chat-block-head">
-                                        <div class="chat-group-photo">
-                                            <img src="/assets/images/icons/groups-small.png">
-                                        </div>
-                                        <p class="chat-block-name">Adult Sunday
-                                            School</p>
-                                        <span class="chat-block-state"></span>
-                                    </div>
-                                    <div class="chat-block-head">
-                                        <div class="chat-group-photo">
-                                            <img src="/assets/images/icons/groups-small.png">
-                                        </div>
-                                        <p class="chat-block-name">Men’s Study Wed</p>
-                                        <span class="chat-block-state"></span>
-                                    </div>
-                                    <div class="chat-block-head">
-                                        <div class="chat-group-photo">
-                                            <img src="/assets/images/icons/groups-small.png">
-                                        </div>
-                                        <p class="chat-block-name">Heritage Christian Fellowship</p>
-                                        <span class="chat-block-state"></span>
-                                    </div>
-
-
                                 </div>
                             </div>
                         </div>
@@ -69,38 +44,25 @@
                         <div class="ps recent-chat-ps" [perfectScrollbar]="config">
                             <div class="chats-scroll">
                                 <div class="recent-chats-block">
-
-                                    <div class="chat-block-head" *ngFor="let chatHead of chatHeads">
-                                        <div class="chat-block-photo" (mouseover)="showFullDescrition($event)"
-                                            (mouseout)="hideFullDescrition($event)">
-                                            <img src="/assets/images/img.jpg">
+                                    <div class="chat-block-head" (click)="openRecentChatInMainSection(recentChatItem)"
+                                         *ngFor="let recentChatItem of recentChatsList">
+                                        <div class="chat-block-photo">
+                                            <img src="{{recentChatItem.userImages[0]}}"
+                                                 *ngIf="recentChatItem.userIds && (recentChatItem.userIds.length === 1) && recentChatItem.userImages && (recentChatItem.userImages.length > 0)">
+                                            <div class="chatter-image-alt"
+                                                 *ngIf="recentChatItem.userIds && (recentChatItem.userIds.length === 1) && (!recentChatItem.userImages ||(recentChatItem.userImages && recentChatItem.userImages.length === 1 && !recentChatItem.userImages[0]) && recentChatItem.chatterNames)">{{recentChatItem.chatterNames.toUpperCase() | slice:0:1}}</div>
+                                            <img src="/assets/images/icons/groups-small.png"
+                                                 *ngIf="recentChatItem.userIds && (recentChatItem.userIds.length > 1)">
                                         </div>
-                                        <div class="chat-block-hover" (mouseenter)="chatBlockHover($event)"
-                                            (mouseleave)="hideChatBlock($event)">
-                                            <p class="chat-block-name">Harold Hunges</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur
-                                                adipisicing
-                                                elit, sed
-                                                do eiusmod tempor
-                                                incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                minim veniam, quis
-                                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                                commodo consequat.
-                                            </p>
-                                        </div>
-                                        <p class="chat-block-name">Harold Hunges</p>
-                                        <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing
-                                            elit, sed
-                                            do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                            minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                            commodo consequat.
-                                        </p>
-                                        <span class="chat-block-state"></span>
+                                        <p class="chat-block-name" ellipsis
+                                           [ellipsis-content]>{{recentChatItem.chatterNames ? recentChatItem.chatterNames : 'user'}}</p>
+                                        <p [line-truncation]="3" [innerHTML]="recentChatItem.recentMessages"></p>
+                                        <span [ngClass]="{'chat-block-state chat-block-state-away': (getMemberOnlineStatus(recentChatItem) === 'away'),
+                                        'chat-block-state chat-block-state-online': (getMemberOnlineStatus(recentChatItem) === 'online'),
+                                        'chat-block-state chat-block-state-offline': (getMemberOnlineStatus(recentChatItem) === 'offline')
+                                        }"
+                                              *ngIf="trustedMembers"></span>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
@@ -112,18 +74,21 @@
                         <div class="start-new-chat">
                             <p>Select or Start a Chat</p>
                             <div class="image-button">
-                                <a class="om-link success" (click)="ChatPanel($event)">New</a>
+                                <a class="om-link success" (click)="chatPanel($event)">
+                                    <div class="green-circle"></div>
+                                    New</a>
                             </div>
                         </div>
                     </div>
                     <!-- Chatting - Sending and recieving -->
                     <div class="chatting-block" *ngIf="openUserChat"
-                        [ngClass]="moreOptionPanel?'active-more-option':''">
+                         [ngClass]="moreOptionPanel?'active-more-option':''">
                         <div class="chat-user-details">
-                            <h3>Sara Thomas</h3>
+                            <h3 *ngIf="currentChatDocument">{{currentChatDocument.chatHeaderNames}}</h3>
+                            <h3 *ngIf="!currentChatDocument">&nbsp;</h3>
                             <div class="image-button">
                                 <a class="om-link success" (click)="moreOptionClick($event)"
-                                    [ngClass]="moreOptionPanel?'more-option-icon':''">More options</a>
+                                   [ngClass]="moreOptionPanel?'more-option-icon':''">More options</a>
                             </div>
                         </div>
 
@@ -138,53 +103,34 @@
                             </div>
                         </div>
 
-                        <div class="ps side-panel-ps chatting-messages" [perfectScrollbar]="config">
-                            <div class="message-sent">
-                                <div class="chatting-message-box">
-                                    <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                                        do
-                                        eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-                                    <div class="chatting-profile">
-                                        <img src="/assets/images/img.jpg">
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="message-sent">
-                                <div class="chatting-message-box">
-                                    <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed
-                                        do
-                                        eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-                                    <div class="chatting-profile">
-                                        <img src="/assets/images/img.jpg">
-                                    </div>
-                                </div>
-
-                            </div>
-                            <!-- Received messages -->
-                            <div class="message-receive">
-                                <div class="chatting-message-box">
-                                    <div class="chatting-profile">
-                                        <img src="/assets/images/img.jpg">
-                                    </div>
-                                    <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed
-                                        do
-                                        eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        <div class="ps side-panel-ps chatting-messages" id="chat-messages-opened-chat"
+                             [perfectScrollbar]="config">
+                            <div *ngFor="let chatMessage of currentChatMessagesList">
+                                <div class="message-sent" *ngIf="chatMessage.senderUserId === loggedInUserDocData.uid">
+                                    <div class="chatting-message-box">
+                                        <div class="content">{{chatMessage.text}}</div>
+                                        <div class="chatting-profile">
+                                            <img src="{{chatMessage.photoURL}}" *ngIf="chatMessage.photoURL"/>
+                                            <div class="chatter-image-alt"
+                                                 *ngIf="!chatMessage.photoURL && chatMessage.displayName">{{chatMessage.displayName.toUpperCase() | slice:0:1}}</div>
+                                        </div>
                                     </div>
 
                                 </div>
+                                <div class="message-receive"
+                                     *ngIf="chatMessage.senderUserId !== loggedInUserDocData.uid">
+                                    <div class="chatting-message-box">
+                                        <div class="chatting-profile">
+                                            <img src="{{chatMessage.photoURL}}" *ngIf="chatMessage.photoURL"/>
+                                            <div class="chatter-image-alt"
+                                                 *ngIf="!chatMessage.photoURL && chatMessage.displayName">{{chatMessage.displayName.toUpperCase() | slice:0:1}}</div>
+                                        </div>
+                                        <div class="content">{{chatMessage.text}}
+                                        </div>
 
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                         <!-- chatting input box -->
@@ -203,7 +149,10 @@
                                     </div> -->
                                     <clr-textarea-container>
                                         <!-- <label>Description</label> -->
-                                        <textarea clrTextarea class="om-input" name="description" required></textarea>
+                                        <textarea clrTextarea class="om-input" name="description"
+                                                  placeholder="Type a message"
+                                                  [formControl]="chatMessageTextControl"
+                                                  (keydown.enter)="sendMessage();false;" required></textarea>
                                     </clr-textarea-container>
 
                                 </div>
@@ -214,35 +163,45 @@
                 </div>
             </div>
         </div>
-        <div class="om-side-panel" [ngClass]="status? 'show-chat-element': ''"
-            [ngClass]="FilterStatus?'show-element filter-active':''" *ngIf="!openUserChat">
+        <div class="om-side-panel" [ngClass]="{
+        'hide-element': (!showGroupBasedFiltering),
+        'filter-active': (showExtraFilterOptionsSidePanel),
+        'show-element': (showGroupBasedFiltering)
+        }">
             <div class="side-panel-heading text-left">
                 <h3>Find a Group</h3>
                 <div class="side-panel-head-button">
-                    <a href="">Done</a>
+                    <a [routerLink]="" (click)="cancelClickedOnMemberSelectionPopup($event)"
+                       style="color:#7ed321; font-size: 1.2rem;font-family: Helvetica Neue, sans-serif;font-weight: bold;margin-right:2rem;">Cancel</a>
+                    <a [routerLink]="" (click)="createNewChatOrOpenExisting($event)"
+                       style="color:#7ed321; font-size: 1.2rem;font-family: Helvetica Neue, sans-serif;font-weight: bold;">Start
+                        Chat</a>
                 </div>
             </div>
             <div class="side-panel-content-wrapper">
-                <div class="side-panel-header-b">
+                <div class="side-panel-header-b side-panel-header-b-chats">
                     <div class="select-small">
                         <clr-select-container class="om-select-wrapper">
                             <select clrSelect name="options">
                                 <option value="one">All</option>
-                                <option value="two">Sunday School auto</option>
-                                <option value="three">Sunday School</option>
+                                <!--<option value="two">Sunday School auto</option>
+                                  <option value="three">Sunday School</option>-->
                             </select>
                         </clr-select-container>
                     </div>
                     <div class="chat-sidepanel-search-header">
 
                         <div class="side-panel-search">
-                            <div class="search-warpper">
-                                <span class="ico"></span>
-                                <input type="text" class="clr-input search-input">
+                            <div class="search-warpper search-warpper-new-meeting">
+                                <clr-icon class="search-icon" shape="search"
+                                          style=" position: relative;top: -3px;left: 19px;"></clr-icon>
+                                <input type="text" class="clr-input search-input"
+                                       placeholder="Enter minimum 3 letters & press Enter..."
+                                       [formControl]="searchTextControl" (keyup.enter)="enterPressed()">
                             </div>
                         </div>
-                        <div class="side-panel-filter">
-                            <a href="" class="filter-ico" (click)="FilterPanel($event)"></a>
+                        <div class="side-panel-filter" hidden>
+                            <a href="" class="filter-ico" (click)="toggleExtraFilterOptionsSidePanel($event)"></a>
                         </div>
                     </div>
                 </div>
@@ -250,40 +209,50 @@
                     <div class="ps side-panel-ps" [perfectScrollbar]="config">
 
                         <div class="sidepanel-data-grid">
-                            <clr-datagrid>
-                                <clr-dg-row class="cell-row" *ngFor="let chatHead of chatHeads">
-                                    <clr-dg-cell class="cell-name-wrapper" (click)='userProfileClick($event)'>
-                                        <div class="cell-wrapper">
-                                            <div class="cell-image">
-                                                <img src="/assets/images/img.jpg"></div>
-                                            <div>Ethel</div>
-                                        </div>
-                                    </clr-dg-cell>
-                                    <clr-dg-cell>Craig</clr-dg-cell>
-                                    <clr-dg-cell class="cell-state-warpper">
-                                        <div class="cell-state active"></div>
-                                    </clr-dg-cell>
+                            <form clrForm [formGroup]="newChatFormGroup">
+                                <clr-datagrid>
+                                    <clr-dg-row class="cell-row" *ngFor="let member of trustedMembers; let i=index;">
+                                        <clr-dg-cell class="cell-name-wrapper">
+                                            <div class="cell-wrapper">
+                                                <div class="cell-image">
+                                                    <img src="{{this.member.photoURL ? this.member.photoURL : 'assets/images/user-avatar.png'}}">
+                                                </div>
+                                            </div>
+                                        </clr-dg-cell>
+                                        <clr-dg-cell style="max-width: 15rem;">{{this.member.displayName}}</clr-dg-cell>
+                                        <clr-dg-cell class="cell-state-warpper">
+                                            <input type="checkbox" clrCheckbox [value]="this.member.userId"
+                                                   (change)="onCheckboxChange(member,$event)"/>
+                                        </clr-dg-cell>
+                                    </clr-dg-row>
+                                    <clr-dg-row>
+                                        <clr-dg-cell style="text-align: center;">
+                                            <div *ngIf="!trustedMembersCheckboxesArray.valid && trustedMembersCheckboxesArray.errors.mandatory"
+                                                 style="color:#ff0000; font-weight: 300;">At least 1 member needs to be
+                                                selected to start a chat!
+                                            </div>
+                                        </clr-dg-cell>
 
-                                </clr-dg-row>
-
-                            </clr-datagrid>
+                                    </clr-dg-row>
+                                </clr-datagrid>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <div class="filter-panel" [ngClass]="FilterStatus?'show':''">
+                <!-- <div class="filter-panel" [ngClass]="showExtraFilterOptionsSidePanel?'show':''">-->
+                <div class="filter-panel" [ngClass]="false?'show':''">
                     <div class="filter-panel-heading">
                         <h3>Filters:</h3>
                     </div>
                     <div class="filter-panel-content">
-
                         <div class="sort-by">
                             <p>Sort by</p>
                             <div class="select-small">
                                 <clr-select-container class="om-select-wrapper">
                                     <select clrSelect name="options">
                                         <option value="one">All</option>
-                                        <option value="two">Sunday School auto</option>
-                                        <option value="three">Sunday School</option>
+                                        <!--<option value="two">Sunday School auto</option>
+                                        <option value="three">Sunday School</option>-->
                                     </select>
                                 </clr-select-container>
                             </div>
@@ -291,12 +260,12 @@
                         <div class="filter-by">
                             <div class="toggle-wrapper-sm">
                                 <clr-toggle-container
-                                    class="om-toggle-switch-container  om-form-control om-toggle-wrapper no-border">
+                                        class="om-toggle-switch-container  om-form-control om-toggle-wrapper no-border">
                                     <label class="clr-control-label clr-col-md-4">Show Selected Only:</label>
                                     <clr-toggle-wrapper>
                                         <label class=""></label>
                                         <input type="checkbox" clrToggle value="option1" name="options"
-                                            class="clr-col-md-8" />
+                                               class="clr-col-md-8"/>
                                     </clr-toggle-wrapper>
                                 </clr-toggle-container>
                             </div>
@@ -308,7 +277,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

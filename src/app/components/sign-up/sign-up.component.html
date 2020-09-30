@@ -3,40 +3,105 @@
         <div class="primary-logo">
             <img src="assets/images/dummy.png">
         </div>
-        <div class="main-block-header">
+        <div class="main-block-header" style="margin-top: 0;margin-bottom: 1rem;">
             <div class="hero-text">
                 <h3>Create Account</h3>
             </div>
         </div>
-        <div class="basic-input-block email-login-block" [formGroup]="signUpForm">
-            <div class="formGroup">
-                <input type="text" class="om-input clr-input om-username" placeholder="Name" name="name"
-                       formControlName="name" required>
-            </div>
-            <div class="formGroup">
-                <input type="email" class="om-input clr-input om-useremail" placeholder="Email" name="email"
-                       formControlName="email" required readonly>
-            </div>
-            <div class="dv-input"></div>
-            <div class="formGroup">
-                <input type="tel" class="om-input clr-input om-phone" placeholder="Phone" name="contact"
-                       formControlName="contact">
-            </div>
+        <div class="pre-process-wrapper" *ngIf="!forJoiningMeetup && !forJoiningMeeting && loggedInUserDocData"  style="margin-top: 10rem;">
+            <div class="basic-input-block email-login-block" [formGroup]="signUpForm" style="margin-bottom: -1rem; margin-top: -6rem; padding-top: 0;">
+                <div class="formGroup">
 
-            <!-- Calling ForgotPassword from AuthService Api -->
-            <div class="formGroup">
-                <div class="auth-button-group">
-                    <div class="btn-primary">
-                        <input type="submit" class="btn btn-email" value="Sign up" (click)="SubmitSignUpForm($event)">
+                    <input type="text" class="om-input clr-input om-username" placeholder="Name" name="name"
+                           formControlName="name" required>
+                </div>
+                <div class="formGroup">
+                    <input type="email" class="om-input clr-input om-useremail" placeholder="Email" name="email"
+                           formControlName="email" required readonly>
+                </div>
+                <div class="dv-input"></div>
+                <div class="formGroup">
+                    <input type="tel" class="om-input clr-input om-phone" placeholder="Phone" name="contact"
+                           formControlName="contact">
+                </div>
+
+                <!-- Calling ForgotPassword from AuthService Api -->
+                <div class="formGroup">
+                    <div class="auth-button-group">
+                        <div class="btn-primary">
+                            <input type="submit" class="btn btn-email" value="Sign up" (click)="submitSignUpForm($event)">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="pre-process-wrapper" *ngIf="forJoiningMeetup && loggedInUserDocData">
+            <div class="basic-input-block email-login-block" [formGroup]="signUpForm" style="margin-bottom: -1rem; margin-top: -6rem; padding-top: 0;">
+                <div class="main-block-header guest-main-block-header" style="margin-bottom: -1rem;">
+                    <div class="hero-text text-center">
+                        <h3 style="text-decoration: underline;">Please Sign-up to Join the Meetup</h3>
+                        <div class="pre-process-label text-center">
 
-        <!-- Commenting this section since it is not in the design -->
-        <div class="redirectToLogin">
-            <span>Go back to ? <a class="redirect" href="" (click)="RedirectToSignIn($event)">Log In</a></span>
+                        </div>
+                    </div>
+                </div>
+                    <div class="formGroup">
+
+                        <input type="text" class="om-input clr-input om-username" placeholder="Name" name="name"
+                               formControlName="name" required>
+                    </div>
+                    <div class="formGroup">
+                        <input type="email" class="om-input clr-input om-useremail" placeholder="Email" name="email"
+                               formControlName="email" required readonly>
+                    </div>
+                    <div class="dv-input"></div>
+                    <div class="formGroup">
+                        <input type="tel" class="om-input clr-input om-phone" placeholder="Phone" name="contact"
+                               formControlName="contact">
+                    </div>
+
+                    <!-- Calling ForgotPassword from AuthService Api -->
+                    <div class="formGroup">
+                        <div class="auth-button-group" style="margin-top: -1rem;">
+                            <div class="btn-primary">
+                                <input type="submit" class="btn btn-email" value="Sign up" (click)="submitSignUpForm($event)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="pre-process-wrapper" *ngIf="meetingDocData as meeting">
+                <div class="basic-input-block email-login-block" [formGroup]="signUpForm" *ngIf="signUpForm" style="margin-bottom: -1rem; margin-top: -5rem; padding-top: 0;">
+                    <div class="formGroup" style="margin-bottom: -1rem;">
+                        <div class="main-block-header guest-main-block-header">
+                            <div class="hero-text text-center">
+                                <h3 style="text-decoration: underline;">Join the below meeting</h3>
+                                <div class="pre-process-label text-center" style="padding-bottom: 1rem;">
+                                    <p style="font-size: 1.2rem;font-weight: bold;color: #7ed321; margin-top:-0.2rem;margin-bottom: 0.15rem;">{{meeting.name}}</p>
+                                    <p>{{meetingDate | date:'medium'}}</p>
+                                    <p style="font-weight: bold;">{{meetingDocData.meetupName}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="text" class="om-input clr-input om-username" placeholder="Name" name="name" formControlName="name" required>
+                    </div>
+                    <div class="formGroup">
+                        <input type="email" class="om-input clr-input om-useremail" placeholder="Email" name="email" formControlName="email" required readonly>
+                    </div>
+                    <div class="dv-input"></div>
+                    <div class="formGroup">
+                        <input type="tel" class="om-input clr-input om-phone" placeholder="Phone" name="contact" formControlName="contact">
+                    </div>
+
+                    <div class="formGroup">
+                        <div class="auth-button-group"  style="margin-top: -2rem;">
+                            <div class="btn-primary">
+                                <input type="submit" class="btn btn-email" value="Sign up" (click)="submitSignUpForm($event)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </div>
-</div>

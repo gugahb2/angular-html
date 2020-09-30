@@ -1,0 +1,127 @@
+<div class="dashboard-content om-block-container">
+    <div class="clr-row no-margin">
+        <div class="clr-col-12 no-padding">
+            <div class="om-left-pane full-pane" [ngClass]="status?'split-panel':''">
+
+                <div class="dc-heading text-left dc-hero-heading">
+                    <h1>Meetup Settings</h1>
+                </div>
+
+                <form clrForm [formGroup]="meetupForm" (ngSubmit)="saveChangesToMeetup()" *ngIf="this.selectedMeetupDocData">
+                    <div class="form-block">
+                        <clr-input-container class="om-form-control textbox-wrapper">
+                            <label class="hide-sm">Name:</label>
+                            <input clrInput type="text" class="om-input" name="name"
+                                   placeholder="Meetup Name" formControlName="name" style="width: 24rem; padding-right: 0.5rem;" required maxlength="60"/>
+                            <clr-control-error>This Field is Required!</clr-control-error>
+                        </clr-input-container>
+                    </div>
+                    <div class="form-block">
+                        <clr-textarea-container class="om-form-control textarea-wrapper">
+                            <label class="hide-sm">Description:</label>
+                            <textarea clrTextarea class="om-input clr-col-md-4" name="description"
+                                      placeholder="Write a Description..." required
+                                      formControlName="description" maxlength="500"></textarea>
+                        </clr-textarea-container>
+                    </div>
+
+                    <div class="form-block om-form-control">
+                        <div class="clr-control-container" *ngIf="selectedMeetupDocData">
+                            <label class="hide-sm">Meetup Join Link:</label> <div class="link-block">
+                                <a class="om-link icon-link bold-link" (click)="copyMeetupJoinLinkToClipboard($event)">Click here to copy
+                                    Meetup Join Link</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-block form-block-p">
+                        <div class="privacy-wrapper">
+                            <clr-radio-container class="om-form-control om-radio-wrapper no-border" clrInline>
+                                <label class="hide-sm">Privacy:</label>
+                                <clr-radio-wrapper>
+                                    <input type="radio" clrRadio name="isPublic" required value="true"
+                                           formControlName="isPublic"/>
+                                    <label>Public</label>
+                                </clr-radio-wrapper>
+                                <clr-radio-wrapper>
+                                    <input type="radio" clrRadio name="isPublic" required value="false"
+                                           formControlName="isPublic"/>
+                                    <label>Private</label>
+                                </clr-radio-wrapper>
+                            </clr-radio-container>
+                            <div class="om-input-info">
+                                <p>Making a Meetup Public will allow anyone on the internet to find and request to
+                                    join the Meetup.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-block form-block-p">
+                        <div class="question-wrapper">
+                            <clr-toggle-container class="om-form-control om-toggle-wrapper no-border">
+                                <label class="clr-control-label">Joining Questions</label>
+                                <clr-toggle-wrapper>
+                                    <label></label>
+                                    <input type="checkbox" clrToggle value="1" name="hasJoiningQuestions"
+                                           formControlName="hasJoiningQuestions"
+                                           (change)="toggleJoiningQuestionStatus($event)"/>
+                                </clr-toggle-wrapper>
+                            </clr-toggle-container>
+                            <a (click)="openQuestionPanel($event)" *ngIf="!status && meetupForm.get('hasJoiningQuestions').value"
+                               class="om-link join-link bold-link">Edit Joining
+                                Questions</a>
+                            <div class="om-input-info question-info">
+                                <p>When a person requests to join your Meetup, they will be asked the following
+                                    questions that will be viewable by an administrator.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-block">
+                    </div>
+
+
+                    <div class="om-link join-link bold-link" style="display: block;"
+                         [ngClass]="{'show-element': ((this.questionsFormsArray.length > 0) || (meetupForm.get('hasJoiningQuestions').value)),'hide-element': (!this.questionsFormsArray || (questionsFormsArray.length === 0) || (!meetupForm.get('hasJoiningQuestions').value))}">
+                        <p style="font-size: 1.1rem; color:#7ed321; font-weight: bold; font-style: italic;">You have <span style="color: black">{{this.questionsFormsArray.length}}</span>
+                            Joining Question(s)</p>
+                    </div>
+
+                    <div class="button-block button-wrapper-a text-center" style="max-width: 75%;">
+                        <input type="submit" [disabled]="meetupForm.invalid" class="btn success om-btn bold-link" value="Save Changes">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="om-side-panel" [ngClass]="status? 'show-element': ''">
+            <div class="side-panel-heading text-left">
+                <h3>Edit Joining Questions</h3>
+            </div>
+            <div class="side-panel-content-wrapper">
+
+                <div class="meetup-content-wrapper">
+                    <div class="clr-form-horizontal" *ngFor="let q of questionsFormsArray.controls; let i=index">
+                        <clr-textarea-container class="om-form-control no-border" [formGroup]="q">
+                            <label>{{i + 1}}:</label>
+                            <textarea clrTextarea class="om-input om-input-text" name="description"
+                                      placeholder="Add question" formControlName="question" required></textarea>
+                        </clr-textarea-container>
+                        <a href="" (click)="deleteThisQuestion($event, q,i)">delete</a>
+                    </div>
+                    <div class="image-button {{questionCount >= 5?'button-hidden':''}}">
+                        <a href="" class="om-btn btn" (click)="addQuestionRow($event)" *ngIf="questionCount < 5">
+                            <div class="green-circle"></div>
+                            Add Another
+                        </a>
+                    </div>
+
+                    <button class="btn success om-btn add-another bold-link" (click)="doneAddingQuestions($event)">Done</button>
+                    <!-- <button class="btn success om-btn add-another bold-link" (click)="clearQuestionsNClosePopup($event)">Cancel</button>-->
+                </div>
+            </div>
+        </div>
+        <!--<div class="overlay-bg-om-settings" style="display:block" *ngIf="this.showNoPermissionBox">
+            <div class="active-block-om-settings">You don't have permission to view this page!
+                <button class="btn success om-btn add-another bold-link" routerLink="/dashboard/meetups" style="margin-top: 1.5rem;">Go To Dashboard</button></div>
+        </div>-->
+    </div>
+
+</div>

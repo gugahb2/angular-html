@@ -1,42 +1,47 @@
 <div class="dashboard-content om-block-container">
     <div class="clr-row no-margin">
         <div class="clr-col-12 no-padding">
-            <div class="om-left-pane full-pane" *ngIf="meetingCollection as meeting">
+            <div class="om-left-pane full-pane" *ngIf="meetingDocData as meeting">
 
                 <div class="dc-heading text-left dc-hero-heading">
                     <h1>Meeting Invite</h1>
                 </div>
 
-                <form clrForm>
-                    <div class="label-block small-select single-select">
-                        <clr-select-container class="om-select-wrapper">
-                            <select clrSelect name="options">
-                                <option value="one">Sunday School</option>
-                                <option value="two">Sunday School</option>
-                                <option value="three">Sunday School</option>
-                            </select>
-                        </clr-select-container>
-                    </div>
+                <form clrForm [formGroup]="peopleForm">
                     <div class="label-block">
                         <div class="label-block-wrapper">
-                            <label class="clr-control-label clr-col-md-12">{{meeting.name}}</label>
+                            <label class="clr-control-label clr-col-md-12"
+                                   style="font-size: 1.5rem;">{{meeting.name}}</label>
                             <div class="label-block-content">
-                                <p>Adult Sunday School</p>
-                                <p>{{MeetingTime}}</p>
+                                <p>{{this.selectedMeetupDocData.name}}</p>
+                                <p>{{formattedMeetingTime}}</p>
                             </div>
 
                         </div>
                     </div>
+                    <div *ngIf="meetingDocData.allowGuests">
                     <div class="form-block vertical-form-block link-block-wrapper">
-                        <div class="clr-form-control om-form-control">
+                        <div class="clr-form-control om-form-control-meeting-invite">
                             <label class="clr-control-label clr-col-md-12">Send
                                 Invitation by link:</label>
-                            <div class="clr-control-container">
+                            <div class="clr-control-container" *ngIf="!isMeetingInPast && meetingDocData.joinURL">
                                 <div class="link-block">
-                                    <a class="om-link icon-link bold-link" (click)="CopyMeetingLink($event)">Copy
+                                    <a class="om-link icon-link bold-link" (click)="copyMeetingLinkToClipboard($event)">Copy
                                         Public Invitation Link</a>
                                 </div>
                             </div>
+
+                            <div class="clr-control-container" *ngIf="!isMeetingInPast && !meetingDocData.joinURL">
+                                <div class="link-block">
+                                   Link is being generated...
+                                </div>
+                            </div>
+                            <div class="clr-control-container" *ngIf="isMeetingInPast">
+                                <div class="link-block">
+                                    <span class="om-link-disabled icon-link bold-link">Meeting has finished</span>
+                                </div>
+                            </div>
+                        </div>
                         </div>
 
                     </div>
@@ -48,20 +53,32 @@
                                 <label class="clr-control-label">Send Notifications: </label>
                                 <clr-toggle-wrapper>
                                     <label></label>
-                                    <input type="checkbox" clrToggle value="option1" name="options"/>
+                                    <input type="checkbox" clrToggle value="true" name="sendNotification"
+                                           formControlName="sendNotification" disabled *ngIf="isMeetingInPast"/>
+                                    <input type="checkbox" clrToggle value="true" name="sendNotification"
+                                           formControlName="sendNotification" *ngIf="!isMeetingInPast"/>
                                 </clr-toggle-wrapper>
                             </clr-toggle-container>
                         </div>
-                        <!--                        <div class="people-count">-->
-                        <!--                            <p>Members: 31</p>-->
-                        <!--                            <p>Guests: 8</p>-->
-                        <!--                        </div>-->
                     </div>
-                    <div class="form-block vertical-form-block people-invite">
+                    <div class="form-block vertical-form-block people-invite" *ngIf="isNotificationSectionVisible">
                         <div class="clr-form-control om-form-control om-input-wrapper no-border">
-                            <label class="clr-control-label clr-col-md-12">People</label>
-                            <div class="clr-control-container inline-control-container"
-                                 *ngFor="let people of People.controls; let i=index" [formGroup]="people">
+                            <div class="form-block vertical-form-block notification-message">
+                                <div class="clr-form-control om-form-control-meeting-invite inviteom-textarea-wrapper no-border">
+                                    <label for="vertical-textarea-basic" class="clr-control-label clr-col-md-12">Notification
+                                        Message:</label>
+                                    <div class="clr-control-container">
+                                        <div class="clr-textarea-wrapper om-form-control-meeting-invite">
+                                    <textarea id="vertical-textarea-basic" placeholder="Enter message here"
+                                              class="clr-textarea om-input om-input-text" formControlName="message"
+                                              name="message" required></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <label class="clr-control-label clr-col-md-12" style="margin-left:1.5rem;">People</label>
+                            <div class="clr-control-container inline-control-container" style="margin-left:1.5rem;"
+                                 *ngFor="let people of people.controls; let i=index" [formGroup]="people">
                                 <div class="clr-input-wrapper om-form-control">
                                     <input type="text" placeholder="Name" class="om-input om-input-text"
                                            formControlName="name" name="name">
@@ -71,21 +88,22 @@
                                            class="om-input om-input-text" formControlName="email" name="email">
                                 </div>
                                 <div class="clr-input-wrapper om-form-control">
-                                    <input type="text" placeholder="Cel phone"
+                                    <input type="text" placeholder="Cell phone"
                                            class="om-input om-input-text" formControlName="phone" name="phone">
                                 </div>
                             </div>
-                            <div class="image-button">
-                                <a href="" class="om-btn btn" (click)="AddPeople($event)">Add Another</a>
+                            <div class="image-button" style="margin-left:1.5rem;">
+                                <a href="" class="om-btn btn" (click)="addPeople($event)"><div class="green-circle"></div>Add Another</a>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="om-btn-wrapper">
-                        <input type="button" class="btn success om-btn bold-link" value="Send Invitation"
-                               (click)="SendInvitation()">
-                        <input type="button" class="btn blank-btn om-btn bold-link" value="Send Later"
-                               (click)="SendLater()">
+
+                    <div class="om-btn-wrapper" style="margin-left:1.5rem;text-align: center">
+                        <input type="button" class="btn success om-btn bold-link" style="margin-top: 1rem;" value="Send Invitation"
+                               (click)="sendInvitation()">
+                        <input type="button" class="btn blank-btn om-btn bold-link" value="Send Later" style="margin-top: 1rem;"
+                               (click)="sendLater()">
+                    </div>
                     </div>
                 </form>
             </div>
@@ -97,7 +115,7 @@
             </div>
             <div class="side-panel-textarea-wrapper">
                 <div class="clr-form-horizontal">
-                    <clr-textarea-container class="om-form-control om-textarea-wrapper">
+                    <clr-textarea-container class="om-form-control-meeting-invite om-textarea-wrapper">
                         <label>1:</label>
                         <textarea clrTextarea class="om-input om-input-text" name="description"
                                   placeholder="Write a Description..." required></textarea>
@@ -109,7 +127,6 @@
                 <button class="btn success om-btn add-another bold-link">Done</button>
             </div>
         </div>
-
 
     </div>
 </div>

@@ -150,6 +150,16 @@ $nav-text: #e1e1e1;
         }
     }
 
+    &.om-settings-ic {
+        .nav-link-img {
+            width: 40px;
+            height: 30px;
+            background-size: cover;
+            background-position: center;
+
+        }
+    }
+
     .nav-link-img {
         display: inline-block;
         background-position: center center;

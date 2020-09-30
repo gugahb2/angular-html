@@ -1,0 +1,92 @@
+<div class="main-container">
+    <div class="content-container">
+        <div class="content-area">
+            <div class="dashboard-header">
+                <div class="brand">
+                    <img src="/assets/images/logo.png" alt="online-meetups"/>
+                </div>
+                <div *ngIf="!this.loggedInUserDocData">
+                    <div class="button-wrap" style="margin-right: 6rem; margin-top: 0.52rem;float: right;">
+                        <button class="btn success om-btn bold-link" style="height: 2.4rem;"
+                                (click)="router.navigate(['/sign-in'])">
+                            Sign Up/Sign In Now
+                        </button>
+                    </div>
+                </div>
+
+                    <ng-container *ngIf="authService.loggedInUserFromAuthService$ | async as currentUser">
+                    <clr-dropdown *ngIf="!this.authService.isAnonymous" style="float:right;margin-top: 0.5rem;">
+                        <div class="user-option">
+                            <div class="current-user">
+                                <img class="align-self-start rounded-circle"
+                                     src="{{(currentUser.photoURL) ? currentUser.photoURL : '/assets/images/user-avatar.png'}}"
+                                     clrDropdownTrigger></div>
+                        </div>
+                        <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+                            <div aria-label="Dropdown header Action 1" clrDropdownItem>
+                                <a class="" (click)="this.authService.signOut()">
+                                    <i class="fas fa-sign-out-alt"></i>Log out
+                                </a>
+                            </div>
+                        </clr-dropdown-menu>
+                    </clr-dropdown>
+                    </ng-container>
+            </div>
+            <div class="clr-flex-lg-row"
+                 style="padding-bottom: 2rem; border-bottom: 0.2rem solid lightgray; background-color:white;">
+                <div class="clr-col-lg-12 text-center"
+                     style="margin-top: 2.5rem; margin-bottom: 1.2rem;">
+                    <span class="find-a-meetup">Find a Meetup</span>
+                </div>
+
+                <div class="clr-col-lg-12 text-center">
+                    <div class="clr-input-wrapper" style="position: relative;">
+                        <clr-icon class="search-icon" shape="search" style=" position: relative;top: -3px;left: 19px;"></clr-icon>
+                        <input type="text" class="rectangle-input" [formControl]="searchTextControl"
+                               placeholder="Type search term(s) and press Enter..." (keyup.enter)="enterPressed()">
+
+                    </div>
+                </div>
+            </div>
+            <div class="clr-col-lg-12">
+                <div class="card" class="public-meetups-card" *ngFor="let meetup of meetupsArray | async">
+                    <div class="meetup-logo-42 card-header text-center" style="float: left;">
+                        {{meetup.name.toUpperCase() | slice:0:1}}
+                    </div>
+                    <div style=" min-height: 2.8rem"><!-- border-bottom: 2px solid;-->
+                    <div class="card-header font-weight-bold" style="font-size:{{getMeetupNameFontSize(meetup)}}rem; vertical-align: center; padding-top: 0.45rem; padding-bottom: 0.2rem;">
+                        {{meetup.name}}
+                    </div>
+
+                    <div style="float:right; position: relative; top: 0; margin-left: 0.1rem; margin-top:0.22rem;  margin-right:0.05rem; ">
+
+                        <ng-container *ngIf="loggedInUserDocData; else notLoggedIn">
+                            <button class="btn request-to-join text-center"
+                                    [routerLink]="['/dashboard/meetups',meetup.meetupId,'join']" [queryParams]="{frompm: 'y', mid: meetup.meetupId}"
+                                    *ngIf="!isAMemberAlready(meetup.meetupId)">
+                                Request to Join
+                            </button>
+
+                            <button class="btn request-to-join text-center"
+                                    [routerLink]="['/dashboard/meetup',meetup.meetupId]" *ngIf="isAMemberAlready(meetup.meetupId)">
+                                View
+                            </button>
+                        </ng-container>
+
+
+                        <ng-template #notLoggedIn>
+                            <button class="btn request-to-join text-center"
+                                    [routerLink]="['/dashboard/meetups',meetup.meetupId,'join']" [queryParams]="{frompm: 'y', mid: meetup.meetupId}">
+                                Request to Join
+                            </button>
+                        </ng-template>
+                    </div>
+                    </div>
+                    <div class="card-block meetup-description">
+                        <read-more [text]="meetup.description" maxHeight="46"></read-more>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

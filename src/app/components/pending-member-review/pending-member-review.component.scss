@@ -1,0 +1,253 @@
+/*.member-review-table{
+  margin-left: 0.2rem;
+  margin-right: 2.5rem;
+  overflow: auto;
+  border: 1px solid lightgray;
+}
+
+.member-review-table tr{
+  font-size: 1rem !important;
+  padding-left: 0.5rem!important;
+}
+
+.member-review-table td,th{
+  font-size: 1rem !important;
+  padding-left: inherit!important;
+}
+.member-review-table tr{
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem;
+}
+
+.member-review-table th{
+  font-size: 1.24rem !important;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  background-color: #f6f6f6;
+  font-family: HelveticaNeue, sans-serif;
+  font-weight: bold;
+  color: #56606d;
+}*/
+
+.review-cell {
+  padding-bottom: 0.5rem !important;
+  margin-right: 1rem;
+  width: 18rem !important;
+}
+
+.review-cell-header {
+  padding-bottom: 0.5rem !important;
+  width: 18rem !important;
+  padding-left: 6rem !important;
+}
+
+.d-button-set-member-review {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 4px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+}
+
+.d-button-member-review {
+  font-size: 0.9rem !important;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #7ed321 !important;
+}
+
+a:not([href]):not([tabindex]) {
+  font-size: 18px;
+  font-family: "Helvetica Neue LT W05_55 Roman";
+  color: #56606d;
+}
+
+.m-name-header {
+  span {
+    font-family: "Helvetica Neue LT W05_75 Bold";
+  }
+}
+
+.meeting-table .datagrid .datagrid-cell.m-name {
+  width: 16rem !important;
+  max-width: 16rem !important;
+  padding-left: 0.65rem;
+}
+
+
+.review-cell-questions {
+  width: 22rem !important;
+  padding: 1.0rem 0.8rem 0.4rem 0.5rem;
+  font-size: 1rem !important;
+  vertical-align: baseline !important;
+  text-align: center;
+}
+
+.review-cell-questions-header {
+  width: 22rem !important;
+  padding-left: 9rem!important;
+  padding-top: 0.4rem;
+  padding-bottom: 0.01rem;
+  padding-right: 2rem !important;
+  font-size: 1rem !important;
+  vertical-align: middle !important;
+  text-align: center !important;
+}
+
+.meeting-table-body {
+
+  .time {
+    width: 191px;
+    padding-left: 11px;
+  }
+
+  .grp {
+    width: 235px;
+    padding-left: 11px;
+  }
+
+  .att {
+    width: 39px;
+  }
+}
+
+
+/*
+
+.member-review-table thead{
+  border: solid 1px #eaeaea !important;
+}
+
+.meeting-table-review {
+  .datagrid-column-separator {
+    display: none;
+  }
+
+  .table-body-row {
+    margin-bottom: 1.5rem;
+
+    &:last-of-type {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .datagrid-table .datagrid-placeholder-container {
+    display: none;
+  }
+
+  .datagrid {
+    border: none;
+  }
+
+  .datagrid-table {
+
+    .datagrid-header {
+      background: #f6f6f6;
+      border: solid 1px #eaeaea;
+      z-index: 1;
+
+      .datagrid-row:hover {
+        background: #f6f6f6;
+      }
+    }
+
+    .datagrid-column {
+      background: none;
+      padding: 15px 10px;
+
+      .datagrid-column-title {
+        color: #56606d;
+        font-size: 18px;
+        line-height: normal;
+        letter-spacing: normal;
+        font-family: "Helvetica Neue LT W05_45 Light";
+      }
+
+      &.m-name {
+        .datagrid-column-title {
+          font-family: "Helvetica Neue LT W05_75 Bold";
+          font-size: 20px;
+        }
+      }
+
+      &.m-name {
+        width: 267px !important;
+        max-width: 267px;
+        padding-left: 11px;
+      }
+
+      &.time {
+        width: 191px !important;
+        max-width: 191px;
+        padding-left: 11px;
+      }
+
+      &.grp {
+        width: 235px !important;
+        max-width: 235px;
+        padding-left: 11px;
+      }
+
+      &.att {
+        width: 39px !important;
+        max-width: 39px;
+      }
+
+    }
+  }
+
+  .datagrid-row {
+    border: none;
+    background: none;
+  }
+
+
+  .datagrid .datagrid-cell {
+    background: none;
+    font-family: "Helvetica Neue LT W05_45 Light";
+    color: #56606d;
+    font-size: 18px;
+    line-height: normal;
+    letter-spacing: normal;
+
+    &.m-name {
+      font-family: "Helvetica Neue LT W05_75 Bold";
+    }
+
+    &.m-name {
+      width: 267px !important;
+      max-width: 267px;
+      padding-left: 11px;
+    }
+
+    &.time {
+      width: 191px !important;
+      max-width: 191px;
+      padding-left: 11px;
+    }
+
+    &.grp {
+      width: 235px !important;
+      max-width: 235px;
+      padding-left: 11px;
+    }
+
+    &.att {
+      width: 39px !important;
+      max-width: 39px;
+    }
+
+  }
+
+}
+*/
+

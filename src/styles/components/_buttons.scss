@@ -95,12 +95,24 @@
 // ***************************************************
 // ***************************************************
 
+.green-circle{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 200px;
+    background: #7ed321;
+}
 
 .image-button {
     padding-left: 41px;
     position: relative;
 
-    &:before {
+   /* &:before {
         content: '';
         display: inline-block;
         position: absolute;
@@ -111,7 +123,7 @@
         height: 30px;
         border-radius: 200px;
         background: #7ed321;
-    }
+    }*/
 
     .om-btn.btn {
         padding-left: 0;
@@ -140,6 +152,17 @@
 
 
 //Links
+a.om-link-find-meetups,
+a.om-link-find-meetups:not([href]):not([tabindex]) {
+    // font-family: "Helvetica Neue LT W05_75 Bold";
+    font-family: "Helvetica Neue LT W05_45 Light";
+    color: #0d0d0d;
+    font-size: 1.1rem;
+    letter-spacing: normal;
+    cursor: pointer;
+    padding-bottom: 1.78rem;
+    font-weight: 500;
+}
 a.om-link,
 a.om-link:not([href]):not([tabindex]) {
     // font-family: "Helvetica Neue LT W05_75 Bold";
@@ -172,6 +195,16 @@ a.om-link:not([href]):not([tabindex]) {
 // Link with an icon on the left side.
 .icon-link {
     padding-left: 23px;
+}
+
+a.om-link-disabled {
+    // font-family: "Helvetica Neue LT W05_75 Bold";
+    font-family: "Helvetica Neue LT W05_45 Light";
+    color: grey;
+    font-size: 1.2rem;
+    letter-spacing: normal;
+    cursor: pointer;
+    padding-bottom: 0.75rem;
 }
 
 //Bold links
@@ -227,6 +260,31 @@ a.om-link-small:not([href]):not([tabindex]) {
         text-align: center;
     }
 
+    .btn-home-page {
+        margin: 0 auto;
+        border-radius: 1.56rem;
+        font-size: 1.15rem;
+        font-family: "Helvetica Neue LT W05_75 Bold";
+        display: inline-block !important;
+        max-width: 100%;
+        width: auto;
+        min-width: 17.2rem !important;
+        letter-spacing: normal;
+        text-transform: initial;
+        border: none;
+        line-height: normal;
+        height: auto;
+        margin-bottom: 0.35rem;
+        margin-left: 2rem !important;
+        padding: 0.5rem 0.4rem 0.67rem 0.4rem;
+
+        &:focus,
+        &:active,
+        &:hover {
+            box-shadow: none;
+        }
+    }
+
     .btn {
         margin: 0 auto;
         border-radius: 25px;
@@ -279,6 +337,15 @@ a.om-link-small:not([href]):not([tabindex]) {
 
         &:hover {
             background: $green;
+        }
+    }
+
+    .btn.btn-email-disabled {
+        background: grey;
+        color: $white;
+
+        &:hover {
+            background: lightgrey;
         }
     }
 

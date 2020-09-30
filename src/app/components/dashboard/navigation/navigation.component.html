@@ -1,6 +1,6 @@
 <nav class="sidenav">
-    <section class="sidenav-content" *ngIf="this.authService.firebaseUser$ | async as currentUser">
-        <a routerLink="/dashboard/meetups" routerLinkActive="active" class="nav-link home-ic" *ngIf="!this.authService.isAnonymous">
+    <section class="sidenav-content" *ngIf="this.authService.loggedInUserFromAuthService$ | async as currentUser">
+        <div (click)='homeLinkClicked()' [class.disabled]="isNavigationDisabled ? true: null" routerLinkActive="active" class="nav-link home-ic">
             <div class="nav-link-icon">
                 <!-- <span class="notification-span">5</span> -->
                 <span class="nav-link-img"></span>
@@ -8,8 +8,8 @@
             <div class="nav-link-text">
                 <span>Home</span>
             </div>
-        </a>
-        <a routerLink="/dashboard/chat" routerLinkActive="active" class="nav-link chat-ic" *ngIf="!this.authService.isAnonymous">
+        </div>
+        <a routerLink="/dashboard/chat" [class.disabled]="isNavigationDisabled ? true: null" routerLinkActive="active" class="nav-link chat-ic">
             <div class="nav-link-icon">
                 <span class="nav-link-img"></span>
             </div>
@@ -17,7 +17,7 @@
                 <span>Chat</span>
             </div>
         </a>
-        <a routerLink="/dashboard/meetings" routerLinkActive="active" class="nav-link meetings-ic">
+        <a routerLink="/dashboard/meetings" [class.disabled]="isNavigationDisabled ? true: null" routerLinkActive="active" class="nav-link meetings-ic">
             <div class="nav-link-icon">
                 <span class="nav-link-img"></span>
             </div>
@@ -25,7 +25,7 @@
                 <span>Meetings</span>
             </div>
         </a>
-        <a routerLink="/dashboard/groups" routerLinkActive="active" class="nav-link groups-ic" *ngIf="!this.authService.isAnonymous">
+        <a routerLink="/dashboard/groups" [class.disabled]="isNavigationDisabled ? true: null" routerLinkActive="active" class="nav-link groups-ic">
             <div class="nav-link-icon">
                 <span class="nav-link-img"></span>
             </div>
@@ -33,13 +33,24 @@
                 <span>Groups</span>
             </div>
         </a>
-        <a routerLink="/dashboard/more" routerLinkActive="active" class="nav-link more-ic" *ngIf="!this.authService.isAnonymous">
+        <a routerLink="/dashboard/om-settings" [class.disabled]="isNavigationDisabled ? true: null" routerLinkActive="active" class="nav-link om-settings-ic"
+           *ngIf="(this.selectedMeetupDocData?.id) && (['MEETUP_OWNER', 'MEETUP_ADMIN'].includes(this.meetupRole))">
+            <div class="nav-link-icon">
+                <span class="nav-link-img">
+                    <clr-icon shape="cog" style="display: inline-block; margin: 0; height: 31px; width: 40px; vertical-align: middle; fill: lightgrey;"></clr-icon>
+                </span>
+            </div>
+            <div class="nav-link-text">
+                <span>Settings</span>
+            </div>
+        </a>
+        <!--<a routerLink="/dashboard/more" routerLinkActive="active" class="nav-link more-ic">
             <div class="nav-link-icon">
                 <span class="nav-link-img"></span>
             </div>
             <div class="nav-link-text">
                 <span>More</span>
             </div>
-        </a>
+        </a>-->
     </section>
 </nav>

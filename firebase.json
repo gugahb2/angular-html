@@ -1,0 +1,50 @@
+{
+  "hosting": {
+
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  "hosting": [{
+    "target" : "dev",
+    "public": "dist/om",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/api/**",
+        "function": "api"
+      }
+    ]
+  },
+    {
+      "target" : "demo",
+      "public": "dist/om",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        },
+        {
+          "source": "/api/**",
+          "function": "api"
+        }
+      ]
+    }
+  ]
+}
