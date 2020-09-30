@@ -1,0 +1,339 @@
+//Overriding clarity.design styles
+
+.button-block {
+    padding-left: 32px;
+}
+
+.om-btn.btn {
+    border-radius: 25px;
+    background: $white;
+    color: $white;
+    font-size: 18px;
+    // font-family: "Helvetica Neue LT W05_75 Bold";
+    font-family: "Helvetica Neue LT W05_45 Light";
+    padding: 0 26px;
+    text-transform: initial;
+    letter-spacing: normal;
+    padding-top: 4px;
+    padding-bottom: 8px;
+    height: auto;
+    max-height: none;
+    border: none;
+    color: $nav-gray;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 9px;
+
+    &:hover,
+    &:focus,
+    &:active {
+        box-shadow: none !important;
+        outline: none !important;
+        text-decoration: none;
+    }
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &:hover {
+        box-shadow: 0 0 8px 2px #d0d0d0 !important;
+    }
+
+    &.success {
+        background-color: $green;
+        color: $white;
+    }
+
+    //Cancel buttons
+    &.regular {
+        background-color: $white;
+        color: $nav-gray;
+        border: solid 1px #4a4a4a;
+    }
+
+    &.blank-btn {
+        background: transparent;
+        border: none;
+        color: $nav-gray;
+        min-width: auto;
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: 5px;
+
+        &:hover,
+        &:focus,
+        &:active {
+            box-shadow: none !important;
+            color: $nav-gray;
+        }
+    }
+
+    &.blank-b {
+        padding-left: 7px;
+        padding-right: 7px;
+
+        &:hover,
+        &:focus,
+        &:active {
+            box-shadow: none !important;
+            color: $nav-gray;
+        }
+
+    }
+}
+
+.filter-buttons {
+    .om-btn.btn {
+        margin-right: 0;
+    }
+}
+
+
+
+// ***************************************************
+// ***************************************************
+
+
+.image-button {
+    padding-left: 41px;
+    position: relative;
+
+    &:before {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 30px;
+        border-radius: 200px;
+        background: #7ed321;
+    }
+
+    .om-btn.btn {
+        padding-left: 0;
+        padding-bottom: 0;
+        font-size: 16px;
+        font-family: "Helvetica Neue LT W05_45 Light";
+        color: $green;
+
+        &:hover {
+            border: none;
+            color: $green;
+            box-shadow: none !important;
+        }
+    }
+
+    .om-link {
+        font-family: "Helvetica Neue LT W05_45 Light";
+        background: none;
+        padding-bottom: 0;
+    }
+
+
+}
+
+
+
+
+//Links
+a.om-link,
+a.om-link:not([href]):not([tabindex]) {
+    // font-family: "Helvetica Neue LT W05_75 Bold";
+    font-family: "Helvetica Neue LT W05_45 Light";
+    color: $green;
+    font-size: 18px;
+    letter-spacing: normal;
+    cursor: pointer;
+    padding-bottom: 13px;
+
+
+    &.invite-link {
+        font-family: "Helvetica Neue LT W05_55 Roman";
+    }
+
+
+    &.om-small-link {
+        font-size: 14px;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #7ed321;
+        // font-family: "Helvetica Neue LT W05_55 Roman";
+    }
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+// Link with an icon on the left side.
+.icon-link {
+    padding-left: 23px;
+}
+
+//Bold links
+.bold-link {
+    font-family: "Helvetica Neue LT W05_75 Bold" !important;
+}
+
+
+a.om-link-small,
+a.om-link-small:not([href]):not([tabindex]) {
+    font-size: 18px;
+    color: $p-color;
+    padding-top: 2px;
+    padding: 2px 19px;
+    display: inline-block;
+    border-radius: 8px;
+    border: solid 1px #56606d;
+
+    &.success {
+        background: $green;
+        border: solid 1px $green;
+        color: $white;
+    }
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+
+
+// Custom styles 
+.button-wrapper-a {
+    padding-top: 53px;
+}
+
+.button-wrapper-b {
+    padding-top: 57px;
+}
+
+.split-panel {
+    .button-wrapper-a {
+        padding-top: 34px;
+    }
+}
+
+
+
+//Auth button for sign in page
+.auth-button-group {
+    .btn-primary {
+        background: none;
+        text-align: center;
+    }
+
+    .btn {
+        margin: 0 auto;
+        border-radius: 25px;
+        font-size: 18px;
+        font-family: "Helvetica Neue LT W05_75 Bold";
+        display: block;
+        max-width: 100%;
+        width: auto;
+        min-width: 266px;
+        letter-spacing: normal;
+        text-transform: initial;
+        border: none;
+        line-height: normal;
+        height: auto;
+        margin-bottom: 5px;
+        padding: 8px 0 11px 0;
+
+        &:focus,
+        &:active,
+        &:hover {
+            box-shadow: none;
+        }
+    }
+}
+
+.auth-button-group {
+    margin-top: 83px;
+
+    .btn-primary:not(:disabled):not(.disabled).active:focus,
+    .btn-primary:not(:disabled):not(.disabled):active:focus,
+    .show>.btn-primary.dropdown-toggle:focus {
+        background: none;
+        border: none;
+        outline: 0;
+        box-shadow: none;
+    }
+
+    .btn-primary:not(:disabled):not(.disabled).active,
+    .btn-primary:not(:disabled):not(.disabled):active,
+    .show>.btn-primary.dropdown-toggle {
+        background: none;
+        border: none;
+        outline: 0;
+        box-shadow: none;
+    }
+
+    .btn.btn-email {
+        background: $green;
+        color: $white;
+
+        &:hover {
+            background: $green;
+        }
+    }
+
+    .btn.btn-apple {
+        color: $white;
+        background: $nav-gray;
+
+        &:hover {
+            background: $nav-gray;
+            color: $white;
+        }
+
+        margin-bottom: 11px;
+    }
+
+    .btn.btn-google {
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+        background: $white;
+        color: $nav-gray;
+
+        &:hover {
+            background: $white;
+            color: $nav-gray;
+        }
+    }
+
+    .btn.btn-guest {
+        margin-top: 10px;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+        background: #e08a01;
+        color: $white;
+
+        &:hover {
+            background: #e08a01;
+            color: $white;
+        }
+    }
+
+
+    .btn.btn-facebook {
+        background: #486aba;
+
+        &:hover {
+            background: #486aba;
+        }
+    }
+
+}
+
+.pre-process-box {
+    .auth-button-group {
+        margin-top: 44px;
+
+        .btn.btn-email {
+            margin: 0;
+        }
+    }
+}

@@ -1,0 +1,76 @@
+<div class="dashboard-container om-block-container groups-container">
+    <div class="home-container" [ngClass]="status?'split-panel':''">
+        <div class="dc-heading text-left dc-hero-heading">
+            <h1>Groups</h1>
+            <div class="header-button-group">
+                <div class="find-div-wrapper">
+                    <a href="" class="search-link" (click)="FindPanel($event)">Find a group</a>
+                </div>
+                <div class="image-button">
+                    <a routerLink="/dashboard/groups/new" class="om-link success">New</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="inner-container">
+            <div class="clr-row">
+                <div class="groups-table regular-table">
+                    <clr-datagrid class="no-header">
+                        <clr-dg-column></clr-dg-column>
+                        <clr-dg-column></clr-dg-column>
+                        <clr-dg-column></clr-dg-column>
+
+                        <clr-dg-row>
+                            <clr-dg-cell class="group-name">Adult Sunday School</clr-dg-cell>
+                            <clr-dg-cell class="group-meeting-link">
+                                <div class="link-block"><a class="om-link">Create Meeting</a></div>
+                            </clr-dg-cell>
+                            <clr-dg-cell class="group-meeting-link">
+                                <div class="link-block"><a class="om-link">Create Chat</a></div>
+                            </clr-dg-cell>
+                        </clr-dg-row>
+                        <clr-dg-row>
+                            <clr-dg-cell class="group-name">Adult Sunday School</clr-dg-cell>
+                            <clr-dg-cell class="group-meeting-link">
+                                <div class="link-block"><a class="om-link">Create Meeting</a>
+                                </div>
+                            </clr-dg-cell>
+                            <clr-dg-cell class="group-meeting-link">
+                                <div class="link-block"><a class="om-link">Create Chat</a></div>
+                            </clr-dg-cell>
+                        </clr-dg-row>
+                        <clr-dg-row>
+                            <clr-dg-cell class="group-name">Adult Sunday School</clr-dg-cell>
+                            <clr-dg-cell class="group-meeting-link">
+                                <div class="link-block"><a class="om-link">Create Meeting</a>
+                                </div>
+                            </clr-dg-cell>
+                            <clr-dg-cell class="group-meeting-link">
+                                <div class="link-block"><a class="om-link">Create Chat</a></div>
+                            </clr-dg-cell>
+                        </clr-dg-row>
+
+                    </clr-datagrid>
+                </div>
+            </div>
+        </div>
+        <div class="om-side-panel find-element-side-panel" [ngClass]="status? 'show-element': ''">
+            <div class="filter-element-content">
+                <div class="side-panel-heading text-left">
+                    <h3>Find a Group</h3>
+                    <div class="side-panel-head-button">
+                        <a href="">Done</a>
+                    </div>
+                </div>
+                <div class="side-panel-content-wrapper">
+                    <div class="side-panel-search">
+                        <div class="search-warpper">
+                            <span class="ico"></span>
+                            <input type="text" class="clr-input search-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

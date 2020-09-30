@@ -1,0 +1,39 @@
+<div class="main-container">
+    <div class="content-container">
+        <div class="content-area">
+            <div class="dashboard-header">
+                <div class="brand">
+                    <img src="/assets/images/logo.png" alt="online-meetups"/>
+                </div>
+            </div>
+            <div class="clr-flex-lg-row"
+                 style="border-bottom: 4px grey; padding-bottom: 2rem; border-bottom: 0.4rem solid lightgray; background-color:white;">
+                <div class="clr-col-lg-12 text-center"
+                     style="margin-top: 4rem; margin-bottom: 2rem;">
+                    <span class="find-a-meetup">Find a Meetup</span>
+                </div>
+
+                <div class="clr-col-lg-12 text-center">
+                    <div class="clr-input-wrapper">
+                        <input type="text" class="rectangle-input" [formControl]="searchTextControl"
+                               placeholder="Type search term(s) and press Enter..." (keyup.enter)="enterPressed()">
+                        <clr-icon shape="search"></clr-icon>
+                    </div>
+                </div>
+            </div>
+                <div class="clr-col-lg-5">
+                    <div class="card" *ngFor="let meetup of meetupsArray | async">
+                       <div class="meetup-logo card-header text-center" style="float: left;">
+                           {{meetup.name | slice:0:1}}
+                       </div>
+                        <div class="card-header font-weight-bold" style="font-size: 1.3rem;">
+                            {{meetup.name}} <div class="request-to-join text-center" style="float: right;">Request to Join</div>
+                        </div>
+                        <div class="card-block meetup-description">
+                                {{meetup.description}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

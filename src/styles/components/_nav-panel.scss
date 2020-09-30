@@ -1,0 +1,176 @@
+$nav-hover: #778494;
+$nav-text: #e1e1e1;
+
+//Overriding clarity.design style
+@mixin sideNavPanel {
+    .side-nav-panel {
+        .sidenav {
+            width: 100%;
+            min-width: 100%;
+            max-width: 100%;
+            border-right: none;
+            @content;
+        }
+    }
+}
+
+.side-nav-panel {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 94px;
+    height: 100vh;
+    background: $nav-gray;
+    padding-top: 57px;
+    overflow: hidden;
+
+    @include bd-custom-max(991px) {
+        top: 65px;
+        width: 100%;
+        height: 50px;
+        padding-top: 0;
+        z-index: 2;
+    }
+}
+
+
+@include sideNavPanel {
+    .sidenav-content {
+        padding-top: 27px;
+
+        @include bd-custom-max(991px) {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        >.nav-link {
+            display: inline-block;
+            margin: 0;
+            text-align: center;
+            padding-bottom: 5px;
+            padding-top: 12px;
+            margin-bottom: 16px;
+
+            @include bd-custom-max(991px) {
+                max-width: calc(100% /5);
+                margin-bottom: 0;
+            }
+
+            &.active {
+                background-color: #778494;
+            }
+        }
+    }
+
+    .sidenav-content>.nav-link:hover {
+        background: $nav-hover;
+
+        @include bd-custom-max(991px) {
+            background: none;
+        }
+    }
+}
+
+
+
+
+.nav-link {
+    .nav-link-icon {
+        position: relative;
+        line-height: 0;
+
+        .notification-span {
+            position: absolute;
+            right: -7px;
+            top: -4px;
+        }
+
+    }
+
+
+    &.home-ic {
+        .nav-link-icon {
+            width: 37px;
+            display: inline-block;
+
+        }
+
+        .nav-link-img {
+            background: url('~/assets/images/icons/navbar/home.png');
+            background-repeat: no-repeat;
+            width: 30px;
+            height: 29px;
+            background-size: cover;
+        }
+    }
+
+    &.chat-ic {
+        .nav-link-img {
+            background: url('~/assets/images/icons/navbar/chat.png');
+            width: 27px;
+            height: 27px;
+            background-size: cover;
+            background-position: center;
+
+        }
+    }
+
+    &.meetings-ic {
+        .nav-link-img {
+            background: url('~/assets/images/icons/navbar/meetings.png');
+            width: 30px;
+            height: 29px;
+            background-size: cover;
+            width: 34px;
+            height: 28px;
+            background-position: center;
+
+        }
+    }
+
+    &.groups-ic {
+        .nav-link-img {
+            background: url('~/assets/images/icons/navbar/groups.png');
+            width: 35px;
+            height: 28px;
+            background-size: cover;
+            background-position: center;
+
+        }
+    }
+
+    &.more-ic {
+        .nav-link-img {
+            background: url('~/assets/images/icons/navbar/more.png');
+            width: 36px;
+            height: 29px;
+            background-size: cover;
+            background-position: center;
+
+        }
+    }
+
+    .nav-link-img {
+        display: inline-block;
+        background-position: center center;
+        background-size: cover;
+    }
+
+
+    //NavLink text under icon
+    .nav-link-text {
+        span {
+            display: inline-block;
+            font-size: 8px;
+            font-family: "Helvetica Neue LT W05_75 Bold";
+            line-height: 18px;
+            vertical-align: super;
+            color: $nav-text;
+
+        }
+
+        @include bd-custom-max(991px) {
+            display: none;
+        }
+    }
+}

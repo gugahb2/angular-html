@@ -1,0 +1,245 @@
+.regular-table {
+    .datagrid-row {
+        border: none;
+        background: none;
+    }
+
+    .datagrid {
+        border: none !important;
+    }
+
+    .datagrid-placeholder-container {
+        display: none;
+    }
+}
+
+
+.meeting-table {
+    width: 100%;
+
+    .d-button-set {
+        position: relative;
+        top: auto;
+        left: auto;
+        opacity: 1;
+
+        .om-link {
+            margin-right: 49px;
+
+            &:hover {
+                background: #7ed321;
+                transition: all 0.5s ease;
+                border: 1px solid #7ed321;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+.meeting-table-head {
+    border: solid 1px #eaeaea;
+    background-color: #f6f6f6;
+    padding: 14px 0;
+
+    .m-name {
+        span {
+            font-size: 20px;
+        }
+
+        font-family:"Helvetica Neue LT W05_75 Bold";
+    }
+}
+
+.meeting-table-body {
+    flex-wrap: wrap;
+
+    .m-name {
+        span {
+            font-family: "Helvetica Neue LT W05_75 Bold";
+        }
+    }
+}
+
+.meeting-table-head,
+.meeting-table-body {
+    display: flex;
+
+
+    >div {
+        color: #56606d;
+        font-size: 18px;
+        line-height: normal;
+        letter-spacing: normal;
+    }
+
+    .m-name {
+        width: 267px;
+        padding-left: 11px;
+    }
+
+    .time {
+        width: 191px;
+        padding-left: 11px;
+    }
+
+    .grp {
+        width: 235px;
+        padding-left: 11px;
+    }
+
+    .att {
+        width: 39px;
+    }
+}
+
+.meeting-table-body {}
+
+.m-t-row {
+    padding-top: 15px;
+    display: flex;
+    margin-bottom: 60px;
+    width: 100%;
+
+    &:last-child {
+        margin-bottom: 57px;
+    }
+
+    >div {
+        color: #56606d;
+        font-size: 18px;
+        line-height: normal;
+        letter-spacing: normal;
+    }
+}
+
+.om-small-link-wrapper {
+    transform: translateY(-20px);
+}
+
+
+
+.meeting-table {
+    .datagrid-column-separator {
+        display: none;
+    }
+
+    .table-body-row {
+        margin-bottom: 42px;
+
+        &:last-of-type {
+            margin-bottom: 32px;
+        }
+    }
+
+    .datagrid-table .datagrid-placeholder-container {
+        display: none;
+    }
+
+    .datagrid {
+        border: none;
+    }
+
+    .datagrid-table {
+
+        .datagrid-header {
+            background: #f6f6f6;
+            border: solid 1px #eaeaea;
+            z-index: 1;
+
+            .datagrid-row:hover {
+                background: #f6f6f6;
+            }
+        }
+
+        .datagrid-column {
+            background: none;
+            padding: 15px 10px;
+
+            .datagrid-column-title {
+                color: #56606d;
+                font-size: 18px;
+                line-height: normal;
+                letter-spacing: normal;
+                font-family: "Helvetica Neue LT W05_45 Light";
+            }
+
+            &.m-name {
+                .datagrid-column-title {
+                    font-family: "Helvetica Neue LT W05_75 Bold";
+                    font-size: 20px;
+                }
+            }
+
+            &.m-name {
+                width: 267px !important;
+                max-width: 267px;
+                padding-left: 11px;
+            }
+
+            &.time {
+                width: 191px !important;
+                max-width: 191px;
+                padding-left: 11px;
+            }
+
+            &.grp {
+                width: 235px !important;
+                max-width: 235px;
+                padding-left: 11px;
+            }
+
+            &.att {
+                width: 39px !important;
+                max-width: 39px;
+            }
+
+        }
+    }
+
+    .datagrid-row {
+        border: none;
+        background: none;
+    }
+
+
+    .datagrid .datagrid-cell {
+        background: none;
+        font-family: "Helvetica Neue LT W05_45 Light";
+        color: #56606d;
+        font-size: 18px;
+        line-height: normal;
+        letter-spacing: normal;
+
+        &.m-name {
+            font-family: "Helvetica Neue LT W05_75 Bold";
+        }
+
+        &.m-name {
+            width: 267px !important;
+            max-width: 267px;
+            padding-left: 11px;
+        }
+
+        &.time {
+            width: 191px !important;
+            max-width: 191px;
+            padding-left: 11px;
+        }
+
+        &.grp {
+            width: 235px !important;
+            max-width: 235px;
+            padding-left: 11px;
+        }
+
+        &.att {
+            width: 39px !important;
+            max-width: 39px;
+        }
+
+    }
+
+}

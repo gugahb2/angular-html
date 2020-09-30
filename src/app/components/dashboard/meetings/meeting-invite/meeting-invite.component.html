@@ -1,0 +1,115 @@
+<div class="dashboard-content om-block-container">
+    <div class="clr-row no-margin">
+        <div class="clr-col-12 no-padding">
+            <div class="om-left-pane full-pane" *ngIf="meetingCollection as meeting">
+
+                <div class="dc-heading text-left dc-hero-heading">
+                    <h1>Meeting Invite</h1>
+                </div>
+
+                <form clrForm>
+                    <div class="label-block small-select single-select">
+                        <clr-select-container class="om-select-wrapper">
+                            <select clrSelect name="options">
+                                <option value="one">Sunday School</option>
+                                <option value="two">Sunday School</option>
+                                <option value="three">Sunday School</option>
+                            </select>
+                        </clr-select-container>
+                    </div>
+                    <div class="label-block">
+                        <div class="label-block-wrapper">
+                            <label class="clr-control-label clr-col-md-12">{{meeting.name}}</label>
+                            <div class="label-block-content">
+                                <p>Adult Sunday School</p>
+                                <p>{{MeetingTime}}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-block vertical-form-block link-block-wrapper">
+                        <div class="clr-form-control om-form-control">
+                            <label class="clr-control-label clr-col-md-12">Send
+                                Invitation by link:</label>
+                            <div class="clr-control-container">
+                                <div class="link-block">
+                                    <a class="om-link icon-link bold-link" (click)="CopyMeetingLink($event)">Copy
+                                        Public Invitation Link</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-block toggle-with-content">
+                        <div class="form-radio-only">
+                            <clr-toggle-container
+                                    class="om-toggle-switch-container no-border om-form-control om-toggle-wrapper">
+                                <label class="clr-control-label">Send Notifications: </label>
+                                <clr-toggle-wrapper>
+                                    <label></label>
+                                    <input type="checkbox" clrToggle value="option1" name="options"/>
+                                </clr-toggle-wrapper>
+                            </clr-toggle-container>
+                        </div>
+                        <!--                        <div class="people-count">-->
+                        <!--                            <p>Members: 31</p>-->
+                        <!--                            <p>Guests: 8</p>-->
+                        <!--                        </div>-->
+                    </div>
+                    <div class="form-block vertical-form-block people-invite">
+                        <div class="clr-form-control om-form-control om-input-wrapper no-border">
+                            <label class="clr-control-label clr-col-md-12">People</label>
+                            <div class="clr-control-container inline-control-container"
+                                 *ngFor="let people of People.controls; let i=index" [formGroup]="people">
+                                <div class="clr-input-wrapper om-form-control">
+                                    <input type="text" placeholder="Name" class="om-input om-input-text"
+                                           formControlName="name" name="name">
+                                </div>
+                                <div class="clr-input-wrapper om-form-control">
+                                    <input type="text" placeholder="Email"
+                                           class="om-input om-input-text" formControlName="email" name="email">
+                                </div>
+                                <div class="clr-input-wrapper om-form-control">
+                                    <input type="text" placeholder="Cel phone"
+                                           class="om-input om-input-text" formControlName="phone" name="phone">
+                                </div>
+                            </div>
+                            <div class="image-button">
+                                <a href="" class="om-btn btn" (click)="AddPeople($event)">Add Another</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="om-btn-wrapper">
+                        <input type="button" class="btn success om-btn bold-link" value="Send Invitation"
+                               (click)="SendInvitation()">
+                        <input type="button" class="btn blank-btn om-btn bold-link" value="Send Later"
+                               (click)="SendLater()">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="om-side-panel">
+            <div class="side-panel-heading text-left">
+                <h3>Edit Joining Questions</h3>
+            </div>
+            <div class="side-panel-textarea-wrapper">
+                <div class="clr-form-horizontal">
+                    <clr-textarea-container class="om-form-control om-textarea-wrapper">
+                        <label>1:</label>
+                        <textarea clrTextarea class="om-input om-input-text" name="description"
+                                  placeholder="Write a Description..." required></textarea>
+                    </clr-textarea-container>
+                </div>
+                <div class="img-button-wrapper">
+                    <button class="btn success om-btn add-another">Add Another</button>
+                </div>
+                <button class="btn success om-btn add-another bold-link">Done</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>

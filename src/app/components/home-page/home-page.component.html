@@ -1,0 +1,54 @@
+<div class="token-page initial-page displayTable center-block">
+    <div class="center-element" *ngIf="hasUser">
+        <div class="primary-logo">
+            <img src="assets/images/dummy.png">
+        </div>
+        <div class="main-block-header">
+            <div class="hero-text">
+                <h3>Welcome back, {{DisplayName}}</h3>
+            </div>
+        </div>
+        <div class="authBlock">
+            <div class="auth-button-group">
+                <div class="btn-primary">
+                    <button *ngIf="LoginType==='email'" class="btn btn-email" routerLink="/email-sign-in">Continue with
+                        Email
+                    </button>
+                    <button *ngIf="LoginType==='apple'" class="btn btn-apple" (click)="socialMediaLogin('apple')">Continue
+                        with Apple
+                    </button>
+                    <button *ngIf="LoginType==='google'" class="btn btn-google" (click)="socialMediaLogin('google')">
+                        Continue with Google
+                    </button>
+                    <button *ngIf="LoginType==='facebook'" class="btn btn-facebook"
+                        (click)="socialMediaLogin('facebook')">Continue with
+                        Facebook
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="redirectToLogin">
+            <span>Not {{DisplayName}} ? <a class="redirect" href="" routerLink="/sign-in"
+                    (click)="RedirectToLogin($event)">Login here.</a></span>
+        </div>
+    </div>
+    <div class="center-element" *ngIf="!hasUser">
+        <div class="primary-logo">
+            <img src="assets/images/dummy.png">
+        </div>
+        <div class="main-block-header">
+            <div class="hero-text">
+                <h3>Join or create a meetup. It's FREE.</h3>
+                <p>The basics with 40 minute meetings is absolutely free. Once you get a taste we are hoping you upgrade
+                    to the basic passage and purchase a license.</p>
+            </div>
+        </div>
+        <div class="authBlock">
+            <div class="auth-button-group">
+                <div class="btn-primary">
+                    <button class="btn btn-email" routerLink="/sign-in">Create Your Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

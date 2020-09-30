@@ -1,0 +1,58 @@
+<div class="dashboard-content om-block-container" *ngIf="userCollection as user">
+    <div class="clr-row no-margin" *ngIf="meetup && user; else noMeetup">
+        <div *ngIf="IsMember" class="clr-col-12 no-padding">
+            <div class="om-left-pane full-pane">
+                <div class="dc-heading text-left dc-hero-heading">
+                    <h1>You're already a member..</h1>
+                </div>
+            </div>
+        </div>
+        <div class="clr-col-12 no-padding" *ngIf="!IsMember && IsPublic && JoiningQuestions.length>0">
+            <div class="om-left-pane full-pane">
+                <div class="dc-heading text-left dc-hero-heading">
+                    <h1>Answer the following questions</h1>
+                </div>
+                <form clrForm [formGroup]="questionForm" (submit)="SubmitForm($event)">
+                    <div class="form-block">
+                        <clr-input-container class="om-form-control textbox-wrapper">
+                            <label class="hide-sm" for="name">What's your name ?</label>
+                            <input clrInput type="text" class="om-input clr-col-md-4" name="name"
+                                   placeholder="Enter your answer" required id="name"
+                                   formControlName="name" readonly="{{userCollection && userCollection.displayName}}"/>
+                        </clr-input-container>
+                    </div>
+                    <div class="form-block" *ngFor="let q of JoiningQuestions;let i = index">
+                        <clr-input-container class="om-form-control textbox-wrapper">
+                            <label class="hide-sm" for="question-{{i}}">{{q.question}}</label>
+                            <input clrInput type="text" class="om-input clr-col-md-4" name="question-{{i}}"
+                                   placeholder="Enter your answer" required id="question-{{i}}"
+                                   formControlName="question-{{i}}"/>
+                        </clr-input-container>
+                    </div>
+                    <div class="button-block button-wrapper-a">
+                        <input type="submit" class="btn success om-btn bold-link" value="Submit">
+                        <input type="button" class="btn regular om-btn bold-link" value="Cancel">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div *ngIf="!IsMember && !IsPublic" class="clr-col-12 no-padding">
+            <div class="om-left-pane full-pane">
+                <div class="dc-heading text-left dc-hero-heading">
+                    <h1>This is a private meetup.</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #noMeetup>
+        <div class="clr-row no-margin" *ngIf="!loader">
+            <div class="clr-col-12 no-padding">
+                <div class="om-left-pane full-pane">
+                    <div class="dc-heading text-left dc-hero-heading">
+                        <h1>Invalid Meetup</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>

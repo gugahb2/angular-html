@@ -1,0 +1,33 @@
+<div class="initial-page displayTable center-block email-sign-in">
+    <div class="center-element">
+        <div class="primary-logo">
+            <img src="assets/images/dummy.png">
+        </div>
+        <div class="main-block-header">
+            <div class="hero-text">
+                <h3 class="text-center big">Give us your email and we will send you a magic link.</h3>
+            </div>
+        </div>
+        <div class="basic-input-block email-login-block">
+            <div class="formGroup">
+                <input type="email" class="om-input clr-input" placeholder="Email Address" #email required>
+            </div>
+
+            <!-- Calling ForgotPassword from AuthService Api -->
+            <div class="formGroup">
+                <div class="auth-button-group">
+                    <div class="btn-primary">
+                        <input type="submit" class="btn btn-email" value="Send Link via Email"
+                            (click)="authService.passwordlesSignin(email.value)">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="redirectToLogin">
+            <span><a class="redirect" routerLink="/sign-in">Continue another way</a></span>
+        </div>
+
+    </div>
+</div>

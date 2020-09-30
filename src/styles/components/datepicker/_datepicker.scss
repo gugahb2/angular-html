@@ -1,0 +1,36 @@
+.om-datepicker-warpper {
+    .clr-control-label {
+        margin-top: 0 !important;
+    }
+
+    .clr-control-label {
+        font-size: 18px;
+        font-family: "Helvetica Neue LT W05_75 Bold";
+        padding-left: 0;
+        padding-right: 0;
+        line-height: normal;
+    }
+
+    .clr-input-group {
+        position: relative;
+
+        .clr-input {
+            width: auto;
+            border-radius: 8px;
+            border: solid 1px #979797;
+            background-color: #fcfcfc;
+            height: 41px;
+            max-height: 41px;
+            min-width: 133px;
+            font-size: 17px;
+            font-family: "Helvetica Neue LT W05_55 Roman";
+        }
+
+        .clr-input-group-icon-action {
+            position: absolute;
+            right: 0;
+            top: 50%;
+
+        }
+    }
+}

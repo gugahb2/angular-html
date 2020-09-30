@@ -1,0 +1,153 @@
+<!-- Dashboard Clarity -->
+
+
+
+
+<!-- End Dashboard Clarity -->
+
+
+
+
+<!-- Sidebar navigation -->
+<ng-container *ngIf="authService.firebaseUser$ | async as currentUser">
+<div class="dashboard-container container">
+    <div class="clr-row" *ngIf="currentUser">
+        <div class="dashboard-header">
+            <div class="brand">
+                <img src="/assets/images/logo.png" alt="online-meetups">
+            </div>
+
+            <!-- Notification  -->
+            <!-- <div class="header-notification">
+                <span class="notification-span">5</span>
+                <span>You have 5 member requests</span>
+            </div> -->
+
+            <div class="header-option-panel">
+                <!-- Timer, commented -->
+                <!--
+                <div class="om-timer-wrapper">
+                    Next Meeting in:
+                    <div class="om-timer">
+                        <div class="om-timer-content">
+                            <p>00:32</p>
+                        </div>
+                    </div>
+                </div>
+                -->
+                <div class="user-current-option-wrapper">
+                    <clr-dropdown *ngIf="currentMeetup || currentUser.meetupSubscriptionSnapshots[0]">
+                        <div class="user-current-option-header" clrDropdownTrigger>
+                            <div class="current-option-header"><span
+                                    class="option-header-icon"></span></div>
+                        </div>
+                        <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+                            <div aria-label="Dropdown header Action 1" *ngFor="let m of currentUser.meetupSubscriptionSnapshots" clrDropdownItem
+                                (click)="RedirectToMeetup(m)">
+                                {{m.name}}
+                            </div>
+                        </clr-dropdown-menu>
+                    </clr-dropdown>
+                </div>
+                <div class="user-option-wrapper">
+                    <div class="header-button-wrapper" *ngIf="this.authService.isAnonymous">
+                        <a class="header-btn" (click)="ShowSecureYourAccountPopup($event)">Secure Your Account</a>
+                    </div>
+                    <clr-dropdown *ngIf="!this.authService.isAnonymous">
+                        <div class="user-option">
+                            <div class="current-user">
+                                <img class="align-self-start rounded-circle"
+                                    src="{{(currentUser.photoURL) ? currentUser.photoURL : '/assets/images/user-avatar.png'}}"
+                                    alt="{{currentUser.displayName}}"  clrDropdownTrigger></div>
+                        </div>
+                        <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+                            <div aria-label="Dropdown header Action 1" clrDropdownItem>
+                                <a class="" (click)="this.authService.signOut()">
+                                    <i class="fas fa-sign-out-alt"></i>Log out
+                                </a>
+                            </div>
+                        </clr-dropdown-menu>
+                    </clr-dropdown>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="side-nav-panel">
+        <app-navigation></app-navigation>
+    </div>
+
+    <router-outlet></router-outlet>
+</div>
+<div class="container-fluid">
+    <div class="row">
+    </div>
+</div>
+
+<div class="overlay-bg active-block" *ngIf="showSecureAccountPopup"></div>
+<div class="om-popup active-block" *ngIf="showSecureAccountPopup">
+    <div class="pre-process-wrapper">
+        <div class="pre-process-box">
+            <div class="main-block-header">
+                <div class="hero-text text-left">
+                    <h3 class="big">Ready to secure your account?</h3>
+                </div>
+            </div>
+            <div class="basic-input-block email-login-block">
+                <div class="pre-process-text-block">
+                    <p>You’ve currently chosen to join as a guest. By simply securing your account with an email or
+                        other
+                        sign in method, you’ll gain additional access such as group chat, and a see a list of your
+                        scheduled meetings. </p>
+                </div>
+
+                <div class="formGroup">
+                    <div class="auth-button-group">
+                        <input type="button" class="btn success om-btn bold-link" value="Secure Account"
+                            (click)="ClosePopup()">
+                        <input type="button" class="btn blank-b om-btn bold-link" value="Later" (click)="ClosePopup()">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Meetings starts in minute, join meeting -->
+<div class="overlay-bg"></div>
+<div class="om-popup join-meeting">
+    <div class="pre-process-wrapper">
+        <div class="pre-process-box">
+            <div class="main-block-header">
+                <div class="hero-text text-left">
+                    <div class="pre-process-label">
+                        <h3>Adult Sunday School</h3>
+                        <p>April 4th, 9:30-10:30 AM</p>
+                    </div>
+                    <h3 class="big">Meeting starts:
+                        32 minutes</h3>
+                </div>
+            </div>
+            <div class="basic-input-block email-login-block">
+                <div class="pre-process-text-block">
+                    <p>You can’t join a meeting until 15 minutes before it begins. If you wish, you can explore Online
+                        Meetups and we will prompt you when you are able to join. </p>
+                </div>
+
+                <div class="formGroup">
+                    <div class="auth-button-group">
+                        <input type="button" class="btn success om-btn bold-link" value="Explore Online Meetups"
+                            (click)="ClosePopup()">
+                        <input type="button" class="btn blank-b om-btn bold-link" value="I’ll Wait Here"
+                            (click)="ClosePopup()">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</ng-container>

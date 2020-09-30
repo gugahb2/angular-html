@@ -1,0 +1,294 @@
+<div class="dashboard-container om-block-container dashboard-home">
+    <div class="home-container" *ngIf="meetup && this.authService.firebaseUser$ | async as user">
+        <div class="dc-heading">
+            <div class="dc-heading-icon">
+                <img src="/assets/images/icons/icon-h.png">
+            </div>
+
+            <div class="meetups-dropdown-wrap">
+                <clr-dropdown>
+                    <div class="user-current-option-header" clrDropdownTrigger>
+                        <div class="current-option-header"><span class="option-header-icon"></span>
+                            <h1>{{meetup.name}}</h1>
+                            <span class="arrow-icon"></span>
+                        </div>
+                    </div>
+                    <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
+                        <div aria-label="Dropdown header Action 1" clrDropdownItem *ngFor="let m of meetupList"
+                             (click)="ChangeMeetup(m)">
+                            {{m.name}}
+                        </div>
+                    </clr-dropdown-menu>
+                </clr-dropdown>
+            </div>
+            <div class="header-button" *ngIf="this.meetup.role.includes('MEETUP_OWNER')">
+                <div class="image-button">
+                    <a routerLink="/dashboard/meetups/settings" class="om-link success img-link">Add meetup</a>
+                </div>
+            </div>
+        </div>
+        <div class="inner-container">
+            <div class="clr-row">
+                <div class="upcoming-meetings small-block">
+                    <h3>Upcoming Meetings</h3>
+
+                    <div class="d-block-scoll">
+                        <div class="ps recent-chat-ps" [perfectScrollbar]="config">
+                            <div class="chats-scroll">
+
+                                <div class="meetings-d-block" *ngFor="let meeting of meetings">
+                                    <h3>{{meeting.name}}</h3>
+                                    <p>{{Date(meeting.startsAt)}}</p>
+                                    <div class="p-image">
+                                        <p>Weekly Sunday School</p>
+                                    </div>
+                                    <div class="d-button-set">
+                                        <a href="" class="om-link om-link-small"
+                                           (click)="InviteMeeting($event,meeting)">Invite</a>
+                                        <!--                                        <a href="" class="om-link om-link-small success"-->
+                                        <!--                                           (click)="JoinMeeting($event,meeting)">Join</a>-->
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="recent-chats-block-wrapper small-block home-page">
+                    <h3>Recent Chats</h3>
+                    <div class="ps recent-chat-ps" [perfectScrollbar]="config">
+                        <div class="chats-scroll">
+                            <div class="recent-chats-block">
+                                <div class="chat-block-head">
+                                    <div class="chat-block-photo"></div>
+                                    <p class="chat-block-name">Harold Hunges</p>
+                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </p>
+                                    <span class="chat-block-state"></span>
+                                </div>
+                                <div class="chat-block-head">
+                                    <div class="chat-block-photo">
+                                        <img src="/assets/images/img.jpg">
+                                    </div>
+                                    <p class="chat-block-name">Sarah Thomas</p>
+                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </p>
+                                    <span class="chat-block-state"></span>
+                                </div>
+                                <div class="chat-block-head">
+                                    <div class="chat-block-photo">
+                                        <img src="/assets/images/img.jpg">
+                                    </div>
+                                    <p class="chat-block-name">Sarah Thomas</p>
+                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </p>
+                                    <span class="chat-block-state"></span>
+                                </div>
+                                <div class="chat-block-head">
+                                    <div class="chat-block-photo">
+                                        <img src="/assets/images/img.jpg">
+                                    </div>
+                                    <p class="chat-block-name">Sarah Thomas</p>
+                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </p>
+                                    <span class="chat-block-state"></span>
+                                </div>
+                                <div class="chat-block-head">
+                                    <div class="chat-block-photo">
+                                        <img src="/assets/images/img.jpg">
+                                    </div>
+                                    <p class="chat-block-name">Sarah Thomas</p>
+                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </p>
+                                    <span class="chat-block-state"></span>
+                                </div>
+                                <div class="chat-block-head">
+                                    <div class="chat-block-photo">
+                                        <img src="/assets/images/img.jpg">
+                                    </div>
+                                    <p class="chat-block-name">Sarah Thomas</p>
+                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </p>
+                                    <span class="chat-block-state"></span>
+                                </div>
+                                <div class="chat-block-head">
+                                    <div class="chat-block-photo">
+                                        <img src="/assets/images/img.jpg">
+                                    </div>
+                                    <p class="chat-block-name">Sarah Thomas</p>
+                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </p>
+                                    <span class="chat-block-state"></span>
+                                </div>
+                                <div class="chat-block-head">
+                                    <div class="chat-block-photo">
+                                        <img src="/assets/images/img.jpg">
+                                    </div>
+                                    <p class="chat-block-name">Sarah Thomas</p>
+                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </p>
+                                    <span class="chat-block-state"></span>
+                                </div>
+                                <div class="chat-block-head">
+                                    <div class="chat-block-photo">
+                                        <img src="/assets/images/img.jpg">
+                                    </div>
+                                    <p class="chat-block-name">Sarah Thomas</p>
+                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </p>
+                                    <span class="chat-block-state"></span>
+                                </div>
+                                <div class="chat-block-head">
+                                    <div class="chat-block-photo">
+                                        <img src="/assets/images/img.jpg">
+                                    </div>
+                                    <p class="chat-block-name">Sarah Thomas</p>
+                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </p>
+                                    <span class="chat-block-state"></span>
+                                </div>
+                                <div class="chat-block-head">
+                                    <div class="chat-block-photo">
+                                        <img src="/assets/images/img.jpg">
+                                    </div>
+                                    <p class="chat-block-name">Sarah Thomas</p>
+                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </p>
+                                    <span class="chat-block-state"></span>
+                                </div>
+                                <div class="chat-block-head">
+                                    <div class="chat-block-photo">
+                                        <img src="/assets/images/img.jpg">
+                                    </div>
+                                    <p class="chat-block-name">Sarah Thomas</p>
+                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </p>
+                                    <span class="chat-block-state"></span>
+                                </div>
+                                <div class="chat-block-head">
+                                    <div class="chat-block-photo">
+                                        <img src="/assets/images/img.jpg">
+                                    </div>
+                                    <p class="chat-block-name">Sarah Thomas</p>
+                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </p>
+                                    <span class="chat-block-state"></span>
+                                </div>
+                                <div class="chat-block-head">
+                                    <div class="chat-block-photo">
+                                        <img src="/assets/images/img.jpg">
+                                    </div>
+                                    <p class="chat-block-name">Sarah Thomas</p>
+                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </p>
+                                    <span class="chat-block-state"></span>
+                                </div>
+                                <div class="chat-block-head">
+                                    <div class="chat-block-photo">
+                                        <img src="/assets/images/img.jpg">
+                                    </div>
+                                    <p class="chat-block-name">Sarah Thomas</p>
+                                    <p [line-truncation]="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </p>
+                                    <span class="chat-block-state"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--    <div *ngIf="!HasAccessToMeetup && userCollection as user" class="home-container">-->
+    <!--        <div class="dc-heading">-->
+    <!--            <p>You're not a member, please <a (click)="NavigateToJoin($event)" class="om-link success img-link">join</a>-->
+    <!--                the meetup.</p>-->
+    <!--        </div>-->
+    <!--    </div>-->
+</div>
+<!-- add class `active-block` to show the overlay-->
+<div class="overlay-bg"></div>
+<!-- add class `active-block` to show the request-panel -->
+<div class="request-panel">
+    <div class="pre-process-wrapper">
+        <div class="pre-process-box">
+            <div class="main-block-header">
+                <div class="hero-text text-left">
+                    <h3 class="big">Be a part of Meetup:</h3>
+                    <div class="pre-process-label">
+                        <div class="pre-process-image"><img src="/assets/images/icons/icon-h.png" alt="Alt name">
+                        </div>
+                        <h3>Heritage Christian Fellowship</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="basic-input-block email-login-block">
+                <div class="pre-process-text-block">
+                    <p>T. Payton</p>
+                    <p>payton@gmail.com</p>
+                </div>
+                <div class="dv-input"></div>
+                <div class="formGroup">
+                    <input type="text" class="om-input clr-input om-referral"
+                           placeholder="Who invited you to this meetup" name="contact">
+                </div>
+                <div class="formGroup">
+                    <div class="auth-button-group">
+                        <input type="submit" class="btn success om-btn bold-link" value="Request to join">
+                        <input type="button" class="btn blank-b om-btn bold-link" value="Cancel"
+                               (click)="RedirectBack()">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Secure account box, add class `active-block` to show -->

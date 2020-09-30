@@ -1,0 +1,56 @@
+<div class="initial-page displayTable center-block pre-process-page">
+    <div class="center-element">
+        <div class="primary-logo">
+            <img src="assets/images/dummy.png">
+        </div>
+        <div class="pre-process-wrapper" *ngIf="meetingCollection as meeting">
+            <div class="pre-process-box" [formGroup]="joinForm">
+                <div class="main-block-header">
+                    <div class="hero-text text-left">
+                        <h3>Join a Meeting:</h3>
+                        <div class="pre-process-label">
+                            <h3>{{meeting.name}}</h3>
+                            <p>{{MeetingDate}}</p>
+                            <div class="p-image">
+                                <p>Weekly Sunday School</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="basic-input-block email-login-block">
+                    <div class="formGroup">
+                        <input type="text" class="om-input clr-input om-username" placeholder="Name" name="name"
+                               formControlName="displayName" required>
+                    </div>
+                    <div class="formGroup">
+                        <div class="om-useremail-wrapper">
+
+                            <input type="email" class="om-input clr-input om-useremail" placeholder="Email" name="email"
+                                   formControlName="email" required>
+                        </div>
+                    </div>
+                    <div class="dv-input"></div>
+                    <div class="formGroup">
+                        <input type="text" class="om-input clr-input om-referral"
+                               placeholder="Who invited you to this meetup" name="invitedBy"
+                               formControlName="invitedBy">
+                    </div>
+
+                    <!-- Calling ForgotPassword from AuthService Api -->
+                    <div class="formGroup">
+                        <div class="auth-button-group">
+                            <div class="btn-primary">
+                                <input type="submit" class="btn btn-email" value="Request to Join"
+                                       (click)="SubmitForm()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="redirectToLogin">
+                    <span>Go back to ? <a class="redirect" href="" (click)="RedirectToSignIn($event)">Log In</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

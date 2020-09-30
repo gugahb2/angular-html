@@ -1,0 +1,123 @@
+$label-width-bt: 170px;
+$radio-text: #979797;
+$wraperr-padding-bottom-bt: 26px;
+$wraperr-margin-bottom-bt: 26px;
+$input-width-bt: 439px;
+
+.om-form-control.om-toggle-wrapper {
+    // padding-bottom: $wraperr-padding-bottom-bt;
+    // margin-bottom: $wraperr-margin-bottom-bt;
+
+    .clr-control-container {
+        max-width: $input-width-bt;
+    }
+
+    &.clr-form-control {}
+
+    //Label
+    .clr-control-label {
+        margin-top: 0 !important;
+        max-width: $label-width-bt;
+        font-size: 18px;
+        font-family: "Helvetica Neue LT W05_75 Bold";
+        padding-left: 0;
+        padding-right: 0;
+        line-height: normal;
+    }
+
+    .clr-toggle-wrapper input[type=checkbox] {
+        &:focus {
+            outline: none;
+            border: none;
+
+            &+label::before {
+                content: '';
+                box-shadow: none;
+            }
+        }
+
+        &+label::before {
+            content: '';
+            width: 76px;
+            height: 29px;
+            border-radius: 14px;
+            border: solid 1px $border;
+            background: $white;
+            box-shadow: none;
+            top: 0;
+        }
+
+        &+label::after {
+            content: '';
+            width: 30px;
+            height: 30px;
+            top: 0px;
+            background: $green;
+        }
+
+        &:checked {
+            &+label::after {
+                content: '';
+                right: auto;
+                left: 11px;
+            }
+        }
+
+    }
+
+    .clr-toggle-wrapper {
+        max-width: 76px;
+        height: auto;
+        max-height: none;
+
+
+        .clr-control-label {
+            height: 29px;
+        }
+    }
+}
+
+
+//Small toggles
+.toggle-wrapper-sm {
+    .om-form-control.om-toggle-wrapper {
+        margin-bottom: 0;
+
+        .clr-control-label {
+            font-size: 18px;
+            font-family: "Helvetica Neue LT W05_45 Light";
+            color: $p-color;
+            min-width: 113px;
+            flex: 0;
+        }
+
+    }
+}
+
+.scheduled-nested-form {
+    .om-form-control.om-toggle-wrapper {
+        .clr-control-label {
+            width: auto;
+            min-width: auto;
+            flex: auto;
+            display: inline-block;
+        }
+    }
+}
+
+
+
+
+.toggle-with-content {
+    .om-form-control.om-toggle-wrapper {
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+
+    .people-count {
+        padding-top: 8px;
+        padding-left: 21px;
+        // padding-bottom: 24px;
+        padding-bottom: 0;
+    }
+}

@@ -1,0 +1,111 @@
+$mt-tab-bg: #ece9e9;
+$mt-tab-border: #979797;
+
+.dashboard-content {
+    margin-left: 79px;
+    padding-top: 52px;
+
+    @include bd-custom-max(991px) {
+        margin-left: 0;
+    }
+}
+
+.dc-hero-heading {
+    padding-top: 95px;
+}
+
+//Common heading
+.dc-heading {
+
+    h1,
+    h2 {
+        font-family: "Helvetica Neue LT W05_75 Bold";
+        color: $nav-gray;
+        font-size: 30px;
+    }
+
+    p {
+        font-size: 17px;
+        font-family: "Helvetica Neue LT W05_55 Roman";
+        color: $nav-gray;
+    }
+}
+
+
+
+
+.meetup-tabs-wrap {
+    padding: 0 15.5px;
+}
+
+.meetup-tabs {
+    display: flex;
+    justify-content: center;
+    margin: 0 -15.5px;
+    padding-top: 54px;
+
+    @include bd-custom-max(370px) {
+        flex-wrap: wrap;
+    }
+}
+
+.mt-tab {
+    width: 314px;
+    height: 314px;
+    border-radius: 8px;
+    border: solid 1px $mt-tab-border;
+    background-color: $mt-tab-bg;
+    margin: 0 15.5px;
+    padding-left: 42px;
+    padding-right: 42px;
+    padding-top: 20px;
+
+    @include bd-custom-max(768px) {
+        margin: 0 7px;
+        width: calc((100% / 2) - 28px);
+        padding-left: 6px;
+        padding-right: 2px;
+        height: auto;
+        padding-bottom: 13px;
+
+        img {
+            max-width: 100%;
+        }
+
+        .button-wrap {
+            .btn {
+                min-width: auto;
+                width: auto;
+                padding-left: 0;
+                padding-right: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+                min-width: 144px;
+                max-width: 144px;
+
+            }
+        }
+    }
+
+    @include bd-custom-max(370px) {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 17px;
+        font-family: "Helvetica Neue LT W05_55 Roman";
+        color: $nav-gray;
+
+        b {
+            font-size: 17px;
+            font-family: "Helvetica Neue LT W05_75 Bold";
+            color: $nav-gray;
+        }
+
+    }
+
+    .button-wrap {
+        margin-top: 25px;
+    }
+}

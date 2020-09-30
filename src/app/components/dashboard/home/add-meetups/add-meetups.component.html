@@ -1,0 +1,44 @@
+<ng-container *ngIf="this.authService.firebaseUser$ | async as currentUser">
+<div class="clr-row">
+    <div class="clr-col-12" *ngIf="currentUser.meetupSubscriptionSnapshots && currentUser.meetupSubscriptionSnapshots.length < 1">
+        <div class="dashboard-content dashboard-landingpage">
+
+            <div class="dc-heading text-center dc-hero-heading">
+                <h1>Add Meetups</h1>
+                <p>Meetups are the places where people gather for video meetings and stay connected with chat.</p>
+            </div>
+            <div class="meetup-tabs-wrap">
+
+                <div class="meetup-tabs">
+                    <div class="mt-tab text-center">
+                        <p>Create a <b>New Meetup</b> and invite others to join.</p>
+                        <div>
+                            <img src="assets/images/dashboard/new-meetup.png">
+                        </div>
+                        <div class="button-wrap">
+                            <button class="btn success om-btn bold-link"
+                                    (click)="router.navigate(['/dashboard/meetups/settings'])">
+                                Create Meetup
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mt-tab text-center">
+                        <p><b>Join a Meetup</b> with an invite code or link</p>
+                        <div>
+                            <img src="assets/images/dashboard/join-meetup.png">
+                        </div>
+                        <div class="button-wrap">
+                            <button class="btn success om-btn bold-link">Join a Meetup</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dc-later-button-wrapper">
+                <div class="button-wrap text-center">
+                    <button class="btn regular om-btn bold-link">Maybe later</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</ng-container>

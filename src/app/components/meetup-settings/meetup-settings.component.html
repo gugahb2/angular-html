@@ -1,0 +1,177 @@
+<!-- Sidebar navigation -->
+<div class="dashboard-container container">
+    <div class="clr-row" *ngIf="authService.userData as user">
+        <div class="dashboard-header">
+            <div class="brand">
+                <h3>Online Meetups</h3>
+            </div>
+            <div class="header-option-panel">
+                <clr-dropdown>
+                    <div class="user-option">
+                        <div class="current-user">
+                            <img class="align-self-start rounded-circle"
+                                src="{{(user.photoURL) ? user.photoURL : '/assets/images/user-avatar.png'}}"
+                                alt="{{user.displayName}}" clrDropdownTrigger></div>
+                    </div>
+                    <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+                        <div aria-label="Dropdown header Action 1" clrDropdownItem>
+                            <a class="" (click)="authService.SignOut()">
+                                <i class="fas fa-sign-out-alt"></i>Log out
+                            </a>
+                        </div>
+                    </clr-dropdown-menu>
+                </clr-dropdown>
+            </div>
+        </div>
+    </div>
+    <div class="side-nav-panel">
+        <nav class="sidenav">
+            <section class="sidenav-content">
+                <a href="" class="nav-link home-ic">
+                    <div class="nav-link-icon">
+                        <span class="nav-link-img"></span>
+                    </div>
+                    <div class="nav-link-text">
+                        <span>Home</span>
+                    </div>
+                </a>
+                <a href="" class="nav-link chat-ic">
+                    <div class="nav-link-icon">
+                        <span class="nav-link-img"></span>
+                    </div>
+                    <div class="nav-link-text">
+                        <span>Chat</span>
+                    </div>
+                </a>
+                <a href="" class="nav-link meetings-ic">
+                    <div class="nav-link-icon">
+                        <span class="nav-link-img"></span>
+                    </div>
+                    <div class="nav-link-text">
+                        <span>Meetings</span>
+                    </div>
+                </a>
+                <a href="" class="nav-link groups-ic">
+                    <div class="nav-link-icon">
+                        <span class="nav-link-img"></span>
+                    </div>
+                    <div class="nav-link-text">
+                        <span>Groups</span>
+                    </div>
+                </a>
+                <a href="" class="nav-link more-ic">
+                    <div class="nav-link-icon">
+                        <span class="nav-link-img"></span>
+                    </div>
+                    <div class="nav-link-text">
+                        <span>More</span>
+                    </div>
+                </a>
+            </section>
+        </nav>
+    </div>
+
+    <div class="dashboard-content om-block-container">
+        <div class="clr-row no-margin">
+            <div class="clr-col-12 no-padding">
+                <div class="om-left-pane full-pane" [ngClass]="status?'split-panel':''">
+
+                    <div class="dc-heading text-left dc-hero-heading">
+                        <h2>Meetup Settings</h2>
+                    </div>
+    
+                    <form clrForm>
+                        <div class="form-block">
+                            <clr-input-container class="om-form-control om-input-wrapper">
+                                <label>Name:</label>
+                                <input clrInput type="text" class="om-input" name="example" placeholder="Meetup Name" />
+                            </clr-input-container>
+                        </div>
+                        <div class="form-block">
+                            <clr-textarea-container class="om-form-control om-textarea-wrapper">
+                                <label>Description:</label>
+                                <textarea clrTextarea class="om-input om-input-text" name="description" placeholder="Write a Description..."
+                                    required></textarea>
+                            </clr-textarea-container>
+                        </div>
+                        <div class="form-block">
+                            <div class="privacy-wrapper">
+                                <clr-radio-container class="om-form-control om-radio-wrapper no-border" clrInline>
+                                    <label>Privacy:</label>
+                                    <clr-radio-wrapper>
+                                        <input type="radio" clrRadio name="options" required value="option1" />
+                                        <label>Public</label>
+                                    </clr-radio-wrapper>
+                                    <clr-radio-wrapper>
+                                        <input type="radio" clrRadio name="options" required value="option2" />
+                                        <label>Private</label>
+                                    </clr-radio-wrapper>
+            
+                                </clr-radio-container>
+                                <div class="om-input-info">
+                                    <p>Making a Meetup Public will allow anyone on the internet to find and request to join the
+                                        Meetup. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-block">
+                            <div class="question-wrapper">
+    
+                                <clr-toggle-container class="om-toggle-switch-container  om-form-control om-toggle-wrapper no-border">
+                                        <label class="clr-control-label">Joining Questions</label>
+                                        <clr-toggle-wrapper>
+                                            <label></label>
+                                            <input type="checkbox" clrToggle value="option1" name="options" />
+                                        </clr-toggle-wrapper>
+                                    </clr-toggle-container>
+                                
+                                    <div class="om-input-info question-info">
+                                        <p>When a person requests to join your Meetup, they will be asked the following questions that
+                                            will be viweable by an administator. </p>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="form-block">
+                        </div>
+                        
+                            <div class="edit-join-questions">
+                                <h4>Edit Joining Questions</h4>
+                                <p class>0 Questions</p>
+                            </div>
+                            <a (click)="questionPaenl($event)" class="om-link join-link">Edit Joining Questions</a>
+                        
+                        <div class="om-btn-wrapper">
+                            <input type="submit" class="btn success om-btn" value="Create Meetup">
+                            <input type="submit" class="btn regular om-btn" value="Cancel">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="om-side-panel" [ngClass]="status? 'show-element': ''">
+                <div class="side-panel-heading text-left">
+                    <h3>Edit Joining Questions</h3>
+                </div>
+                <div class="side-panel-textarea-wrapper">
+                    <div class="clr-form-horizontal">
+                        <clr-textarea-container class="om-form-control om-textarea-wrapper">
+                            <label>1:</label>
+                            <textarea clrTextarea class="om-input om-input-text" name="description" placeholder="Write a Description..."
+                                required></textarea>
+                        </clr-textarea-container>
+                    </div>
+                    <div class="img-button-wrapper">
+                        <button class="btn success om-btn add-another">Add Another</button>
+                    </div>
+                    <button class="btn success om-btn add-another">Done</button>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+    </div>
+</div>

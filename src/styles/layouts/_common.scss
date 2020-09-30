@@ -1,0 +1,213 @@
+html,
+body {
+    height: 100%;
+    font-family: "Helvetica Neue LT W05_55 Roman";
+    color: $p-color;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Helvetica Neue LT W05_55 Roman";
+    color: $nav-gray;
+    letter-spacing: normal;
+    line-height: normal;
+}
+
+body {
+
+    p {
+        font-family: "Helvetica Neue LT W05_55 Roman";
+        color: $p-color;
+        font-size: 18px;
+        letter-spacing: normal;
+        margin: 0;
+        line-height: normal;
+    }
+}
+
+body {
+    a:not([href]):not([tabindex]) {
+        font-size: 18px;
+        font-family: "Helvetica Neue LT W05_55 Roman";
+        color: $p-color;
+    }
+}
+
+h3 {
+    font-size: 18px;
+    font-family: "Helvetica Neue LT W05_75 Bold";
+    color: $p-color;
+}
+
+h3.big {
+    font-size: 30px;
+}
+
+strong {
+    font-family: "Helvetica Neue LT W05_75 Bold";
+    font-size: 17px;
+    color: $p-color;
+}
+
+
+.token-page {
+    &.center-block {
+
+        h3 {
+            font-size: 35px;
+            margin-bottom: 37px;
+        }
+    }
+
+    .hero-text {
+        max-width: 720px;
+
+        p {
+            font-size: 21px;
+        }
+    }
+
+    .authBlock {
+        margin-top: 20px;
+        margin-bottom: 46px;
+
+        .auth-button-group {
+            margin-top: 0;
+        }
+    }
+
+    .redirectToLogin {
+
+        span,
+        a,
+        a:active,
+        a:hover {
+            font-size: 17px;
+            letter-spacing: normal;
+            color: #56606d;
+            text-decoration: none;
+        }
+    }
+
+}
+
+.email-sign-in {
+    .hero-text {
+        max-width: 770px;
+    }
+
+    .email-login-block {
+        margin-top: 23px;
+    }
+
+    .om-input {
+        margin-bottom: 10px;
+    }
+
+    .om-input.clr-input:not([readonly]) {
+        &::-webkit-input-placeholder {
+            font-size: 18px !important;
+            font-family: "Helvetica Neue LT W05_56 Italic" !important;
+
+        }
+    }
+
+
+    .redirect {
+        padding-top: 44px;
+        display: inline-block;
+        font-size: 18px;
+        font-family: "Helvetica Neue LT W05_75 Bold";
+        color: #56606d;
+    }
+}
+
+
+.container {
+    max-width: 100%;
+}
+
+.dashboard-container {
+    height: 100%;
+    padding-right: 0;
+
+    >.clr-row {
+        margin: 0 -15px;
+    }
+
+    @include bd-custom-max(991px) {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+
+
+.groups-table {
+    width: 100%;
+
+    .datagrid-row {
+        &:last-of-type {
+            .datagrid-row-scrollable {
+                border-bottom: none;
+
+            }
+        }
+    }
+
+    .datagrid-row-scrollable {
+        border-bottom: 1px solid $border;
+    }
+
+    .datagrid .datagrid-cell {
+        padding: 27px 10px 24px 10px;
+
+        &.group-name {
+            flex: 0 0 342px;
+            width: auto !important;
+        }
+
+        &.group-meeting-link {
+            flex: 0 0 210px;
+            padding: 24px 10px;
+            width: auto !important;
+        }
+    }
+}
+
+.search-link,
+a.search-link {
+    position: relative;
+    padding-left: 26px;
+    font-size: 18px;
+    font-family: "Helvetica Neue LT W05_65 Medium";
+    color: #56606d;
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    &:before {
+        content: '';
+        width: 18px;
+        height: 18px;
+        background: #0d0d0d;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
+
+.side-panel-head-button {
+    a {
+        font-size: 18px;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #7ed321;
+        font-family: "Helvetica Neue LT W05_65 Medium";
+    }
+}

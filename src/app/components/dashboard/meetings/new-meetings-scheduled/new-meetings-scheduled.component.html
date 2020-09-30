@@ -1,0 +1,281 @@
+<!-- Sidebar navigation -->
+<div class="dashboard-container container">
+    <div class="clr-row" *ngIf="authService.firebaseUser$ | async as user">
+        <div class="dashboard-header">
+            <div class="brand">
+                <h3>Online Meetups</h3>
+            </div>
+            <div class="header-option-panel">
+                <clr-dropdown>
+                    <div class="user-option">
+                        <div class="current-user">
+                            <img class="align-self-start rounded-circle"
+                                src="{{(user.photoURL) ? user.photoURL : '/assets/images/user-avatar.png'}}"
+                                alt="{{user.displayName}}" clrDropdownTrigger></div>
+                    </div>
+                    <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+                        <div aria-label="Dropdown header Action 1" clrDropdownItem>
+                            <a class="" (click)="authService.signOut()">
+                                <i class="fas fa-sign-out-alt"></i>Log out
+                            </a>
+                        </div>
+                    </clr-dropdown-menu>
+                </clr-dropdown>
+            </div>
+        </div>
+    </div>
+    <div class="side-nav-panel">
+        <nav class="sidenav">
+            <section class="sidenav-content">
+                <a href="" class="nav-link home-ic">
+                    <div class="nav-link-icon">
+                        <span class="nav-link-img"></span>
+                    </div>
+                    <div class="nav-link-text">
+                        <span>Home</span>
+                    </div>
+                </a>
+                <a href="" class="nav-link chat-ic">
+                    <div class="nav-link-icon">
+                        <span class="nav-link-img"></span>
+                    </div>
+                    <div class="nav-link-text">
+                        <span>Chat</span>
+                    </div>
+                </a>
+                <a href="" class="nav-link meetings-ic">
+                    <div class="nav-link-icon">
+                        <span class="nav-link-img"></span>
+                    </div>
+                    <div class="nav-link-text">
+                        <span>Meetings</span>
+                    </div>
+                </a>
+                <a href="" class="nav-link groups-ic">
+                    <div class="nav-link-icon">
+                        <span class="nav-link-img"></span>
+                    </div>
+                    <div class="nav-link-text">
+                        <span>Groups</span>
+                    </div>
+                </a>
+                <a href="" class="nav-link more-ic">
+                    <div class="nav-link-icon">
+                        <span class="nav-link-img"></span>
+                    </div>
+                    <div class="nav-link-text">
+                        <span>More</span>
+                    </div>
+                </a>
+            </section>
+        </nav>
+    </div>
+
+    <div class="dashboard-content om-block-container">
+        <div class="clr-row no-margin">
+            <div class="clr-col-12 no-padding">
+                <div class="om-left-pane full-pane">
+
+                    <div class="dc-heading text-left dc-hero-heading">
+                        <h2>New Meeting</h2>
+                    </div>
+
+                    <form clrForm>
+                        <div class="form-block">
+                            <clr-input-container class="om-form-control textbox-wrapper">
+                                <label>Name:</label>
+                                <input clrInput type="text" class="om-input clr-col-md-4" name="example"
+                                    placeholder="Meetup Name" />
+                            </clr-input-container>
+                        </div>
+                        <div class="form-block">
+                            <div class="nested-blocks meeting-nested-block">
+                                <clr-radio-container class="om-form-control om-radio-wrapper no-border" clrInline>
+                                    <label>People:</label>
+
+                                    <clr-radio-wrapper>
+                                        <input type="radio" clrRadio name="options" required value="option1" />
+                                        <label>Group</label>
+                                    </clr-radio-wrapper>
+                                    <clr-radio-wrapper>
+                                        <input type="radio" clrRadio name="options" required value="option2" />
+                                        <label>Choose People</label>
+                                    </clr-radio-wrapper>
+                                </clr-radio-container>
+                                <div class="people-description">
+                                    <div class="clr-row no-margin">
+                                        <label class="clr-col-2 clr-control-label"></label>
+                                        <div class="clr-col-10 clr-control-container">
+                                            <div class="nested-control-container">
+
+                                                <a class="om-link bold-link">Add/Edit People > </a>
+                                                <div class="people-count">
+                                                    <p>Members: 31</p>
+                                                    <p>Guests: 8</p>
+                                                </div>
+                                                <div class="toggle-wrapper-sm">
+                                                    <clr-toggle-container
+                                                        class="om-toggle-switch-container  om-form-control om-toggle-wrapper no-border">
+                                                        <label class="clr-control-label clr-col-md-4">Allow Guests:
+                                                        </label>
+                                                        <clr-toggle-wrapper>
+                                                            <label class=""></label>
+                                                            <input type="checkbox" clrToggle value="option1"
+                                                                name="options" class="clr-col-md-8" />
+                                                        </clr-toggle-wrapper>
+                                                    </clr-toggle-container>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-block">
+                            <div class="nested-blocks meeting-nested-block">
+                                <clr-radio-container class="om-form-control om-radio-wrapper no-border" clrInline>
+                                    <label>Date:</label>
+
+                                    <clr-radio-wrapper>
+                                        <input type="radio" clrRadio name="options" required value="option1" />
+                                        <label>Group</label>
+                                    </clr-radio-wrapper>
+                                    <clr-radio-wrapper>
+                                        <input type="radio" clrRadio name="options" required value="option2" />
+                                        <label>Choose People</label>
+                                    </clr-radio-wrapper>
+                                </clr-radio-container>
+                                <div class="people-description">
+                                    <div class="clr-row no-margin">
+                                        <label class="clr-col-2 clr-control-label"></label>
+                                        <div class="clr-col-10 clr-control-container">
+                                            <div class="nested-control-container">
+
+                                                <div class="small-select">
+                                                    <clr-date-container class="om-datepicker-warpper">
+                                                        <label>Start</label>
+                                                        <input type="time" clrDate name="demo1">
+                                                    </clr-date-container>
+                                                </div>
+                                                <div class="small-select">
+                                                    <clr-date-container class="om-datepicker-warpper">
+                                                        <label>End</label>
+                                                        <input type="time" clrDate name="demo1">
+                                                    </clr-date-container>
+                                                </div>
+                                                <div>
+
+                                                </div>
+                                                <div class="toggle-wrapper-sm">
+                                                    <clr-toggle-container
+                                                        class="om-toggle-switch-container  om-form-control om-toggle-wrapper no-border">
+                                                        <label class="clr-control-label clr-col-md-5">Recurring meeting:
+                                                        </label>
+                                                        <clr-toggle-wrapper>
+                                                            <label class=""></label>
+                                                            <input type="checkbox" clrToggle value="option1"
+                                                                name="options" class="clr-col-md-7" />
+                                                        </clr-toggle-wrapper>
+                                                    </clr-toggle-container>
+                                                </div>
+                                                <div class="label-a-tag">
+                                                    <label class="d">Time Zone:</label>
+                                                    <div class="">
+                                                        <a class="om-link bold-link">Mountain Time</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-block">
+                            <div class="form-toggle-only">
+                                <clr-radio-container class="om-form-control om-radio-wrapper" clrInline>
+                                    <label>Date:</label>
+                                    <clr-radio-wrapper>
+                                        <input type="radio" clrRadio name="options" required value="option1" />
+                                        <label>Now</label>
+                                    </clr-radio-wrapper>
+                                    <clr-radio-wrapper>
+                                        <input type="radio" clrRadio name="options" required value="option2" />
+                                        <label>Scheduled</label>
+                                    </clr-radio-wrapper>
+
+                                </clr-radio-container>
+
+                            </div>
+                        </div>
+                        <div class="form-block">
+                            <div class="form-radio-only">
+
+                                <clr-toggle-container
+                                    class="om-toggle-switch-container  om-form-control om-toggle-wrapper">
+                                    <label class="clr-control-label">Add Attachments</label>
+                                    <clr-toggle-wrapper>
+                                        <label></label>
+                                        <input type="checkbox" clrToggle value="option1" name="options" />
+                                    </clr-toggle-wrapper>
+                                </clr-toggle-container>
+
+
+                            </div>
+                        </div>
+                        <div class="form-block">
+                            <div class="form-radio-only">
+                                <clr-toggle-container
+                                    class="om-toggle-switch-container  om-form-control om-toggle-wrapper">
+                                    <label class="clr-control-label">Record Meeting</label>
+                                    <clr-toggle-wrapper>
+                                        <label></label>
+                                        <input type="checkbox" clrToggle value="option1" name="options" />
+                                    </clr-toggle-wrapper>
+                                </clr-toggle-container>
+
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="button-block button-wrapper-b">
+                            <input type="submit" class="btn success om-btn bold-link" value="Create Meeting">
+                            <input type="submit" class="btn regular om-btn bold-link" value="Cancel">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="om-side-panel">
+                <div class="side-panel-heading text-left">
+                    <h3>Edit Joining Questions</h3>
+                </div>
+                <div class="side-panel-textarea-wrapper">
+                    <div class="clr-form-horizontal">
+                        <clr-textarea-container class="om-form-control">
+                            <label>1:</label>
+                            <textarea clrTextarea class="om-input clr-col-md-4" name="description"
+                                placeholder="Write a Description..." required></textarea>
+                        </clr-textarea-container>
+                    </div>
+                    <div class="img-button-wrapper">
+                        <button class="btn success om-btn add-another">Add Another</button>
+                    </div>
+                    <button class="btn success om-btn add-another bold-link">Done</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+    </div>
+</div>

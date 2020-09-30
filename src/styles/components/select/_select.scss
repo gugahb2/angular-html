@@ -1,0 +1,59 @@
+.small-select{
+    margin-bottom: 21px;
+    .clr-row{
+        margin:0;
+    }
+    label{
+        padding-left:0;
+    }
+}
+
+.om-select-wrapper{
+    .clr-control-label{
+        font-size: 18px;
+        color: $p-color;
+        font-family:"Helvetica Neue LT W05_75 Bold";
+        margin-top:0 !important;
+    }
+
+    .clr-select-wrapper,
+    .clr-multiselect-wrapper{
+        max-height: 41px;
+        .clr-select{
+            height: 41px;
+            min-width:  242px;
+            color: #7ed321;
+            background-color: #fcfcfc;
+            font-size: 17px;
+            font-family:"Helvetica Neue LT W05_75 Bold";
+            letter-spacing: normal;
+             line-height: normal;
+
+             border-radius: 8px;
+             border: solid 1px #979797;
+             background-color: #fcfcfc;
+             padding-left: 18px;
+             padding-right: 18px;
+             &:focus,
+             &:active{
+                 background-size: 0;
+             }
+        }
+
+        &::after{
+            content:'';
+            height: 17px;
+            width: 18px;
+            z-index: 2;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 14px;
+        }
+    }
+}
+
+.small-select{
+    .om-select-wrapper{
+        align-items: center;
+    }
+}

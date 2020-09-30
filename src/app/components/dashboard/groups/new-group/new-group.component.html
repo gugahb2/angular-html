@@ -1,0 +1,436 @@
+<div class="dashboard-content om-block-container">
+    <div class="clr-row no-margin">
+        <div class="clr-col-12 no-padding">
+            <div class="om-left-pane full-pane" [ngClass]="status?'split-panel':''">
+
+                <div class="dc-heading text-left dc-hero-heading">
+                    <h1>New Group</h1>
+                </div>
+
+                <form clrForm>
+                    <div class="form-block">
+                        <clr-input-container class="om-form-control textbox-wrapper">
+                            <label>Name:</label>
+                            <input clrInput type="text" class="om-input clr-col-md-4" name="example"
+                                placeholder="Meetup Name" />
+                        </clr-input-container>
+                    </div>
+                    <div class="form-block">
+                        <clr-textarea-container class="om-form-control">
+                            <label class="hide-sm">Description:</label>
+                            <textarea clrTextarea class="om-input clr-col-md-4" name="description"
+                                placeholder="Write a Description..." required></textarea>
+                        </clr-textarea-container>
+                    </div>
+                    <div class="privacy-block">
+
+                        <div class="form-block">
+                            <div class="nested-blocks">
+                                <clr-radio-container class="om-form-control om-radio-wrapper no-border" clrInline>
+                                    <label>Privacy:</label>
+
+                                    <clr-radio-wrapper>
+                                        <input type="radio" clrRadio name="options" required value="option1" />
+                                        <label>Prublic</label>
+                                    </clr-radio-wrapper>
+                                    <clr-radio-wrapper>
+                                        <input type="radio" clrRadio name="options" required value="option2" />
+                                        <label>Private</label>
+                                    </clr-radio-wrapper>
+                                </clr-radio-container>
+                            </div>
+                        </div>
+                        <div class="form-block">
+                            <div class="form-radio-only">
+                                <clr-toggle-container
+                                    class="om-toggle-switch-container  om-form-control om-toggle-wrapper">
+                                    <label class="clr-control-label light-label">Members can invite new members</label>
+                                    <clr-toggle-wrapper>
+                                        <label></label>
+                                        <input type="checkbox" clrToggle value="option1" name="options" />
+                                    </clr-toggle-wrapper>
+                                </clr-toggle-container>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-block" [ngClass]="status? 'split-panel-active form-block': 'form-block'">
+                        <div class="clr-row no-margin form-link-only">
+                            <label class="clr-col-2 clr-control-label">Managers:</label>
+                            <div class="clr-col-10 clr-control-container">
+                                <div class="nested-control-container">
+                                    <a class="om-link bold-link" (click)="QuestionPanel($event)">Add/Edit People > </a>
+                                    <div class="people-count-couter">
+                                        <div class="people-count">
+                                            <p>Invited: 1</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-block">
+                        <div class="clr-row no-margin form-link-only  no-border">
+                            <label class="clr-col-2 clr-control-label">Memebers:</label>
+                            <div class="clr-col-10 clr-control-container">
+                                <div class="nested-control-container">
+                                    <a class="om-link bold-link">Add/Edit People > </a>
+                                    <div class="people-count-couter">
+                                        <div class="people-count">
+                                            <p>Invited: 1</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="button-block button-wrapper-b">
+                        <input type="submit" class="btn success om-btn bold-link" value="Create Group">
+                        <input type="submit" class="btn blank-b om-btn bold-link" value="Cancel">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="om-side-panel meeting-side-panel" [ngClass]="status? 'show-element': ''"
+            [ngClass]="FilterStatus?'show-element filter-active':''">
+            <div class="side-panel-heading text-left">
+                <h3>Add/Edit People</h3>
+            </div>
+            <div class="side-panel-content-wrapper">
+                <div class="side-panel-header-b">
+                    <div class="select-small">
+                        <clr-select-container class="om-select-wrapper">
+                            <select clrSelect name="options">
+                                <option value="one">All</option>
+                                <option value="two">Sunday School auto</option>
+                                <option value="three">Sunday School</option>
+                            </select>
+                        </clr-select-container>
+                    </div>
+                    <div class="side-panel-search">
+                        <div class="search-warpper">
+                            <span class="ico"></span>
+                            <input type="text" class="clr-input search-input">
+                        </div>
+                    </div>
+                    <div class="side-panel-filter">
+                        <a href="" class="filter-ico" (click)="FilterPanel($event)"></a>
+                    </div>
+                </div>
+                <div class="side-panel-scroll">
+
+                    <div class="ps side-panel-ps" [perfectScrollbar]="config">
+
+                        <div class="sidepanel-data-grid">
+                            <clr-datagrid>
+                                <clr-dg-row class="cell-row">
+                                    <clr-dg-cell class="cell-name-wrapper">
+                                        <div class="cell-wrapper">
+                                            <div class="cell-image"><img src="/assets/images/img.jpg"></div>
+                                            <div>Ethel</div>
+                                        </div>
+                                    </clr-dg-cell>
+                                    <clr-dg-cell>Craig</clr-dg-cell>
+                                    <clr-dg-cell class="cell-state-warpper">
+                                        <div class="cell-state active"></div>
+                                    </clr-dg-cell>
+
+                                </clr-dg-row>
+                                <clr-dg-row class="cell-row">
+                                    <clr-dg-cell class="cell-name-wrapper">
+                                        <div class="cell-wrapper">
+                                            <div class="cell-image"><img src="/assets/images/img.jpg"></div>
+                                            <div>Ethel</div>
+                                        </div>
+                                    </clr-dg-cell>
+                                    <clr-dg-cell>Craig</clr-dg-cell>
+                                    <clr-dg-cell class="cell-state-warpper">
+                                        <div class="cell-state active"></div>
+                                    </clr-dg-cell>
+
+                                </clr-dg-row>
+                                <clr-dg-row class="cell-row">
+                                    <clr-dg-cell class="cell-name-wrapper">
+                                        <div class="cell-wrapper">
+                                            <div class="cell-image"><img src="/assets/images/img.jpg"></div>
+                                            <div>Ethel</div>
+                                        </div>
+                                    </clr-dg-cell>
+                                    <clr-dg-cell>Craig</clr-dg-cell>
+                                    <clr-dg-cell class="cell-state-warpper">
+                                        <div class="cell-state active"></div>
+                                    </clr-dg-cell>
+
+                                </clr-dg-row>
+                                <clr-dg-row class="cell-row">
+                                    <clr-dg-cell class="cell-name-wrapper">
+                                        <div class="cell-wrapper">
+                                            <div class="cell-image"><img src="/assets/images/img.jpg"></div>
+                                            <div>Ethel</div>
+                                        </div>
+                                    </clr-dg-cell>
+                                    <clr-dg-cell>Craig</clr-dg-cell>
+                                    <clr-dg-cell class="cell-state-warpper">
+                                        <div class="cell-state active"></div>
+                                    </clr-dg-cell>
+
+                                </clr-dg-row>
+                                <clr-dg-row class="cell-row">
+                                    <clr-dg-cell class="cell-name-wrapper">
+                                        <div class="cell-wrapper">
+                                            <div class="cell-image"><img src="/assets/images/img.jpg"></div>
+                                            <div>Ethel</div>
+                                        </div>
+                                    </clr-dg-cell>
+                                    <clr-dg-cell>Craig</clr-dg-cell>
+                                    <clr-dg-cell class="cell-state-warpper">
+                                        <div class="cell-state active"></div>
+                                    </clr-dg-cell>
+
+                                </clr-dg-row>
+                                <clr-dg-row class="cell-row">
+                                    <clr-dg-cell class="cell-name-wrapper">
+                                        <div class="cell-wrapper">
+                                            <div class="cell-image"><img src="/assets/images/img.jpg"></div>
+                                            <div>Ethel</div>
+                                        </div>
+                                    </clr-dg-cell>
+                                    <clr-dg-cell>Craig</clr-dg-cell>
+                                    <clr-dg-cell class="cell-state-warpper">
+                                        <div class="cell-state active"></div>
+                                    </clr-dg-cell>
+
+                                </clr-dg-row>
+                                <clr-dg-row class="cell-row">
+                                    <clr-dg-cell class="cell-name-wrapper">
+                                        <div class="cell-wrapper">
+                                            <div class="cell-image"><img src="/assets/images/img.jpg"></div>
+                                            <div>Ethel</div>
+                                        </div>
+                                    </clr-dg-cell>
+                                    <clr-dg-cell>Craig</clr-dg-cell>
+                                    <clr-dg-cell class="cell-state-warpper">
+                                        <div class="cell-state active"></div>
+                                    </clr-dg-cell>
+
+                                </clr-dg-row>
+                                <clr-dg-row class="cell-row">
+                                    <clr-dg-cell class="cell-name-wrapper">
+                                        <div class="cell-wrapper">
+                                            <div class="cell-image"><img src="/assets/images/img.jpg"></div>
+                                            <div>Ethel</div>
+                                        </div>
+                                    </clr-dg-cell>
+                                    <clr-dg-cell>Craig</clr-dg-cell>
+                                    <clr-dg-cell class="cell-state-warpper">
+                                        <div class="cell-state active"></div>
+                                    </clr-dg-cell>
+
+                                </clr-dg-row>
+                                <clr-dg-row class="cell-row">
+                                    <clr-dg-cell class="cell-name-wrapper">
+                                        <div class="cell-wrapper">
+                                            <div class="cell-image"><img src="/assets/images/img.jpg"></div>
+                                            <div>Ethel</div>
+                                        </div>
+                                    </clr-dg-cell>
+                                    <clr-dg-cell>Craig</clr-dg-cell>
+                                    <clr-dg-cell class="cell-state-warpper">
+                                        <div class="cell-state active"></div>
+                                    </clr-dg-cell>
+
+                                </clr-dg-row>
+                                <clr-dg-row class="cell-row">
+                                    <clr-dg-cell class="cell-name-wrapper">
+                                        <div class="cell-wrapper">
+                                            <div class="cell-image"><img src="/assets/images/img.jpg"></div>
+                                            <div>Ethel</div>
+                                        </div>
+                                    </clr-dg-cell>
+                                    <clr-dg-cell>Craig</clr-dg-cell>
+                                    <clr-dg-cell class="cell-state-warpper">
+                                        <div class="cell-state active"></div>
+                                    </clr-dg-cell>
+
+                                </clr-dg-row>
+                                <clr-dg-row class="cell-row">
+                                    <clr-dg-cell class="cell-name-wrapper">
+                                        <div class="cell-wrapper">
+                                            <div class="cell-image"><img src="/assets/images/img.jpg"></div>
+                                            <div>Ethel</div>
+                                        </div>
+                                    </clr-dg-cell>
+                                    <clr-dg-cell>Craig</clr-dg-cell>
+                                    <clr-dg-cell class="cell-state-warpper">
+                                        <div class="cell-state active"></div>
+                                    </clr-dg-cell>
+
+                                </clr-dg-row>
+                                <clr-dg-row class="cell-row">
+                                    <clr-dg-cell class="cell-name-wrapper">
+                                        <div class="cell-wrapper">
+                                            <div class="cell-image"><img src="/assets/images/img.jpg"></div>
+                                            <div>Ethel</div>
+                                        </div>
+                                    </clr-dg-cell>
+                                    <clr-dg-cell>Craig</clr-dg-cell>
+                                    <clr-dg-cell class="cell-state-warpper">
+                                        <div class="cell-state active"></div>
+                                    </clr-dg-cell>
+
+                                </clr-dg-row>
+                                <clr-dg-row class="cell-row">
+                                    <clr-dg-cell class="cell-name-wrapper">
+                                        <div class="cell-wrapper">
+                                            <div class="cell-image"><img src="/assets/images/img.jpg"></div>
+                                            <div>Ethel</div>
+                                        </div>
+                                    </clr-dg-cell>
+                                    <clr-dg-cell>Craig</clr-dg-cell>
+                                    <clr-dg-cell class="cell-state-warpper">
+                                        <div class="cell-state active"></div>
+                                    </clr-dg-cell>
+
+                                </clr-dg-row>
+                                <clr-dg-row class="cell-row">
+                                    <clr-dg-cell class="cell-name-wrapper">
+                                        <div class="cell-wrapper">
+                                            <div class="cell-image"><img src="/assets/images/img.jpg"></div>
+                                            <div>Ethel</div>
+                                        </div>
+                                    </clr-dg-cell>
+                                    <clr-dg-cell>Craig</clr-dg-cell>
+                                    <clr-dg-cell class="cell-state-warpper">
+                                        <div class="cell-state active"></div>
+                                    </clr-dg-cell>
+
+                                </clr-dg-row>
+                                <clr-dg-row class="cell-row">
+                                    <clr-dg-cell class="cell-name-wrapper">
+                                        <div class="cell-wrapper">
+                                            <div class="cell-image"><img src="/assets/images/img.jpg"></div>
+                                            <div>Ethel</div>
+                                        </div>
+                                    </clr-dg-cell>
+                                    <clr-dg-cell>Craig</clr-dg-cell>
+                                    <clr-dg-cell class="cell-state-warpper">
+                                        <div class="cell-state active"></div>
+                                    </clr-dg-cell>
+
+                                </clr-dg-row>
+                                <clr-dg-row class="cell-row">
+                                    <clr-dg-cell class="cell-name-wrapper">
+                                        <div class="cell-wrapper">
+                                            <div class="cell-image"><img src="/assets/images/img.jpg"></div>
+                                            <div>Ethel</div>
+                                        </div>
+                                    </clr-dg-cell>
+                                    <clr-dg-cell>Craig</clr-dg-cell>
+                                    <clr-dg-cell class="cell-state-warpper">
+                                        <div class="cell-state active"></div>
+                                    </clr-dg-cell>
+
+                                </clr-dg-row>
+                                <clr-dg-row class="cell-row">
+                                    <clr-dg-cell class="cell-name-wrapper">
+                                        <div class="cell-wrapper">
+                                            <div class="cell-image"><img src="/assets/images/img.jpg"></div>
+                                            <div>Ethel</div>
+                                        </div>
+                                    </clr-dg-cell>
+                                    <clr-dg-cell>Craig</clr-dg-cell>
+                                    <clr-dg-cell class="cell-state-warpper">
+                                        <div class="cell-state active"></div>
+                                    </clr-dg-cell>
+
+                                </clr-dg-row>
+                                <clr-dg-row class="cell-row">
+                                    <clr-dg-cell class="cell-name-wrapper">
+                                        <div class="cell-wrapper">
+                                            <div class="cell-image"><img src="/assets/images/img.jpg"></div>
+                                            <div>Ethel</div>
+                                        </div>
+                                    </clr-dg-cell>
+                                    <clr-dg-cell>Craig</clr-dg-cell>
+                                    <clr-dg-cell class="cell-state-warpper">
+                                        <div class="cell-state active"></div>
+                                    </clr-dg-cell>
+
+                                </clr-dg-row>
+                                <clr-dg-row class="cell-row">
+                                    <clr-dg-cell class="cell-name-wrapper">
+                                        <div class="cell-wrapper">
+                                            <div class="cell-image"><img src="/assets/images/img.jpg"></div>
+                                            <div>Ethel</div>
+                                        </div>
+                                    </clr-dg-cell>
+                                    <clr-dg-cell>Craig</clr-dg-cell>
+                                    <clr-dg-cell class="cell-state-warpper">
+                                        <div class="cell-state active"></div>
+                                    </clr-dg-cell>
+
+                                </clr-dg-row>
+                                <clr-dg-row class="cell-row">
+                                    <clr-dg-cell class="cell-name-wrapper">
+                                        <div class="cell-wrapper">
+                                            <div class="cell-image"><img src="/assets/images/img.jpg"></div>
+                                            <div>Ethel</div>
+                                        </div>
+                                    </clr-dg-cell>
+                                    <clr-dg-cell>Craig</clr-dg-cell>
+                                    <clr-dg-cell class="cell-state-warpper">
+                                        <div class="cell-state active"></div>
+                                    </clr-dg-cell>
+
+                                </clr-dg-row>
+                            </clr-datagrid>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-panel" [ngClass]="FilterStatus?'show':''">
+                    <div class="filter-panel-heading">
+                        <h3>Filters:</h3>
+                    </div>
+                    <div class="filter-panel-content">
+
+                        <div class="sort-by">
+                            <p>Sort by</p>
+                            <div class="select-small">
+                                <clr-select-container class="om-select-wrapper">
+                                    <select clrSelect name="options">
+                                        <option value="one">All</option>
+                                        <option value="two">Sunday School auto</option>
+                                        <option value="three">Sunday School</option>
+                                    </select>
+                                </clr-select-container>
+                            </div>
+                        </div>
+                        <div class="filter-by">
+                            <div class="toggle-wrapper-sm">
+                                <clr-toggle-container
+                                    class="om-toggle-switch-container  om-form-control om-toggle-wrapper no-border">
+                                    <label class="clr-control-label clr-col-md-4">Show Selected Only:</label>
+                                    <clr-toggle-wrapper>
+                                        <label class=""></label>
+                                        <input type="checkbox" clrToggle value="option1" name="options"
+                                            class="clr-col-md-8" />
+                                    </clr-toggle-wrapper>
+                                </clr-toggle-container>
+
+                            </div>
+                        </div>
+                        <div class="filter-buttons text-center">
+                            <input type="submit" class="btn success om-btn" value="Apply filter">
+                            <a href="" class="om-link bold-link">Clear filter</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<nav class="sidenav">
+    <section class="sidenav-content" *ngIf="this.authService.firebaseUser$ | async as currentUser">
+        <a routerLink="/dashboard/meetups" routerLinkActive="active" class="nav-link home-ic" *ngIf="!this.authService.isAnonymous">
+            <div class="nav-link-icon">
+                <!-- <span class="notification-span">5</span> -->
+                <span class="nav-link-img"></span>
+            </div>
+            <div class="nav-link-text">
+                <span>Home</span>
+            </div>
+        </a>
+        <a routerLink="/dashboard/chat" routerLinkActive="active" class="nav-link chat-ic" *ngIf="!this.authService.isAnonymous">
+            <div class="nav-link-icon">
+                <span class="nav-link-img"></span>
+            </div>
+            <div class="nav-link-text">
+                <span>Chat</span>
+            </div>
+        </a>
+        <a routerLink="/dashboard/meetings" routerLinkActive="active" class="nav-link meetings-ic">
+            <div class="nav-link-icon">
+                <span class="nav-link-img"></span>
+            </div>
+            <div class="nav-link-text">
+                <span>Meetings</span>
+            </div>
+        </a>
+        <a routerLink="/dashboard/groups" routerLinkActive="active" class="nav-link groups-ic" *ngIf="!this.authService.isAnonymous">
+            <div class="nav-link-icon">
+                <span class="nav-link-img"></span>
+            </div>
+            <div class="nav-link-text">
+                <span>Groups</span>
+            </div>
+        </a>
+        <a routerLink="/dashboard/more" routerLinkActive="active" class="nav-link more-ic" *ngIf="!this.authService.isAnonymous">
+            <div class="nav-link-icon">
+                <span class="nav-link-img"></span>
+            </div>
+            <div class="nav-link-text">
+                <span>More</span>
+            </div>
+        </a>
+    </section>
+</nav>

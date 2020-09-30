@@ -1,0 +1,17 @@
+.clr-input-wrapper,
+.clr-textarea-wrapper{
+    max-height: none;
+    white-space: normal;
+    margin-top:0;
+    margin-bottom:0;
+}
+
+
+.clr-form-horizontal .clr-form-control>.clr-control-label, 
+.clr-form-horizontal .clr-form-control>.clr-form-control.clr-form-control-multi .clr-control-label{
+    width: auto;
+    flex-shrink: 0;
+}
+
+
+    

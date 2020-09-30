@@ -1,0 +1,42 @@
+<div class="initial-page displayTable center-block">
+    <div class="center-element">
+        <div class="primary-logo">
+            <img src="assets/images/dummy.png">
+        </div>
+        <div class="main-block-header">
+            <div class="hero-text">
+                <h3>Create Account</h3>
+            </div>
+        </div>
+        <div class="basic-input-block email-login-block" [formGroup]="signUpForm">
+            <div class="formGroup">
+                <input type="text" class="om-input clr-input om-username" placeholder="Name" name="name"
+                       formControlName="name" required>
+            </div>
+            <div class="formGroup">
+                <input type="email" class="om-input clr-input om-useremail" placeholder="Email" name="email"
+                       formControlName="email" required readonly>
+            </div>
+            <div class="dv-input"></div>
+            <div class="formGroup">
+                <input type="tel" class="om-input clr-input om-phone" placeholder="Phone" name="contact"
+                       formControlName="contact">
+            </div>
+
+            <!-- Calling ForgotPassword from AuthService Api -->
+            <div class="formGroup">
+                <div class="auth-button-group">
+                    <div class="btn-primary">
+                        <input type="submit" class="btn btn-email" value="Sign up" (click)="SubmitSignUpForm($event)">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Commenting this section since it is not in the design -->
+        <div class="redirectToLogin">
+            <span>Go back to ? <a class="redirect" href="" (click)="RedirectToSignIn($event)">Log In</a></span>
+        </div>
+
+    </div>
+</div>

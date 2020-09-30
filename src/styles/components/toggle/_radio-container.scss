@@ -1,0 +1,82 @@
+$label-width-rc: 170px;
+$radio-text: #979797;
+// $wraperr-padding-bottom-rc: 26px;
+$wraperr-padding-bottom-rc: 26px;
+// $wraperr-margin-bottom-rc: 8px;
+$wraperr-margin-bottom-rc: 26px;
+
+.om-form-control.om-radio-wrapper {
+    &.clr-form-control{
+    // padding-bottom: $wraperr-padding-bottom-rc;
+    // margin-bottom: $wraperr-margin-bottom-rc;
+    margin-top: 0;
+    border-bottom: 1px solid $border;
+    
+    }
+
+    //Label
+    .clr-control-label{
+        margin-top: 0 !important;
+        max-width: $label-width-rc;
+        font-size: 18px;
+        font-family:"Helvetica Neue LT W05_75 Bold";
+        padding-left:0;
+        padding-right:0;
+        line-height: normal;
+    }
+
+    
+    .clr-radio-wrapper {
+        height: 40px;   
+        min-width: 100px;
+        position: relative;
+    }
+
+    .clr-radio-wrapper input{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity:0;
+    }
+    .clr-radio-wrapper .clr-control-label{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        background:$white;
+        border: 1px solid $radio-text;
+        // padding: 0 54px;
+        padding: 0 10px;
+        min-width: 157px;
+        line-height: normal;
+        margin:0;
+        color: $p-color;
+        font-size: 18px;
+        font-family:"Helvetica Neue LT W05_45 Light";
+        letter-spacing: normal;
+    }
+    .clr-radio-wrapper .clr-control-label:before{
+        content:'';
+        display: none;
+    }
+    .clr-radio-wrapper input:checked + .clr-control-label{
+        background:$green;
+        color: $radio-text;
+    }
+}
+
+.form-radio-only{
+
+}
+
+.privacy-wrapper{
+    .om-form-control.om-radio-wrapper {
+
+        &.clr-form-control{
+                margin-bottom:0;
+        }
+    }
+}
+
+

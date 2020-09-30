@@ -1,0 +1,39 @@
+<div class="sign-in-page initial-page displayTable center-block">
+    <div class="center-element">
+        <div class="primary-logo">
+            <img src="assets/images/dummy.png">
+        </div>
+        <div class="main-block-header">
+            <div class="hero-text">
+                <h3>Welcome to Online Meetups</h3>
+            </div>
+        </div>
+        <div class="sub-block-header">
+            <div class="auth-button-group auth-button-group-b">
+                <div class="sub-block-header" *ngIf="meetingCollection as meeting">
+                    <div class="hero-text text-center">
+                        <h3>Join a Meeting:</h3>
+                        <div class="pre-process-label">
+                            <h3>{{meeting.name}}</h3>
+                            <p>{{MeetingDate}}</p>
+                            <div class="p-image">
+                                <p>Weekly Sunday School</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-primary">
+                    <button class="btn btn-email" routerLink="/email-sign-in">Continue with Email</button>
+                    <button class="btn btn-apple" (click)="authService.appleSignin()">Continue with Apple</button>
+                    <button class="btn btn-google" (click)="authService.googleSignin()">Continue with Google</button>
+                    <button class="btn btn-facebook" (click)="authService.facebookSignin()">Continue with
+                        Facebook
+                    </button>
+                    <button class="btn btn-guest" (click)="GuestLogin()" *ngIf="ShowGuestLogin">Continue as Guest
+                    </button>
+                    <!--<button (click)="authService.SignOut()">test</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

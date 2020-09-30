@@ -1,0 +1,152 @@
+<!-- Sidebar navigation -->
+<div class="dashboard-container container">
+    <div class="clr-row" *ngIf="authService.userData as user">
+        <div class="dashboard-header">
+            <div class="brand">
+                <h3>Online Meetups</h3>
+            </div>
+            <div class="header-option-panel">
+                <clr-dropdown>
+                    <div class="user-option">
+                        <div class="current-user">
+                            <img class="align-self-start rounded-circle"
+                                src="{{(user.photoURL) ? user.photoURL : '/assets/images/user-avatar.png'}}"
+                                alt="{{user.displayName}}" clrDropdownTrigger></div>
+                    </div>
+                    <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+                        <div aria-label="Dropdown header Action 1" clrDropdownItem>
+                            <a class="" (click)="authService.SignOut()">
+                                <i class="fas fa-sign-out-alt"></i>Log out
+                            </a>
+                        </div>
+                    </clr-dropdown-menu>
+                </clr-dropdown>
+            </div>
+        </div>
+    </div>
+    <div class="side-nav-panel">
+        <nav class="sidenav">
+            <section class="sidenav-content">
+                <a href="" class="nav-link home-ic">
+                    <div class="nav-link-icon">
+                        <span class="nav-link-img"></span>
+                    </div>
+                    <div class="nav-link-text">
+                        <span>Home</span>
+                    </div>
+                </a>
+                <a href="" class="nav-link chat-ic">
+                    <div class="nav-link-icon">
+                        <span class="nav-link-img"></span>
+                    </div>
+                    <div class="nav-link-text">
+                        <span>Chat</span>
+                    </div>
+                </a>
+                <a href="" class="nav-link meetings-ic">
+                    <div class="nav-link-icon">
+                        <span class="nav-link-img"></span>
+                    </div>
+                    <div class="nav-link-text">
+                        <span>Meetings</span>
+                    </div>
+                </a>
+                <a href="" class="nav-link groups-ic">
+                    <div class="nav-link-icon">
+                        <span class="nav-link-img"></span>
+                    </div>
+                    <div class="nav-link-text">
+                        <span>Groups</span>
+                    </div>
+                </a>
+                <a href="" class="nav-link more-ic">
+                    <div class="nav-link-icon">
+                        <span class="nav-link-img"></span>
+                    </div>
+                    <div class="nav-link-text">
+                        <span>More</span>
+                    </div>
+                </a>
+            </section>
+        </nav> 
+    </div>
+
+    <div class="dashboard-content om-block-container">
+        <div class="clr-row no-margin">
+            <div class="clr-col-12 no-padding">
+                <div class="om-left-pane full-pane">
+
+                    <div class="dc-heading text-left dc-hero-heading">
+                        <h2>Meeting Notify</h2>
+                    </div>
+    
+                    <form clrForm>
+                        <div class="label-block">
+                            <label class="clr-control-label clr-col-md-12">Meeting</label>
+                            <div class="label-block-content">
+                                <p>Sunday school meeting</p>
+                                <p>When: Now</p>
+                            </div>
+                        </div>
+                       <div class="form-block toggle-with-content">
+                            <div class="form-radio-only">
+                                <clr-toggle-container class="om-toggle-switch-container no-border om-form-control om-toggle-wrapper">
+                                        <label class="clr-control-label">Send Notifications: </label>
+                                        <clr-toggle-wrapper>
+                                            <label></label>
+                                            <input type="checkbox" clrToggle value="option1" name="options" />
+                                        </clr-toggle-wrapper>
+                                </clr-toggle-container>
+                            </div>
+                            <div class="people-count">
+                                <p>Members: 31</p>
+                                <p>Guests: 8</p>
+                            </div>
+                        </div>
+                        <div class="form-block vertical-form-block">
+                            <div class="clr-form-control om-form-control om-textarea-wrapper">
+                                <label for="vertical-textarea-basic" class="clr-control-label clr-col-md-12">Notification Message:</label>
+                                    <div class="clr-control-container">
+                                    <div class="clr-textarea-wrapper">
+                                        <textarea id="vertical-textarea-basic" placeholder="Enter value here" class="clr-textarea om-input om-input-text"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                   
+                        <div class="om-btn-wrapper">
+                            <input type="submit" class="btn success om-btn" value="Create Meeting">
+                            <input type="submit" class="btn regular om-btn" value="Cancel">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="om-side-panel" >
+                <div class="side-panel-heading text-left">
+                    <h3>Edit Joining Questions</h3>
+                </div>
+                <div class="side-panel-textarea-wrapper">
+                    <div class="clr-form-horizontal">
+                        <clr-textarea-container class="om-form-control om-textarea-wrapper">
+                            <label>1:</label>
+                            <textarea clrTextarea class="om-input om-input-text" name="description" placeholder="Write a Description..."
+                                required></textarea>
+                        </clr-textarea-container>
+                    </div>
+                    <div class="img-button-wrapper">
+                        <button class="btn success om-btn add-another">Add Another</button>
+                    </div>
+                    <button class="btn success om-btn add-another">Done</button>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+    </div>
+</div>

@@ -1,0 +1,109 @@
+<div class="dashboard-content om-block-container">
+    <div class="clr-row no-margin">
+        <div class="clr-col-12 no-padding">
+            <div class="om-left-pane full-pane" [ngClass]="status?'split-panel':''">
+
+                <div class="dc-heading text-left dc-hero-heading">
+                    <h1>Meetup Settings</h1>
+                </div>
+
+                <form clrForm [formGroup]="meetupForm" (ngSubmit)="CreateMeetupRequest()">
+                    <div class="form-block">
+                        <clr-input-container class="om-form-control textbox-wrapper">
+                            <label class="hide-sm">Name:</label>
+                            <input clrInput type="text" class="om-input clr-col-md-4" name="name"
+                                   placeholder="Meetup Name" formControlName="name" required/>
+                        </clr-input-container>
+                    </div>
+                    <div class="form-block">
+                        <clr-textarea-container class="om-form-control textarea-wrapper">
+                            <label class="hide-sm">Description:</label>
+                            <textarea clrTextarea class="om-input clr-col-md-4" name="description"
+                                      placeholder="Write a Description..." required
+                                      formControlName="description"></textarea>
+                        </clr-textarea-container>
+                    </div>
+                    <div class="form-block form-block-p">
+                        <div class="privacy-wrapper">
+                            <clr-radio-container class="om-form-control om-radio-wrapper no-border" clrInline>
+                                <label class="hide-sm">Privacy:</label>
+                                <clr-radio-wrapper>
+                                    <input type="radio" clrRadio name="isPublic" required value="true"
+                                           formControlName="isPublic"/>
+                                    <label>Public</label>
+                                </clr-radio-wrapper>
+                                <clr-radio-wrapper>
+                                    <input type="radio" clrRadio name="isPublic" required value="false"
+                                           formControlName="isPublic"/>
+                                    <label>Private</label>
+                                </clr-radio-wrapper>
+                            </clr-radio-container>
+                            <div class="om-input-info">
+                                <p>Making a Meetup Public will allow anyone on the internet to find and request to
+                                    join the Meetup.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-block form-block-p">
+                        <div class="question-wrapper">
+                            <clr-toggle-container class="om-form-control om-toggle-wrapper no-border">
+                                <label class="clr-control-label">Joining Questions</label>
+                                <clr-toggle-wrapper>
+                                    <label></label>
+                                    <input type="checkbox" clrToggle value="1" name="hasJoiningQuestions"
+                                           formControlName="hasJoiningQuestions"
+                                           (change)="ToggleJoiningQuestionStatus($event)"/>
+                                </clr-toggle-wrapper>
+                            </clr-toggle-container>
+                            <div class="om-input-info question-info">
+                                <p>When a person requests to join your Meetup, they will be asked the following
+                                    questions that will be viewable by an administrator.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-block">
+                    </div>
+
+                    <div class="edit-join-questions" *ngIf="status">
+                        <h4>Edit Joining Questions</h4>
+                        <p class>0 Questions</p>
+                    </div>
+                    <a (click)="QuestionPanel($event)" *ngIf="!status && meetupForm.get('hasJoiningQuestions').value"
+                       class="om-link join-link bold-link">Edit Joining
+                        Questions</a>
+
+                    <div class="button-block button-wrapper-a">
+                        <input type="submit" class="btn success om-btn bold-link" value="Create Meetup">
+                        <input type="button" class="btn regular om-btn bold-link" value="Cancel"
+                               (click)="RedirectBack()">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="om-side-panel" [ngClass]="status? 'show-element': ''">
+            <div class="side-panel-heading text-left">
+                <h3>Edit Joining Questions</h3>
+            </div>
+            <div class="side-panel-content-wrapper">
+                <div class="meetup-content-wrapper">
+                    <div class="clr-form-horizontal" *ngFor="let q of Questions.controls; let i=index">
+                        <clr-textarea-container class="om-form-control no-border" [formGroup]="q">
+                            <label>{{i + 1}}:</label>
+                            <textarea clrTextarea class="om-input om-input-text" name="description"
+                                      placeholder="Add question" formControlName="question" required
+                                      [readonly]="i===0"></textarea>
+                        </clr-textarea-container>
+                    </div>
+                    <div class="image-button {{questionCount >= 5?'button-hidden':''}}">
+                        <a href="" class="om-btn btn" (click)="AddQuestion($event)" *ngIf="questionCount < 5">Add
+                            Another</a>
+                    </div>
+
+                    <button class="btn success om-btn add-another bold-link" (click)="SetQuestion($event)">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

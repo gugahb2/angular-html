@@ -1,0 +1,59 @@
+<div class="dashboard-container om-block-container dashboard-home">
+    <div class="home-container" *ngIf="meetupCollection && userCollection as user">
+        <div class="dc-heading">
+            <div class="dc-heading-icon">
+                <img src="/assets/images/icons/icon-h.png">
+            </div>
+            <div class="meetups-dropdown-wrap">
+                <div class="user-current-option-header">
+                    <div class="current-option-header">
+                        <h1>{{meetupCollection.name}}</h1>
+                    </div>
+                </div>
+                <p *ngIf="IsMember">Already a member</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="overlay-bg {{showJoiningPopup?'active-block':''}}"></div>
+<div class="om-popup be-a-part-qs {{showJoiningPopup?'active-block':''}}"
+     *ngIf="!IsMember && meetupCollection && userCollection as user">
+    <div class="pre-process-wrapper">
+        <div class="pre-process-wrapper">
+            <div class="pre-process-box">
+                <div class="main-block-header">
+                    <div class="hero-text text-left">
+                        <h3 class="big">Be a part of Meetup:</h3>
+                        <div class="pre-process-label">
+                            <div class="pre-process-image"><img src="/assets/images/icons/icon-h.png" alt="Alt name">
+                            </div>
+                            <h3>{{meetupCollection.name}}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="basic-input-block email-login-block" [formGroup]="questionForm">
+                    <p>Please answer the following</p>
+                    <div class="formGroup" *ngFor="let q of JoiningQuestions;let i = index">
+                        <input type="text" class="om-input clr-input om-username"
+                               placeholder="{{q.question}}" name="question-{{i}}"
+                               formControlName="question-{{i}}" required
+                               [readonly]="!!(i===0 && user && user.displayName)">
+                    </div>
+
+                    <!-- Calling ForgotPassword from AuthService Api -->
+                    <div class="formGroup">
+                        <div class="auth-button-group">
+                            <input type="button" class="btn success om-btn bold-link" value="Request to join"
+                                   (click)="SubmitQuestionForm($event)">
+                            <input type="button" class="btn blank-b om-btn bold-link" value="Cancel"
+                                   (click)="showJoiningPopup=false">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
